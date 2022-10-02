@@ -3,11 +3,6 @@ version: "3.7"
 #
 # All-in-one docker-compose file to develop this Flarum extension.
 #
-# Initialization:
-#   docker exec -it -w /flarum/app flarum-dev /bin/sh
-#   composer config repositories.0 path "packages/*"
-#   composer require jeromegillard/flarum-osm *@dev
-#
 
 services:
   flarum-dev:
@@ -15,12 +10,12 @@ services:
     container_name: flarum-dev
     env_file:
       - .env
-      - flarum-dev.env.local
+      - flarum-dev.env.local # create it from flarum-dev.env.local.example
     restart: unless-stopped
     depends_on:
       - flarum-dev-db
     volumes:
-      - ${FL_DIR}:/flarum/app/packages/osm
+      - .:/flarum/app/packages/osm
     ports:
       - 80:8888
     networks:

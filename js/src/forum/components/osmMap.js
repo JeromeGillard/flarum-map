@@ -8,7 +8,7 @@ import Counter from './customCounter';
 export default function () {
     extend(Post.prototype, 'content', function () {
         let postId = this.attrs.post.id();
-        console.log("Found post id:", postId);
+        console.log("Found post id ", postId);
         return <Counter buttonLabel="++"/> ;
     });
 

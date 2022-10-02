@@ -26,7 +26,7 @@ I've prepared a all-in-one `docker-compose` file to get up and running to develo
 
 ### Prepare the environment
 1. create the `flarum-dev.env.local` file. There's an example just nearby.
-1. Spin the containers: `docker-compose up`
+1. Spin the containers: `docker-compose up -d`
 1. Enter the container: `docker exec -it -w /flarum/app flarum-dev /bin/sh`
 1. Allow local packages sources: `composer config repositories.0 path "packages/*"`
 1. Install the extension: `composer require jeromegillard/flarum-osm *@dev`

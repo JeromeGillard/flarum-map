@@ -111,7 +111,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ function __WEBPACK_DEFAULT_EXPORT__() {
   (0,flarum_common_extend__WEBPACK_IMPORTED_MODULE_1__.extend)((flarum_components_Post__WEBPACK_IMPORTED_MODULE_0___default().prototype), 'content', function () {
     var postId = this.attrs.post.id();
-    console.log("Found post id:", postId);
+    console.log("Found post id ", postId);
     return m(_customCounter__WEBPACK_IMPORTED_MODULE_3__["default"], {
       buttonLabel: "++"
     });
