@@ -1,0 +1,13 @@
+jeromegillard-osm:
+  # For more details on the format
+  # Checkout https://docs.flarum.org/extend/i18n/#appendix-a-standard-key-format
+  admin:
+    templates:
+      osm: GPX Route Preview
+      osm.file_description: Embeds an OpenStreetMap map..
+      markdown-osm: Markdown map
+      markdown-osm_description: Markdown map description
+    settings:
+      intro: Settings of the Open Street Map extension.
+  
+  forum:
