@@ -33,6 +33,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/inheritsLoose */ "./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js");
 /* harmony import */ var flarum_common_Component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flarum/common/Component */ "flarum/common/Component");
 /* harmony import */ var flarum_common_Component__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(flarum_common_Component__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var flarum_forum_app__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! flarum/forum/app */ "flarum/forum/app");
+/* harmony import */ var flarum_forum_app__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(flarum_forum_app__WEBPACK_IMPORTED_MODULE_2__);
+
 
 
 
@@ -48,7 +51,7 @@ var Counter = /*#__PURE__*/function (_Component) {
   _proto.oninit = function oninit(vnode) {
     _Component.prototype.oninit.call(this, vnode);
 
-    this.count = 0;
+    this.mapboxKey = flarum_forum_app__WEBPACK_IMPORTED_MODULE_2___default().forum.attribute("osm.mapbox");
   };
 
   _proto.view = function view() {
@@ -61,19 +64,21 @@ var Counter = /*#__PURE__*/function (_Component) {
       </div>
     );*/
     return m("div", {
-      id: "map"
-    }, "MAP!!");
+      id: 'map' + this.attrs.pid
+    });
   };
 
   _proto.oncreate = function oncreate(vnode) {
-    _Component.prototype.oncreate.call(this, vnode); // We aren't actually doing anything here, but this would
-    // be a good place to attach event handlers, initialize libraries
-    // like sortable, or make other DOM modifications.
-    //$element = this.$();
-    //$button = this.$('button');
+    _Component.prototype.oncreate.call(this, vnode);
 
-
-    var map = L.map('map').setView([50.4631, 5.7533], 13);
+    var map = L.map('map' + this.attrs.pid).setView([50.4631, 5.7533], 13);
+    var tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=' + this.mapboxKey, {
+      maxZoom: 18,
+      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' + 'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+      id: 'mapbox/light-v9',
+      tileSize: 512,
+      zoomOffset: -1
+    }).addTo(map);
   };
 
   return Counter;
@@ -109,12 +114,13 @@ __webpack_require__.r(__webpack_exports__);
 /* global $ */
 
 /* harmony default export */ function __WEBPACK_DEFAULT_EXPORT__() {
-  (0,flarum_common_extend__WEBPACK_IMPORTED_MODULE_1__.extend)((flarum_components_Post__WEBPACK_IMPORTED_MODULE_0___default().prototype), 'content', function () {
+  (0,flarum_common_extend__WEBPACK_IMPORTED_MODULE_1__.extend)((flarum_components_Post__WEBPACK_IMPORTED_MODULE_0___default().prototype), 'content', function (content) {
     var postId = this.attrs.post.id();
-    console.log("Found post id ", postId);
-    return m(_customCounter__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      buttonLabel: "++"
-    });
+    console.log("Found post id ", postId), this.attrs.post;
+    content.push(m(_customCounter__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      buttonLabel: "++",
+      pid: postId
+    }));
   });
   (0,flarum_common_extend__WEBPACK_IMPORTED_MODULE_1__.extend)((flarum_forum_components_HeaderPrimary__WEBPACK_IMPORTED_MODULE_2___default().prototype), 'items', function (items) {
     items.add('google', m("a", {

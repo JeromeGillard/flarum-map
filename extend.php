@@ -31,6 +31,8 @@ return [
     (new Extend\ServiceProvider())
         ->register(Providers\OSMProvider::class),
 
+    (new Extend\Settings())
+        ->serializeToForum('osm.mapbox', 'jeromegillard-osm.mapbox'),
 
     (new Extend\View())
         ->namespace('fof-upload.templates', __DIR__.'/resources/templates'),

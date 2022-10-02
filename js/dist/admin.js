@@ -15,10 +15,10 @@ __webpack_require__.r(__webpack_exports__);
 
 flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jeromegillard/flarum-osm', function () {
   console.log('[jeromegillard/flarum-osm] Hello, admin!');
-  flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().extensionData["for"]('jeromegillard-osm').registerSetting({
-    setting: 'jeromegillard-osm.test',
+  flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().extensionData["for"]('flarum-osm').registerSetting({
+    setting: 'flarum-osm.mapbox',
     // This is the key the settings will be saved under in the settings table in the database.
-    label: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-osm.admin.settings.intro'),
+    label: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('flarum-osm.admin.settings.mapbox.key'),
     // The label to be shown letting the admin know what the setting does.
     type: 'string' // What type of setting this is, valid options are: boolean, text (or any other <input> tag type), and select. 
 

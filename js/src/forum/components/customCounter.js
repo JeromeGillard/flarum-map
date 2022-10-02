@@ -1,10 +1,12 @@
 import Component from 'flarum/common/Component';
+import app from 'flarum/forum/app';
 
 export default class Counter extends Component {
+  
   oninit(vnode) {
     super.oninit(vnode);
 
-    this.count = 0;
+    this.mapboxKey = app.forum.attribute("osm.mapbox");
   }
 
   view() {
@@ -17,20 +19,24 @@ export default class Counter extends Component {
       </div>
     );*/
     return (
-        <div id='map'>MAP!!</div>
+        <div id={'map'+this.attrs.pid}></div>
     );
   }
 
   oncreate(vnode) {
     super.oncreate(vnode);
 
-    // We aren't actually doing anything here, but this would
-    // be a good place to attach event handlers, initialize libraries
-    // like sortable, or make other DOM modifications.
-    //$element = this.$();
-    //$button = this.$('button');
+    var map = L.map('map'+ this.attrs.pid).setView([50.4631,5.7533], 13);
 
-    var map = L.map('map').setView([50.4631,5.7533], 13);
+    var tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token='+this.mapboxKey, 
+    {
+      maxZoom: 18,
+      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
+        'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+      id: 'mapbox/light-v9',
+      tileSize: 512,
+      zoomOffset: -1
+    }).addTo(map);
   }
 }
 
