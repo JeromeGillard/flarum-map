@@ -1,23 +1,43 @@
-import Post from 'flarum/components/Post';
-import { extend } from 'flarum/common/extend';
-import HeaderPrimary from 'flarum/forum/components/HeaderPrimary';
-import Counter from './customCounter';
+import Component from 'flarum/common/Component';
+import app from 'flarum/forum/app';
 
+export default class OSMMap extends Component {
+  
+  oninit(vnode) {
+    super.oninit(vnode);
 
-/* global $ */
-export default function () {
-    extend(Post.prototype, 'content', function (content) {
-        let postId = this.attrs.post.id();
-        console.log("Found post id ", postId), this.attrs.post;
-        content.push(
-            <Counter buttonLabel="++" pid={postId}/> 
-        );
-    });
+    this.mapboxKey = app.forum.attribute("osm.mapbox");
+  }
 
-    extend(HeaderPrimary.prototype, 'items', function(items) {
-        items.add('google', <a href="https://google.com">Google</a>);
-        
-    });
+  view() {
+    /*return (
+      <div>
+        Count: {this.count}
+        <button onclick={e => this.count++}>
+          {this.attrs.buttonLabel}
+        </button>
+      </div>
+    );*/
+    return (
+        <div id={'map'+this.attrs.pid}></div>
+    );
+  }
 
-    //m.mount(document.body, <Counter buttonLabel="Increment" />);
+  oncreate(vnode) {
+    super.oncreate(vnode);
+
+    var map = L.map('map'+ this.attrs.pid).setView([50.4631,5.7533], 13);
+
+    var tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token='+this.mapboxKey, 
+    {
+      maxZoom: 18,
+      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
+        'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+      id: 'mapbox/light-v9',
+      tileSize: 512,
+      zoomOffset: -1
+    }).addTo(map);
+  }
 }
+
+//m.mount(document.body, <MyComponent buttonLabel="Increment" />);

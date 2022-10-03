@@ -3,7 +3,7 @@ import app from 'flarum/admin/app';
 app.initializers.add('jeromegillard/flarum-osm', () => {
   console.log('[jeromegillard/flarum-osm] Hello, admin!');
   app.extensionData
-    .for('flarum-osm')
+    .for('jeromegillard-osm')
     .registerSetting(
       {
         setting: 'flarum-osm.mapbox', // This is the key the settings will be saved under in the settings table in the database.
