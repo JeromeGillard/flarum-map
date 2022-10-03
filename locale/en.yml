@@ -3,6 +3,7 @@ flarum-osm:
   # Checkout https://docs.flarum.org/extend/i18n/#appendix-a-standard-key-format
   admin:
     templates:
+      osm: OpenStreetMap
       markdown-osm: Markdown map
       markdown-osm_description: Markdown map description
     settings:

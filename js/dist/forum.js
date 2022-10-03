@@ -19,6 +19,94 @@ flarum_common_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jerom
 
 /***/ }),
 
+/***/ "./src/forum/components/File.js":
+/*!**************************************!*\
+  !*** ./src/forum/components/File.js ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ File)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/inheritsLoose */ "./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js");
+/* harmony import */ var flarum_app__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flarum/app */ "flarum/app");
+/* harmony import */ var flarum_app__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(flarum_app__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var flarum_common_Model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! flarum/common/Model */ "flarum/common/Model");
+/* harmony import */ var flarum_common_Model__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(flarum_common_Model__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var flarum_common_utils_mixin__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! flarum/common/utils/mixin */ "flarum/common/utils/mixin");
+/* harmony import */ var flarum_common_utils_mixin__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(flarum_common_utils_mixin__WEBPACK_IMPORTED_MODULE_3__);
+
+
+
+
+
+var File = /*#__PURE__*/function (_mixin) {
+  (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__["default"])(File, _mixin);
+
+  function File() {
+    return _mixin.apply(this, arguments) || this;
+  }
+
+  var _proto = File.prototype;
+
+  /**
+   * Use FoF Uploads endpoint
+   */
+  _proto.apiEndpoint = function apiEndpoint() {
+    return '/fof/uploads' + (this.exists ? '/' + this.data.id : '');
+  }
+  /**
+   * Generate bbcode for this file
+   */
+  ;
+
+  _proto.bbcode = function bbcode() {
+    console.log('checking');
+    console.log(this.tag());
+
+    switch (this.tag()) {
+      // THis is obviouslu not sustainable and the backend API should return thus bb (which is already defined) in the provider php
+      case 'gpx':
+        return "[upl-file uuid=" + this.uuid() + " size=" + this.humanSize() + " url=" + this.url() + "]" + this.baseName() + "[/upl-file]";
+      // File
+
+      case 'file':
+        return "[upl-file uuid=" + this.uuid() + " size=" + this.humanSize() + "]" + this.baseName() + "[/upl-this]";
+      // Image template
+
+      case 'image':
+        return "[upl-image uuid=" + this.uuid() + " size=" + this.humanSize() + " url=" + this.url() + "]" + this.baseName() + "[/upl-image]";
+      // Image preview
+
+      case 'image-preview':
+        return "[upl-image-preview url=" + this.url() + "]";
+      // 'just-url' or unknown
+
+      default:
+        return this.url();
+    }
+  };
+
+  return File;
+}(flarum_common_utils_mixin__WEBPACK_IMPORTED_MODULE_3___default()((flarum_common_Model__WEBPACK_IMPORTED_MODULE_2___default()), {
+  baseName: flarum_common_Model__WEBPACK_IMPORTED_MODULE_2___default().attribute('baseName'),
+  path: flarum_common_Model__WEBPACK_IMPORTED_MODULE_2___default().attribute('path'),
+  url: flarum_common_Model__WEBPACK_IMPORTED_MODULE_2___default().attribute('url'),
+  type: flarum_common_Model__WEBPACK_IMPORTED_MODULE_2___default().attribute('type'),
+  size: flarum_common_Model__WEBPACK_IMPORTED_MODULE_2___default().attribute('size'),
+  humanSize: flarum_common_Model__WEBPACK_IMPORTED_MODULE_2___default().attribute('humanSize'),
+  createdAt: flarum_common_Model__WEBPACK_IMPORTED_MODULE_2___default().attribute('createdAt'),
+  uuid: flarum_common_Model__WEBPACK_IMPORTED_MODULE_2___default().attribute('uuid'),
+  tag: flarum_common_Model__WEBPACK_IMPORTED_MODULE_2___default().attribute('tag'),
+  hidden: flarum_common_Model__WEBPACK_IMPORTED_MODULE_2___default().attribute('hidden')
+}));
+
+
+
+/***/ }),
+
 /***/ "./src/forum/components/OSMMap.js":
 /*!****************************************!*\
   !*** ./src/forum/components/OSMMap.js ***!
@@ -104,20 +192,49 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var flarum_common_extend__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! flarum/common/extend */ "flarum/common/extend");
 /* harmony import */ var flarum_common_extend__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(flarum_common_extend__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _components_OSMMap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/OSMMap */ "./src/forum/components/OSMMap.js");
+/* harmony import */ var _components_File__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/File */ "./src/forum/components/File.js");
+
 
 
 
 
 flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jeromegillard/flarum-osm', function () {
   console.log('[jeromegillard/flarum-osm] Hello, forum!');
+  (flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().store.models.files) = _components_File__WEBPACK_IMPORTED_MODULE_4__["default"];
 });
-(0,flarum_common_extend__WEBPACK_IMPORTED_MODULE_2__.extend)((flarum_components_Post__WEBPACK_IMPORTED_MODULE_1___default().prototype), 'content', function (content) {
+(0,flarum_common_extend__WEBPACK_IMPORTED_MODULE_2__.extend)((flarum_components_Post__WEBPACK_IMPORTED_MODULE_1___default().prototype), 'oncreate', function () {
   var postId = this.attrs.post.id();
-  console.log("Found post id # ", postId), this.attrs.post;
-  content.push(m(_components_OSMMap__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    pid: postId
-  }));
+  console.log("Found post id #", postId), this.attrs.post;
+  var mapboxKey = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute("osm.mapbox"); //for each gpx file in this post, loop and map
+
+  this.$('.osmFile').each(function (i) {
+    var url = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute('apiUrl') + '/fof/download';
+    url += '/' + $(this).data('fofUploadDownloadUuid');
+    url += '/' + postId;
+    url += '/' + (flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().session.csrfToken);
+    console.log(url);
+    var uuid = $(this).data('fofUploadDownloadUuid');
+    var map = L.map('map-' + uuid).setView([50.4631, 5.7533], 13);
+    var tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=' + mapboxKey, {
+      maxZoom: 18,
+      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' + 'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+      id: 'mapbox/light-v9',
+      tileSize: 512,
+      zoomOffset: -1
+    }).addTo(map);
+  });
 });
+
+/***/ }),
+
+/***/ "flarum/app":
+/*!********************************************!*\
+  !*** external "flarum.core.compat['app']" ***!
+  \********************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core.compat['app'];
 
 /***/ }),
 
@@ -129,6 +246,17 @@ flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jerome
 
 "use strict";
 module.exports = flarum.core.compat['common/Component'];
+
+/***/ }),
+
+/***/ "flarum/common/Model":
+/*!*****************************************************!*\
+  !*** external "flarum.core.compat['common/Model']" ***!
+  \*****************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core.compat['common/Model'];
 
 /***/ }),
 
@@ -151,6 +279,17 @@ module.exports = flarum.core.compat['common/app'];
 
 "use strict";
 module.exports = flarum.core.compat['common/extend'];
+
+/***/ }),
+
+/***/ "flarum/common/utils/mixin":
+/*!***********************************************************!*\
+  !*** external "flarum.core.compat['common/utils/mixin']" ***!
+  \***********************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core.compat['common/utils/mixin'];
 
 /***/ }),
 

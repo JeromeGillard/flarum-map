@@ -18,7 +18,7 @@ class OSMTemplate extends AbstractTextFormatterTemplate
      */
     public function name(): string
     {
-        return $this->trans('jeromegillard-osm.admin.templates.osm');
+        return $this->trans('flarum-osm.admin.templates.osm');
     }
 
     /**
@@ -26,7 +26,7 @@ class OSMTemplate extends AbstractTextFormatterTemplate
      */
     public function description(): string
     {
-        return $this->trans('jeromegillard-osm.admin.templates.osm.file_description');
+        return $this->trans('flarum-osm.admin.templates.osm.file_description');
     }
 
     /**
@@ -46,7 +46,7 @@ class OSMTemplate extends AbstractTextFormatterTemplate
      */
     public function bbcode(): string
     {
-        //return '[upl-file uuid={IDENTIFIER} size={SIMPLETEXT2} url={URL}]{SIMPLETEXT1}[/upl-file]';
-        return '[osm]{SIMPLETEXT1}[/osm]';
+        return '[upl-file uuid={IDENTIFIER} size={SIMPLETEXT2} url={URL}]{SIMPLETEXT1}[/upl-file]';
+        //return '[osm zoom={ZOOM}]{SIMPLETEXT1}[/osm]';
     }
 }
