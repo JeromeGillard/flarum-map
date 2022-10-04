@@ -13,6 +13,7 @@ export default class File extends mixin(Model, {
     uuid: Model.attribute('uuid'),
     tag: Model.attribute('tag'),
     hidden: Model.attribute('hidden'),
+    cuuid: Model.attribute('cuuid'),
 }){
 
 
@@ -27,10 +28,11 @@ export default class File extends mixin(Model, {
      * Generate bbcode for this file
      */
     bbcode() {
-        console.log('checking')
-        console.log(this.tag())
+        //console.log('checking')
+        //console.log(this.tag())
         switch (this.tag()) {
             // THis is obviouslu not sustainable and the backend API should return thus bb (which is already defined) in the provider php
+            case 'osm':
             case 'gpx':
                 return `[upl-file uuid=${this.uuid()} size=${this.humanSize()} url=${this.url()}]${this.baseName()}[/upl-file]`;
             // File

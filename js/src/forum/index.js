@@ -1,20 +1,14 @@
 import app from 'flarum/forum/app';
 import Post from 'flarum/components/Post';
 import { extend } from 'flarum/common/extend';
-import OSMMap from './components/OSMMap';
 import File from './components/File';
 
 app.initializers.add('jeromegillard/flarum-osm', () => {
-  console.log('[jeromegillard/flarum-osm] Hello, forum!');
-
   app.store.models.files = File;
 });
 
 extend(Post.prototype, 'oncreate', function () {
   let postId = this.attrs.post.id();
-  console.log("Found post id #", postId), this.attrs.post;
-
-  
   let mapboxKey = app.forum.attribute("osm.mapbox");
   
   //for each gpx file in this post, loop and map
@@ -23,10 +17,23 @@ extend(Post.prototype, 'oncreate', function () {
             url += '/' + $(this).data('fofUploadDownloadUuid');
             url += '/' + postId;
             url += '/' + app.session.csrfToken;
-    console.log(url, this);
+    
+    // grab the uploaded gpx file's UUID
     let uuid = $(this).data('fofUploadDownloadUuid');
-    let map = L.map('map-'+uuid).setView([50.4631,5.7533], 13);
 
+    /*  change the template rendering to insert a new id to the map element.
+      * this allows us to have an unique div id even if a same file is displayed
+      * more than one time
+    */
+    var oldNode = document.getElementById('map--'+uuid);
+    var newNode = oldNode.cloneNode(true);
+    newNode.id = 'map-'+postId+i+'-'+uuid;
+    oldNode.parentNode.replaceChild(newNode, oldNode);
+
+    // Get the map element
+    let map = L.map('map-'+postId+i+'-'+uuid);
+
+    // Set the tiles provider
     let tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token='+mapboxKey, 
     {
       maxZoom: 18,
@@ -37,6 +44,7 @@ extend(Post.prototype, 'oncreate', function () {
       zoomOffset: -1
     }).addTo(map);
 
+    // Display the GPX file in it thanks to https://github.com/mpetazzoni/leaflet-gpx
     new L.GPX(url, 
         {
           async: true,
