@@ -23,7 +23,7 @@ extend(Post.prototype, 'oncreate', function () {
             url += '/' + $(this).data('fofUploadDownloadUuid');
             url += '/' + postId;
             url += '/' + app.session.csrfToken;
-    console.log(url);
+    console.log(url, this);
     let uuid = $(this).data('fofUploadDownloadUuid');
     let map = L.map('map-'+uuid).setView([50.4631,5.7533], 13);
 
@@ -35,6 +35,24 @@ extend(Post.prototype, 'oncreate', function () {
       id: 'mapbox/light-v9',
       tileSize: 512,
       zoomOffset: -1
+    }).addTo(map);
+
+    new L.GPX(url, 
+        {
+          async: true,
+          marker_options: {
+            startIconUrl: '/assets/extensions/jeromegillard-osm/pin-icon-start.png',
+            endIconUrl: '/assets/extensions/jeromegillard-osm/pin-icon-end.png',
+            shadowUrl: '/assets/extensions/jeromegillard-osm/pin-shadow.png',
+            wptIconUrls: {
+              '': '/assets/extensions/jeromegillard-osm/default-waypoint.png',
+              'Geocache Found': '/assets/extensions/jeromegillard-osm/geocache.png',
+              'Park': '/assets/extensions/jeromegillard-osm/tree.png'
+            },
+          }
+        }
+      ).on('loaded', function(e) {
+      map.fitBounds(e.target.getBounds());
     }).addTo(map);
 
   });

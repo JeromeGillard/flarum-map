@@ -212,7 +212,7 @@ flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jerome
     url += '/' + $(this).data('fofUploadDownloadUuid');
     url += '/' + postId;
     url += '/' + (flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().session.csrfToken);
-    console.log(url);
+    console.log(url, this);
     var uuid = $(this).data('fofUploadDownloadUuid');
     var map = L.map('map-' + uuid).setView([50.4631, 5.7533], 13);
     var tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=' + mapboxKey, {
@@ -221,6 +221,21 @@ flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jerome
       id: 'mapbox/light-v9',
       tileSize: 512,
       zoomOffset: -1
+    }).addTo(map);
+    new L.GPX(url, {
+      async: true,
+      marker_options: {
+        startIconUrl: '/assets/extensions/jeromegillard-osm/pin-icon-start.png',
+        endIconUrl: '/assets/extensions/jeromegillard-osm/pin-icon-end.png',
+        shadowUrl: '/assets/extensions/jeromegillard-osm/pin-shadow.png',
+        wptIconUrls: {
+          '': '/assets/extensions/jeromegillard-osm/default-waypoint.png',
+          'Geocache Found': '/assets/extensions/jeromegillard-osm/geocache.png',
+          'Park': '/assets/extensions/jeromegillard-osm/tree.png'
+        }
+      }
+    }).on('loaded', function (e) {
+      map.fitBounds(e.target.getBounds());
     }).addTo(map);
   });
 });
