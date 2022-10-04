@@ -50,7 +50,7 @@ return [
     (new Extend\Formatter)
         ->configure(function (Configurator $config) {
             $config->BBCodes->addCustom(
-                '[osm="{TEXT1}"]{TEXT2}[/osm]',
+                '[osm c={TEXT1}]{TEXT2}[/osm]',
                 '<span class="{TEXT1}">YAY{TEXT2}!!</span>'
             );
         })
