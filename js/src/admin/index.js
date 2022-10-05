@@ -116,6 +116,8 @@ app.initializers.add('jeromegillard/osm', () => {
       },
       30)
 
+    // TODO: add openmaptiles https://openmaptiles.org/styles/
+
     // Toogle settings blocks on provider change
     .registerSetting( () => {      
       if($('.select-tilesProvider')[0]){

@@ -211,7 +211,16 @@ flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jerome
       fetch(url).then(function (response) {
         return response.json();
       }).then(function (json) {
-        console.log(json);
+        function onEachFeature(feature, layer) {
+          var popupContent = '';
+
+          if (feature.properties && feature.properties.name) {
+            popupContent += feature.properties.name;
+          }
+
+          layer.bindPopup(popupContent);
+        }
+
         var geoJSONLayer = L.geoJSON([json], {
           style: function style(feature) {
             if (feature.properties && feature.properties.colour) {
@@ -221,10 +230,10 @@ flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jerome
                 opacity: 1
               };
             }
-          } //onEachFeature: onEachFeature,
-
+          },
+          onEachFeature: onEachFeature
         }).addTo(map);
-        map.setView(geoJSONLayer.getBounds().getCenter(), 13);
+        map.fitBounds(geoJSONLayer.getBounds());
       });
     } else {
       map.setView([51.505, -0.09], 13);

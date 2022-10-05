@@ -106,7 +106,8 @@ flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jerome
     },
     "default": 'atlas',
     className: 'thunderforest-setting thunderforest-style toggle-setting-block'
-  }, 30) // Toogle settings blocks on provider change
+  }, 30) // TODO: add openmaptiles https://openmaptiles.org/styles/
+  // Toogle settings blocks on provider change
   .registerSetting(function () {
     if ($('.select-tilesProvider')[0]) {
       currentTilesProvider = $('.select-tilesProvider')[0].value;
