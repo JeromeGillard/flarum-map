@@ -1,4 +1,4 @@
-# OSM
+# OpenStreetMap Flarum extension
 
 ![License](https://img.shields.io/badge/license-GPL-3.0-blue.svg) [![Latest Stable Version](https://img.shields.io/packagist/v/jeromegillard/osm.svg)](https://packagist.org/packages/jeromegillard/osm) [![Total Downloads](https://img.shields.io/packagist/dt/jeromegillard/osm.svg)](https://packagist.org/packages/jeromegillard/osm)
 
@@ -12,7 +12,13 @@ Install with composer:
 composer require jeromegillard/osm:"*"
 ```
 
-Configure FoF/Uploads to add the new GPX Template for `^application\/.*(gpx|xml)` files.
+Configure FoF/Uploads to add the new GPX Template for `^application\/.*(gpx|json|xml)` files.
+![Setup FoF Upload MIME type](assets/readme-fof-upload-mime.png)
+
+Then add those extensions to this list:
+![Setup FoF Upload MIME type](assets/readme-fof-upload-extensions.png)
+
+:warning: Don't forget to save your changes!
 
 ## Updating
 

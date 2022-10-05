@@ -48,6 +48,8 @@ extend(Post.prototype, 'oncreate', function () {
             url += '/' + so.postId;
             url += '/' + app.session.csrfToken;
 
+    let fileExt = $(this).data('mapUrl').split('.').pop().toLowerCase();
+
     /*  change the template rendering to insert a new id to the map element.
       * this allows us to have an unique div id even if a same file is displayed
       * more than one time
@@ -58,7 +60,8 @@ extend(Post.prototype, 'oncreate', function () {
     oldNode.parentNode.replaceChild(newNode, oldNode);
 
     // Get the map element
-    let map = L.map(nid).setView([51.505, -0.09], 13); 
+    let map = L.map(nid); 
+    map.addControl(new L.Control.Fullscreen());
     
     // Set the tiles provider
     new L.tileLayer(so.tileLayerURL, 
@@ -72,6 +75,7 @@ extend(Post.prototype, 'oncreate', function () {
       detectRetina: true
     }).addTo(map);
 
+    if(fileExt == 'gpx'){
     // Display the GPX file in it thanks to https://github.com/mpetazzoni/leaflet-gpx
     new L.GPX(url, 
         {
@@ -89,9 +93,41 @@ extend(Post.prototype, 'oncreate', function () {
         }
       ).on('loaded', function(e) {
       map.fitBounds(e.target.getBounds());
-    }).addTo(map);
-    map.addControl(new L.Control.Fullscreen());
+      }).addTo(map);
+    }
 
+    else if(fileExt == 'geojson'){
+      fetch(url)
+        .then(response => response.json())
+        .then(json => {
+          console.log(json);
+
+          var geoJSONLayer = L.geoJSON([json], {
+
+            style: function (feature) {
+              if( feature.properties && feature.properties.colour){
+                return { 
+                  color: feature.properties.colour,
+                  weight: 3,
+                  opacity: 1
+                  };
+              }
+            },
+        
+            //onEachFeature: onEachFeature,
+        
+          }).addTo(map);
+          map.setView(geoJSONLayer.getBounds().getCenter(), 13);
+
+          });
+      
+    
+    }
+
+    else {
+      map.setView([51.505, -0.09], 13);
+    }
+  
   });
 
 });

@@ -166,6 +166,7 @@ flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jerome
     url += '/' + uuid;
     url += '/' + so.postId;
     url += '/' + (flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().session.csrfToken);
+    var fileExt = $(this).data('mapUrl').split('.').pop().toLowerCase();
     /*  change the template rendering to insert a new id to the map element.
       * this allows us to have an unique div id even if a same file is displayed
       * more than one time
@@ -176,7 +177,8 @@ flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jerome
     newNode.id = nid;
     oldNode.parentNode.replaceChild(newNode, oldNode); // Get the map element
 
-    var map = L.map(nid).setView([51.505, -0.09], 13); // Set the tiles provider
+    var map = L.map(nid);
+    map.addControl(new L.Control.Fullscreen()); // Set the tiles provider
 
     new L.tileLayer(so.tileLayerURL, {
       key: so.currentKey,
@@ -186,24 +188,47 @@ flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jerome
       tileSize: 512,
       zoomOffset: -1,
       detectRetina: true
-    }).addTo(map); // Display the GPX file in it thanks to https://github.com/mpetazzoni/leaflet-gpx
-
-    new L.GPX(url, {
-      async: true,
-      marker_options: {
-        startIconUrl: '/assets/extensions/jeromegillard-osm/pin-icon-start.png',
-        endIconUrl: '/assets/extensions/jeromegillard-osm/pin-icon-end.png',
-        shadowUrl: '/assets/extensions/jeromegillard-osm/pin-shadow.png',
-        wptIconUrls: {
-          '': '/assets/extensions/jeromegillard-osm/default-waypoint.png',
-          'Geocache Found': '/assets/extensions/jeromegillard-osm/geocache.png',
-          'Park': '/assets/extensions/jeromegillard-osm/tree.png'
-        }
-      }
-    }).on('loaded', function (e) {
-      map.fitBounds(e.target.getBounds());
     }).addTo(map);
-    map.addControl(new L.Control.Fullscreen());
+
+    if (fileExt == 'gpx') {
+      // Display the GPX file in it thanks to https://github.com/mpetazzoni/leaflet-gpx
+      new L.GPX(url, {
+        async: true,
+        marker_options: {
+          startIconUrl: '/assets/extensions/jeromegillard-osm/pin-icon-start.png',
+          endIconUrl: '/assets/extensions/jeromegillard-osm/pin-icon-end.png',
+          shadowUrl: '/assets/extensions/jeromegillard-osm/pin-shadow.png',
+          wptIconUrls: {
+            '': '/assets/extensions/jeromegillard-osm/default-waypoint.png',
+            'Geocache Found': '/assets/extensions/jeromegillard-osm/geocache.png',
+            'Park': '/assets/extensions/jeromegillard-osm/tree.png'
+          }
+        }
+      }).on('loaded', function (e) {
+        map.fitBounds(e.target.getBounds());
+      }).addTo(map);
+    } else if (fileExt == 'geojson') {
+      fetch(url).then(function (response) {
+        return response.json();
+      }).then(function (json) {
+        console.log(json);
+        var geoJSONLayer = L.geoJSON([json], {
+          style: function style(feature) {
+            if (feature.properties && feature.properties.colour) {
+              return {
+                color: feature.properties.colour,
+                weight: 3,
+                opacity: 1
+              };
+            }
+          } //onEachFeature: onEachFeature,
+
+        }).addTo(map);
+        map.setView(geoJSONLayer.getBounds().getCenter(), 13);
+      });
+    } else {
+      map.setView([51.505, -0.09], 13);
+    }
   });
 });
 
