@@ -128,20 +128,31 @@ flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jerome
   (flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().store.models.files) = _components_File__WEBPACK_IMPORTED_MODULE_3__["default"];
 });
 (0,flarum_common_extend__WEBPACK_IMPORTED_MODULE_2__.extend)((flarum_components_Post__WEBPACK_IMPORTED_MODULE_1___default().prototype), 'oncreate', function () {
-  var _app$forum$attribute, _app$forum$attribute2, _app$forum$attribute3;
+  var _app$forum$attribute, _app$forum$attribute2, _app$forum$attribute3, _app$forum$attribute4, _app$forum$attribute5;
 
   this.postId = this.attrs.post.id();
   this.tilesProvider = (_app$forum$attribute = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute("tilesProvider")) != null ? _app$forum$attribute : 'osm';
-  this.mapboxKey = (_app$forum$attribute2 = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute("mapbox.key")) != null ? _app$forum$attribute2 : '';
-  this.thunderforestKey = (_app$forum$attribute3 = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute("thunderforest.key")) != null ? _app$forum$attribute3 : '';
+  this.currentKey = '';
+  this.currentStyle = '';
 
   switch (this.tilesProvider) {
     case "mapbox":
-      this.tileLayerURL = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=' + this.mapboxKey;
+      this.currentKey = (_app$forum$attribute2 = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute("mapbox.key")) != null ? _app$forum$attribute2 : '';
+      this.currentStyle = (_app$forum$attribute3 = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute("mapbox.style")) != null ? _app$forum$attribute3 : 'mapbox/light-v9';
+      this.tileLayerURL = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}@2x?access_token={key}';
+      this.attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, ' + '© <a href="https://www.mapbox.com/">Mapbox</a>';
+      break;
+
+    case "thunderforest":
+      this.currentKey = (_app$forum$attribute4 = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute("thunderforest.key")) != null ? _app$forum$attribute4 : '';
+      this.currentStyle = (_app$forum$attribute5 = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute("thunderforest.style")) != null ? _app$forum$attribute5 : 'atlas';
+      this.tileLayerURL = 'https://tile.thunderforest.com/{id}/{z}/{x}/{y}.png?apikey={key}';
+      this.attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, ' + '© <a href="https://www.thunderforest.com/">Thunderforest</a>';
       break;
 
     default:
       this.tileLayerURL = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
+      this.attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>';
   } // copy this for usage within .each()
 
 
@@ -165,14 +176,16 @@ flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jerome
     newNode.id = nid;
     oldNode.parentNode.replaceChild(newNode, oldNode); // Get the map element
 
-    var map = L.map(nid); // Set the tiles provider
+    var map = L.map(nid).setView([51.505, -0.09], 13); // Set the tiles provider
 
-    var tiles = L.tileLayer(so.tileLayerURL, {
+    new L.tileLayer(so.tileLayerURL, {
+      key: so.currentKey,
       maxZoom: 18,
-      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' + 'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-      id: 'mapbox/light-v9',
+      attribution: so.attribution,
+      id: so.currentStyle,
       tileSize: 512,
-      zoomOffset: -1
+      zoomOffset: -1,
+      detectRetina: true
     }).addTo(map); // Display the GPX file in it thanks to https://github.com/mpetazzoni/leaflet-gpx
 
     new L.GPX(url, {
@@ -190,6 +203,7 @@ flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jerome
     }).on('loaded', function (e) {
       map.fitBounds(e.target.getBounds());
     }).addTo(map);
+    map.addControl(new L.Control.Fullscreen());
   });
 });
 

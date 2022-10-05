@@ -11,10 +11,18 @@ jeromegillard-osm:
         label: Tiles layer provider
         help: Select the provider of the tiles layer that appears in the background
         tile_usage_policy: Tile Usage Policy
+        link: See here
+      style:
+          label: Style
+          help: Pick a map style.
       osm:
         help: OpenStreetMap tiles are fine for programming your Leaflet map, but read the Tile Usage Policy of OpenStreetMap if you’re going to use the tiles in production.        
       mapbox:
-        key: Mapbox key
+        label: Mapbox key
         help: Register for free at mapbox.com to get a token
+      thunderforest:
+        label: Thunderforest API key
+        help: Register for free at thunderforest.com to get an API key.
+        
   
   forum:

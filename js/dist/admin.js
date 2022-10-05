@@ -14,50 +14,106 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(flarum_admin_app__WEBPACK_IMPORTED_MODULE_0__);
 
 flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jeromegillard/osm', function () {
-  var currentTilesProvider = (flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().data.settings["jeromegillard-osm.tilesProvider"]);
-  console.log('[jeromegillard/osm] Hello, admin!');
-  flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().extensionData["for"]('jeromegillard-osm').registerSetting({
+  var currentTilesProvider = (flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().data.settings["jeromegillard-osm.tilesProvider"]); // As we don't know when the elements will be created, wait for them to display only the relevant ones.
+
+  var observer = new MutationObserver(function () {
+    if ($('.toggle-setting-block').length == 5) {
+      toggleSettingBlocks();
+      observer.disconnect();
+    }
+  });
+  observer.observe(document.querySelector('body'), {
+    childList: true
+  }); // Display only the relevant settings block
+
+  var toggleSettingBlocks = function toggleSettingBlocks() {
+    $('.toggle-setting-block').closest('.Form-group').hide();
+    $('.' + currentTilesProvider + '-setting').closest('.Form-group').show();
+  };
+
+  flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().extensionData["for"]('jeromegillard-osm') // Tile provider selection
+  .registerSetting({
     setting: 'jeromegillard-osm.tilesProvider',
     label: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-osm.admin.settings.tiles_provider.label'),
     help: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-osm.admin.settings.tiles_provider.help'),
     type: 'select',
     options: {
-      // The key in this object is what the setting will be stored as in the database, the value is the label the admin will see (remember to use translations if they make sense in your context).
       'osm': 'OpenStreetMap',
-      'mapbox': 'Mapbox'
+      'mapbox': 'Mapbox',
+      'thunderforest': 'Thunderforest'
     },
     "default": 'osm',
-    className: 'select-mapbox'
-  }, 30).registerSetting(function () {
-    if ($('.select-mapbox')[0]) {
-      currentTilesProvider = $('.select-mapbox')[0].value;
+    className: 'select-tilesProvider'
+  }, 30) // OpenStreetMap
+  .registerSetting(function () {
+    return m("div", {
+      className: "Form-group"
+    }, m("div", {
+      "class": "helpText osm-setting  toggle-setting-block"
+    }, flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-osm.admin.settings.osm.help'), " | ", m("a", {
+      href: "https://operations.osmfoundation.org/policies/tiles",
+      target: "_blank"
+    }, flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-osm.admin.settings.tiles_provider.tile_usage_policy'), ".")));
+  }, 30) // Mapbox key
+  .registerSetting({
+    setting: 'jeromegillard-osm.mapbox.key',
+    label: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-osm.admin.settings.mapbox.label'),
+    help: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-osm.admin.settings.mapbox.help'),
+    type: 'text',
+    className: 'mapbox-setting toggle-setting-block'
+  }, 21) // Mapbox styles (https://docs.mapbox.com/api/maps/styles/#mapbox-styles)
+  .registerSetting({
+    setting: 'jeromegillard-osm.mapbox.style',
+    label: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-osm.admin.settings.style.label'),
+    help: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-osm.admin.settings.style.help'),
+    type: 'select',
+    options: {
+      'mapbox/streets-v11': 'Streets',
+      'mapbox/outdoors-v11': 'Outdoors',
+      'mapbox/light-v10': 'Light',
+      'mapbox/dark-v10': 'Dark',
+      'mapbox/satellite-v9': 'Satelite',
+      'mapbox/satellite-streets-v11': 'Satelite streets',
+      'mapbox/navigation-day-v1': 'Navigation day',
+      'mapbox/navigation-night-v1': 'Navigation night'
+    },
+    "default": 'mapbox/streets-v11',
+    className: 'mapbox-setting mapbox-style toggle-setting-block'
+  }, 20) // Thunderforest key  
+  .registerSetting({
+    setting: 'jeromegillard-osm.thunderforest.key',
+    label: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-osm.admin.settings.thunderforest.label'),
+    help: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-osm.admin.settings.thunderforest.help'),
+    type: 'text',
+    className: 'thunderforest-setting toggle-setting-block'
+  }, 31) // Thunderforest style
+  .registerSetting({
+    setting: 'jeromegillard-osm.thunderforest.style',
+    label: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-osm.admin.settings.style.label'),
+    help: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-osm.admin.settings.style.help'),
+    type: 'select',
+    options: {
+      'cycle': 'cycle',
+      'transport': 'transport',
+      'landscape': 'landscape',
+      'outdoors': 'outdoors',
+      'transport-dark': 'transport-dark',
+      'spinal-map': 'spinal-map',
+      'pioneer': 'pioneer',
+      'mobile-atlas': 'mobile-atlas',
+      'neighbourhood': 'neighbourhood',
+      'atlas': 'atlas'
+    },
+    "default": 'atlas',
+    className: 'thunderforest-setting thunderforest-style toggle-setting-block'
+  }, 30) // Toogle settings blocks on provider change
+  .registerSetting(function () {
+    if ($('.select-tilesProvider')[0]) {
+      currentTilesProvider = $('.select-tilesProvider')[0].value;
     }
 
-    if (currentTilesProvider == 'osm') {
-      return m("div", {
-        className: "Form-group"
-      }, m("div", {
-        "class": "helpText"
-      }, flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-osm.admin.settings.osm.help'), " | ", m("a", {
-        href: "https://operations.osmfoundation.org/policies/tiles",
-        target: "_blank"
-      }, flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-osm.admin.settings.tiles_provider.tile_usage_policy'), ".")));
-    } else if (currentTilesProvider == 'mapbox') {
-      return m("div", {
-        className: "Form-group"
-      }, m("label", null, flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-osm.admin.settings.mapbox.key')), m("div", {
-        "class": "helpText"
-      }, flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-osm.admin.settings.mapbox.help'), " | ", m("a", {
-        href: "https://docs.mapbox.com/help/getting-started/attribution/",
-        target: "_blank"
-      }, flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-osm.admin.settings.tiles_provider.tile_usage_policy'), ".")), m("input", {
-        type: "string",
-        "class": "FormControl",
-        bidi: this.setting('jeromegillard-osm.mapbox.key')
-      }));
-    }
-  }, 10 // Optional: Priority
-  );
+    toggleSettingBlocks();
+  }, 0);
 });
 
 /***/ }),

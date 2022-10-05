@@ -10,16 +10,28 @@ app.initializers.add('jeromegillard/osm', () => {
 
 extend(Post.prototype, 'oncreate', function () {
   this.postId = this.attrs.post.id();  
-  this.tilesProvider = app.forum.attribute("tilesProvider")??'osm';
-  this.mapboxKey = app.forum.attribute("mapbox.key")??'';
-  this.thunderforestKey  = app.forum.attribute("thunderforest.key")??'';
+  this.tilesProvider = app.forum.attribute("tilesProvider")??'osm';  
+  this.currentKey = '';
+  this.currentStyle = '';
   
   switch(this.tilesProvider){
     case "mapbox":
-      this.tileLayerURL = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token='+this.mapboxKey;
+      this.currentKey = app.forum.attribute("mapbox.key")??'';
+      this.currentStyle = app.forum.attribute("mapbox.style")??'mapbox/light-v9';
+      this.tileLayerURL = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}@2x?access_token={key}';
+      this.attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, ' +
+      '© <a href="https://www.mapbox.com/">Mapbox</a>';
+      break;
+    case "thunderforest":
+      this.currentKey = app.forum.attribute("thunderforest.key")??'';
+      this.currentStyle = app.forum.attribute("thunderforest.style")??'atlas';
+      this.tileLayerURL = 'https://tile.thunderforest.com/{id}/{z}/{x}/{y}.png?apikey={key}';
+      this.attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, ' +
+      '© <a href="https://www.thunderforest.com/">Thunderforest</a>';
       break;
     default:
       this.tileLayerURL = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
+      this.attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>';
   }
 
   // copy this for usage within .each()
@@ -46,17 +58,18 @@ extend(Post.prototype, 'oncreate', function () {
     oldNode.parentNode.replaceChild(newNode, oldNode);
 
     // Get the map element
-    let map = L.map(nid);    
-
+    let map = L.map(nid).setView([51.505, -0.09], 13); 
+    
     // Set the tiles provider
-    let tiles = L.tileLayer(so.tileLayerURL, 
+    new L.tileLayer(so.tileLayerURL, 
     {
+      key: so.currentKey,      
       maxZoom: 18,
-      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
-        'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-      id: 'mapbox/light-v9',
+      attribution: so.attribution,
+      id: so.currentStyle,
       tileSize: 512,
-      zoomOffset: -1
+      zoomOffset: -1,
+      detectRetina: true
     }).addTo(map);
 
     // Display the GPX file in it thanks to https://github.com/mpetazzoni/leaflet-gpx
@@ -77,6 +90,7 @@ extend(Post.prototype, 'oncreate', function () {
       ).on('loaded', function(e) {
       map.fitBounds(e.target.getBounds());
     }).addTo(map);
+    map.addControl(new L.Control.Fullscreen());
 
   });
 
