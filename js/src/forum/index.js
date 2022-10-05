@@ -3,23 +3,38 @@ import Post from 'flarum/components/Post';
 import { extend } from 'flarum/common/extend';
 import File from './components/File';
 
-app.initializers.add('jeromegillard/flarum-osm', () => {
+app.initializers.add('jeromegillard/osm', () => {
   app.store.models.files = File;
+
 });
 
 extend(Post.prototype, 'oncreate', function () {
-  let postId = this.attrs.post.id();
-  let mapboxKey = app.forum.attribute("osm.mapbox");
+  this.postId = this.attrs.post.id();  
+  this.tilesProvider = app.forum.attribute("tilesProvider")??'osm';
+  this.mapboxKey = app.forum.attribute("mapbox.key")??'';
+  this.thunderforestKey  = app.forum.attribute("thunderforest.key")??'';
   
+  switch(this.tilesProvider){
+    case "mapbox":
+      this.tileLayerURL = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token='+this.mapboxKey;
+      break;
+    default:
+      this.tileLayerURL = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
+  }
+
+  // copy this for usage within .each()
+  let so = this;
+
   //for each gpx file in this post, loop and map
-  this.$('.osmFile').each(function( i ) {
-    let url = app.forum.attribute('apiUrl') + '/fof/download';
-            url += '/' + $(this).data('fofUploadDownloadUuid');
-            url += '/' + postId;
-            url += '/' + app.session.csrfToken;
-    
-    // grab the uploaded gpx file's UUID
+  this.$('.osmFile').each(function( i ) { 
+
+    // grab the uploaded gpx file's UUID and url
     let uuid = $(this).data('fofUploadDownloadUuid');
+    let nid = 'map-'+so.postId+i+'-'+uuid;
+    let url = app.forum.attribute('apiUrl') + '/fof/download';
+            url += '/' + uuid;
+            url += '/' + so.postId;
+            url += '/' + app.session.csrfToken;
 
     /*  change the template rendering to insert a new id to the map element.
       * this allows us to have an unique div id even if a same file is displayed
@@ -27,14 +42,14 @@ extend(Post.prototype, 'oncreate', function () {
     */
     var oldNode = document.getElementById('map--'+uuid);
     var newNode = oldNode.cloneNode(true);
-    newNode.id = 'map-'+postId+i+'-'+uuid;
+    newNode.id = nid;
     oldNode.parentNode.replaceChild(newNode, oldNode);
 
     // Get the map element
-    let map = L.map('map-'+postId+i+'-'+uuid);
+    let map = L.map(nid);    
 
     // Set the tiles provider
-    let tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token='+mapboxKey, 
+    let tiles = L.tileLayer(so.tileLayerURL, 
     {
       maxZoom: 18,
       attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +

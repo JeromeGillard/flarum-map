@@ -13,16 +13,50 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var flarum_admin_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! flarum/admin/app */ "flarum/admin/app");
 /* harmony import */ var flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(flarum_admin_app__WEBPACK_IMPORTED_MODULE_0__);
 
-flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jeromegillard/flarum-osm', function () {
-  console.log('[jeromegillard/flarum-osm] Hello, admin!');
+flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jeromegillard/osm', function () {
+  var currentTilesProvider = (flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().data.settings["jeromegillard-osm.tilesProvider"]);
+  console.log('[jeromegillard/osm] Hello, admin!');
   flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().extensionData["for"]('jeromegillard-osm').registerSetting({
-    setting: 'flarum-osm.mapbox',
-    // This is the key the settings will be saved under in the settings table in the database.
-    label: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('flarum-osm.admin.settings.mapbox.key'),
-    // The label to be shown letting the admin know what the setting does.
-    type: 'string' // What type of setting this is, valid options are: boolean, text (or any other <input> tag type), and select. 
+    setting: 'jeromegillard-osm.tilesProvider',
+    label: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-osm.admin.settings.tiles_provider.label'),
+    help: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-osm.admin.settings.tiles_provider.help'),
+    type: 'select',
+    options: {
+      // The key in this object is what the setting will be stored as in the database, the value is the label the admin will see (remember to use translations if they make sense in your context).
+      'osm': 'OpenStreetMap',
+      'mapbox': 'Mapbox'
+    },
+    "default": 'osm',
+    className: 'select-mapbox'
+  }, 30).registerSetting(function () {
+    if ($('.select-mapbox')[0]) {
+      currentTilesProvider = $('.select-mapbox')[0].value;
+    }
 
-  }, 30 // Optional: Priority
+    if (currentTilesProvider == 'osm') {
+      return m("div", {
+        className: "Form-group"
+      }, m("div", {
+        "class": "helpText"
+      }, flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-osm.admin.settings.osm.help'), " | ", m("a", {
+        href: "https://operations.osmfoundation.org/policies/tiles",
+        target: "_blank"
+      }, flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-osm.admin.settings.tiles_provider.tile_usage_policy'), ".")));
+    } else if (currentTilesProvider == 'mapbox') {
+      return m("div", {
+        className: "Form-group"
+      }, m("label", null, flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-osm.admin.settings.mapbox.key')), m("div", {
+        "class": "helpText"
+      }, flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-osm.admin.settings.mapbox.help'), " | ", m("a", {
+        href: "https://docs.mapbox.com/help/getting-started/attribution/",
+        target: "_blank"
+      }, flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-osm.admin.settings.tiles_provider.tile_usage_policy'), ".")), m("input", {
+        type: "string",
+        "class": "FormControl",
+        bidi: this.setting('jeromegillard-osm.mapbox.key')
+      }));
+    }
+  }, 10 // Optional: Priority
   );
 });
 
@@ -39,8 +73,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var flarum_common_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! flarum/common/app */ "flarum/common/app");
 /* harmony import */ var flarum_common_app__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(flarum_common_app__WEBPACK_IMPORTED_MODULE_0__);
 
-flarum_common_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jeromegillard/flarum-osm', function () {
-  console.log('[jeromegillard/flarum-osm] Hello, forum and admin!');
+flarum_common_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jeromegillard/osm', function () {
+  console.log('[jeromegillard/osm] Hello, forum and admin!');
 });
 
 /***/ }),

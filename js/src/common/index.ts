@@ -1,5 +1,5 @@
 import app from 'flarum/common/app';
 
-app.initializers.add('jeromegillard/flarum-osm', () => {
-  console.log('[jeromegillard/flarum-osm] Hello, forum and admin!');
+app.initializers.add('jeromegillard/osm', () => {
+  console.log('[jeromegillard/osm] Hello, forum and admin!');
 });

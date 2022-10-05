@@ -14,7 +14,7 @@ class MardownOSMTemplate extends AbstractTemplate
      */
     public function name(): string
     {
-        return $this->trans('flarum-osm.admin.templates.osm');
+        return $this->trans('osm.admin.templates.osm');
     }
 
     /**
@@ -22,7 +22,7 @@ class MardownOSMTemplate extends AbstractTemplate
      */
     public function description(): string
     {
-        return $this->trans('flarum-osm.admin.templates.osm.file_description');
+        return $this->trans('osm.admin.templates.osm.file_description');
     }
 
     /**

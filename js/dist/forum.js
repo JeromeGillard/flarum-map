@@ -13,8 +13,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var flarum_common_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! flarum/common/app */ "flarum/common/app");
 /* harmony import */ var flarum_common_app__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(flarum_common_app__WEBPACK_IMPORTED_MODULE_0__);
 
-flarum_common_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jeromegillard/flarum-osm', function () {
-  console.log('[jeromegillard/flarum-osm] Hello, forum and admin!');
+flarum_common_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jeromegillard/osm', function () {
+  console.log('[jeromegillard/osm] Hello, forum and admin!');
 });
 
 /***/ }),
@@ -63,12 +63,9 @@ var File = /*#__PURE__*/function (_mixin) {
   ;
 
   _proto.bbcode = function bbcode() {
-    //console.log('checking')
-    //console.log(this.tag())
+    //console.log('checking', this.tag())
     switch (this.tag()) {
-      // THis is obviouslu not sustainable and the backend API should return thus bb (which is already defined) in the provider php
-      case 'osm':
-      case 'gpx':
+      case 'jeromegillard-osm':
         return "[upl-file uuid=" + this.uuid() + " size=" + this.humanSize() + " url=" + this.url() + "]" + this.baseName() + "[/upl-file]";
       // File
 
@@ -127,20 +124,37 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jeromegillard/flarum-osm', function () {
+flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jeromegillard/osm', function () {
   (flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().store.models.files) = _components_File__WEBPACK_IMPORTED_MODULE_3__["default"];
 });
 (0,flarum_common_extend__WEBPACK_IMPORTED_MODULE_2__.extend)((flarum_components_Post__WEBPACK_IMPORTED_MODULE_1___default().prototype), 'oncreate', function () {
-  var postId = this.attrs.post.id();
-  var mapboxKey = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute("osm.mapbox"); //for each gpx file in this post, loop and map
+  var _app$forum$attribute, _app$forum$attribute2, _app$forum$attribute3;
+
+  this.postId = this.attrs.post.id();
+  this.tilesProvider = (_app$forum$attribute = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute("tilesProvider")) != null ? _app$forum$attribute : 'osm';
+  this.mapboxKey = (_app$forum$attribute2 = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute("mapbox.key")) != null ? _app$forum$attribute2 : '';
+  this.thunderforestKey = (_app$forum$attribute3 = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute("thunderforest.key")) != null ? _app$forum$attribute3 : '';
+
+  switch (this.tilesProvider) {
+    case "mapbox":
+      this.tileLayerURL = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=' + this.mapboxKey;
+      break;
+
+    default:
+      this.tileLayerURL = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
+  } // copy this for usage within .each()
+
+
+  var so = this; //for each gpx file in this post, loop and map
 
   this.$('.osmFile').each(function (i) {
-    var url = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute('apiUrl') + '/fof/download';
-    url += '/' + $(this).data('fofUploadDownloadUuid');
-    url += '/' + postId;
-    url += '/' + (flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().session.csrfToken); // grab the uploaded gpx file's UUID
-
+    // grab the uploaded gpx file's UUID and url
     var uuid = $(this).data('fofUploadDownloadUuid');
+    var nid = 'map-' + so.postId + i + '-' + uuid;
+    var url = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute('apiUrl') + '/fof/download';
+    url += '/' + uuid;
+    url += '/' + so.postId;
+    url += '/' + (flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().session.csrfToken);
     /*  change the template rendering to insert a new id to the map element.
       * this allows us to have an unique div id even if a same file is displayed
       * more than one time
@@ -148,12 +162,12 @@ flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jerome
 
     var oldNode = document.getElementById('map--' + uuid);
     var newNode = oldNode.cloneNode(true);
-    newNode.id = 'map-' + postId + i + '-' + uuid;
+    newNode.id = nid;
     oldNode.parentNode.replaceChild(newNode, oldNode); // Get the map element
 
-    var map = L.map('map-' + postId + i + '-' + uuid); // Set the tiles provider
+    var map = L.map(nid); // Set the tiles provider
 
-    var tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=' + mapboxKey, {
+    var tiles = L.tileLayer(so.tileLayerURL, {
       maxZoom: 18,
       attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' + 'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
       id: 'mapbox/light-v9',

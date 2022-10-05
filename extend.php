@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of jeromegillard/flarum-osm.
+ * This file is part of jeromegillard/osm.
  *
  * Copyright (c) 2022 Jérôme Gillard.
  *
@@ -33,7 +33,9 @@ return [
         ->register(Providers\OSMProvider::class),
 
     (new Extend\Settings())
-        ->serializeToForum('osm.mapbox', 'jeromegillard-osm.mapbox'),
+        ->serializeToForum('tilesProvider', 'jeromegillard-osm.tilesProvider')
+        ->serializeToForum('mapbox.key', 'jeromegillard-osm.mapbox.key')
+        ->serializeToForum('thunderforest.key', 'jeromegillard-osm.thunderforest.key'),
 
     (new Extend\View())
         ->namespace('fof-upload.templates', __DIR__.'/resources/templates'),
