@@ -9,7 +9,7 @@ class OSMTemplate extends AbstractTextFormatterTemplate
     /**
      * @var string
      */
-    protected $tag = 'osm';
+    protected $tag = 'jeromegillard-osm';
 
     /**
      * The human readable name of the template.
@@ -18,7 +18,7 @@ class OSMTemplate extends AbstractTextFormatterTemplate
      */
     public function name(): string
     {
-        return $this->trans('flarum-osm.admin.templates.osm');
+        return $this->trans('jeromegillard-osm.admin.templates.osm');
     }
 
     /**
@@ -26,7 +26,7 @@ class OSMTemplate extends AbstractTextFormatterTemplate
      */
     public function description(): string
     {
-        return $this->trans('flarum-osm.admin.templates.osm.file_description');
+        return $this->trans('jeromegillard-osm.admin.templates.osm.file_description');
     }
 
     /**
@@ -36,7 +36,7 @@ class OSMTemplate extends AbstractTextFormatterTemplate
      */
     public function template(): string
     {
-        return $this->getView('fof-upload.templates::osm');
+        return $this->getView('fof-upload.templates::jeromegillard-osm');
     }
 
     /**

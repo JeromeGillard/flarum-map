@@ -1,8 +1,11 @@
 {
-    "name": "jeromegillard/flarum-osm",
-    "description": "OpenStreetMap in flarum.",
+    "name": "jeromegillard/osm",
+    "description": "OpenStreetMap in Flarum.",
     "keywords": [
-        "flarum"
+        "flarum",
+        "gpx",
+        "openstreetmap",
+        "osm"
     ],
     "type": "flarum-extension",
     "require": {

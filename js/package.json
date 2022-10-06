@@ -1,5 +1,5 @@
 {
-    "name": "@jeromegillard/flarum-osm",
+    "name": "@jeromegillard/osm",
     "private": true,
     "version": "0.0.0",
     "devDependencies": {

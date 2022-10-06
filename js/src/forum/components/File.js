@@ -28,12 +28,9 @@ export default class File extends mixin(Model, {
      * Generate bbcode for this file
      */
     bbcode() {
-        //console.log('checking')
-        //console.log(this.tag())
+        //console.log('checking', this.tag())
         switch (this.tag()) {
-            // THis is obviouslu not sustainable and the backend API should return thus bb (which is already defined) in the provider php
-            case 'osm':
-            case 'gpx':
+            case 'jeromegillard-osm':
                 return `[upl-file uuid=${this.uuid()} size=${this.humanSize()} url=${this.url()}]${this.baseName()}[/upl-file]`;
             // File
             case 'file':

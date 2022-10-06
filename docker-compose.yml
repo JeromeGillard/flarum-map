@@ -15,7 +15,7 @@ services:
     depends_on:
       - flarum-dev-db
     volumes:
-      - .:/flarum/app/packages/osm
+      - .:/flarum/app/packages/flarum-osm
     ports:
       - 80:8888
     networks:
