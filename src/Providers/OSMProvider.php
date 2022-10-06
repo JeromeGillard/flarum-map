@@ -17,5 +17,8 @@ class OSMProvider extends AbstractServiceProvider
         $util = $this->container->make(Util::class);
 
         $util->addRenderTemplate($this->container->make(OSMTemplate::class));
+
+        // display a map based on location query results
+        // https://nominatim.openstreetmap.org/search?q=nonceveux&format=json
     }
 }

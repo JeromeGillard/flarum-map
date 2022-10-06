@@ -7,7 +7,7 @@ jeromegillard-osm:
       markdown-osm: Markdown map
       markdown-osm_description: Markdown map description
     settings:
-      tiles_provider: 
+      tiles_provider:
         label: Tiles layer provider
         help: Select the provider of the tiles layer that appears in the background
         tile_usage_policy: Tile Usage Policy
@@ -16,13 +16,16 @@ jeromegillard-osm:
           label: Style
           help: Pick a map style.
       osm:
-        help: OpenStreetMap tiles are fine for programming your Leaflet map, but read the Tile Usage Policy of OpenStreetMap if you’re going to use the tiles in production.        
+        help: OpenStreetMap tiles are fine for programming your Leaflet map, but read the Tile Usage Policy of OpenStreetMap if you’re going to use the tiles in production.
       mapbox:
         label: Mapbox key
         help: Register for free at mapbox.com to get a token
       thunderforest:
         label: Thunderforest API key
         help: Register for free at thunderforest.com to get an API key.
-        
-  
+
+
   forum:
+    text_editor:
+      bbcode_tooltip: insert a map
+      location_placeholder: WHERE?

@@ -1,19 +1,33 @@
 import app from 'flarum/forum/app';
 import Post from 'flarum/components/Post';
 import { extend } from 'flarum/common/extend';
+import TextEditor from 'flarum/common/components/TextEditor';
+import TextEditorButton from 'flarum/common/components/TextEditorButton';
 import File from './components/File';
+import insertAtCursor from './components/OSMBBCode';
 
 app.initializers.add('jeromegillard/osm', () => {
   app.store.models.files = File;
 
+  extend(TextEditor.prototype, 'toolbarItems', function (items) {
+    if (/*app.forum.attribute('zerosonesfun-bbcode-button.code') === ""*/false) {
+      return; } else {
+      items.add(
+        'bbcode',
+        <TextEditorButton onclick={() => insertAtCursor(this.tilesProvider)} icon={'fas fa-map'}>
+          {app.translator.trans('jeromegillard-osm.forum.text_editor.bbcode_tooltip')}
+        </TextEditorButton>
+      ); }
+    });
+
 });
 
 extend(Post.prototype, 'oncreate', function () {
-  this.postId = this.attrs.post.id();  
-  this.tilesProvider = app.forum.attribute("tilesProvider")??'osm';  
+  this.postId = this.attrs.post.id();
+  this.tilesProvider = app.forum.attribute("tilesProvider")??'osm';
   this.currentKey = '';
   this.currentStyle = '';
-  
+
   switch(this.tilesProvider){
     case "mapbox":
       this.currentKey = app.forum.attribute("mapbox.key")??'';
@@ -38,7 +52,7 @@ extend(Post.prototype, 'oncreate', function () {
   let so = this;
 
   //for each gpx file in this post, loop and map
-  this.$('.osmFile').each(function( i ) { 
+  this.$('.osmFile').each(function( i ) {
 
     // grab the uploaded gpx file's UUID and url
     let uuid = $(this).data('fofUploadDownloadUuid');
@@ -60,13 +74,13 @@ extend(Post.prototype, 'oncreate', function () {
     oldNode.parentNode.replaceChild(newNode, oldNode);
 
     // Get the map element
-    let map = L.map(nid); 
+    let map = L.map(nid);
     map.addControl(new L.Control.Fullscreen());
-    
+
     // Set the tiles provider
-    new L.tileLayer(so.tileLayerURL, 
+    new L.tileLayer(so.tileLayerURL,
     {
-      key: so.currentKey,      
+      key: so.currentKey,
       maxZoom: 18,
       attribution: so.attribution,
       id: so.currentStyle,
@@ -77,7 +91,7 @@ extend(Post.prototype, 'oncreate', function () {
 
     if(fileExt == 'gpx'){
     // Display the GPX file in it thanks to https://github.com/mpetazzoni/leaflet-gpx
-    new L.GPX(url, 
+    new L.GPX(url,
         {
           async: true,
           marker_options: {
@@ -103,25 +117,25 @@ extend(Post.prototype, 'oncreate', function () {
 
           function onEachFeature(feature, layer) {
             var popupContent = '';
-        
+
             if (feature.properties && feature.properties.name) {
               popupContent += feature.properties.name;
             }
-        
+
             layer.bindPopup(popupContent);
-          }        
+          }
 
           var geoJSONLayer = L.geoJSON([json], {
             style: function (feature) {
               if( feature.properties && feature.properties.colour){
-                return { 
+                return {
                   color: feature.properties.colour,
                   weight: 3,
                   opacity: 1
                   };
               }
-            },        
-            onEachFeature: onEachFeature,        
+            },
+            onEachFeature: onEachFeature,
           }).addTo(map);
           map.fitBounds(geoJSONLayer.getBounds());
           });
@@ -130,7 +144,7 @@ extend(Post.prototype, 'oncreate', function () {
     else {
       map.setView([51.505, -0.09], 13);
     }
-  
+
   });
 
 });
