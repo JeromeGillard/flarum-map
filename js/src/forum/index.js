@@ -51,6 +51,10 @@ extend(Post.prototype, 'oncreate', function () {
   // copy this for usage within .each()
   let so = this;
 
+  this.$('.mapFile-container').each((i) => {
+    console.log('mapFileCont', this.$('.mapFile-container')[i]);
+  });
+
   //for each gpx file in this post, loop and map
   this.$('.osmFile').each(function( i ) {
 
@@ -68,10 +72,8 @@ extend(Post.prototype, 'oncreate', function () {
       * this allows us to have an unique div id even if a same file is displayed
       * more than one time
     */
-    var oldNode = document.getElementById('map--'+uuid);
-    var newNode = oldNode.cloneNode(true);
-    newNode.id = nid;
-    oldNode.parentNode.replaceChild(newNode, oldNode);
+    $('.mapFile-container')[i].id = nid;
+
 
     // Get the map element
     let map = L.map(nid);
