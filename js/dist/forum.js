@@ -149,6 +149,97 @@ function insertAtCursor(tilesProvider, style, zoom) {
 
 /***/ }),
 
+/***/ "./src/forum/components/mapConfigHelper.js":
+/*!*************************************************!*\
+  !*** ./src/forum/components/mapConfigHelper.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ getMapConfig)
+/* harmony export */ });
+/* harmony import */ var flarum_forum_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! flarum/forum/app */ "flarum/forum/app");
+/* harmony import */ var flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(flarum_forum_app__WEBPACK_IMPORTED_MODULE_0__);
+
+function getMapConfig(o_tilesProvider, o_style, o_zoom) {
+  var _app$forum$attribute, _app$forum$attribute2, _app$forum$attribute3, _app$forum$attribute4, _app$forum$attribute5, _app$forum$attribute6;
+
+  var tilesProvider = (_app$forum$attribute = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute("tilesProvider")) != null ? _app$forum$attribute : 'osm';
+  var currentStyle;
+  var currentKey;
+  var tileLayerURL;
+  var zoom = (_app$forum$attribute2 = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute("zoom")) != null ? _app$forum$attribute2 : 13;
+  var attribution;
+
+  if (o_tilesProvider && o_tilesProvider === 'mapbox' || o_tilesProvider === 'thunderforest' || o_tilesProvider === 'osm') {
+    tilesProvider = o_tilesProvider;
+  }
+
+  if (o_style) {
+    switch (tilesProvider) {
+      case 'mapbox':
+        // default style if mapbox was selected
+        currentStyle = (_app$forum$attribute3 = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute("mapbox.style")) != null ? _app$forum$attribute3 : 'mapbox/light-v9';
+
+        if (o_style === 'mapbox/streets-v11' || o_style === 'mapbox/outdoors-v11' || o_style === 'mapbox/light-v10' || o_style === 'mapbox/dark-v10' || o_style === 'mapbox/satellite-v9' || o_style === 'mapbox/satellite-streets-v11' || o_style === 'mapbox/navigation-day-v1' || o_style === 'mapbox/streets-v11' || o_style === 'mapbox/navigation-night-v1') {
+          currentStyle = o_style;
+        }
+
+        break;
+
+      case 'thunderforest':
+        // default style if thunderforest was selected
+        currentStyle = (_app$forum$attribute4 = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute("thunderforest.style")) != null ? _app$forum$attribute4 : 'atlas';
+
+        if (o_style === 'cycle' || o_style === 'transport' || o_style === 'landscape' || o_style === 'outdoors' || o_style === 'transport-dark9' || o_style === 'spinal-map' || o_style === 'pioneer' || o_style === 'mobile-atlas' || o_style === 'neighbourhood' || o_style === 'atlas') {
+          currentStyle = o_style;
+        }
+
+        break;
+    }
+  }
+
+  switch (tilesProvider) {
+    case "mapbox":
+      currentKey = (_app$forum$attribute5 = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute("mapbox.key")) != null ? _app$forum$attribute5 : '';
+      tileLayerURL = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}@2x?access_token={key}';
+      attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, ' + '© <a href="https://www.mapbox.com/">Mapbox</a>';
+      break;
+
+    case "thunderforest":
+      currentKey = (_app$forum$attribute6 = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute("thunderforest.key")) != null ? _app$forum$attribute6 : '';
+      tileLayerURL = 'https://tile.thunderforest.com/{id}/{z}/{x}/{y}.png?apikey={key}';
+      attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, ' + '© <a href="https://www.thunderforest.com/">Thunderforest</a>';
+      break;
+
+    default:
+      tileLayerURL = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
+      attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>';
+  }
+
+  if (o_zoom >= 0 && o_zoom <= 18) {
+    zoom = o_zoom;
+  }
+
+  return {
+    "tilesProvider": tilesProvider,
+    "currentStyle": currentStyle,
+    "currentKey": currentKey,
+    "tileLayerURL": tileLayerURL,
+    "zoom": zoom,
+    maxZoom: 18,
+    tileSize: 512,
+    zoomOffset: -1,
+    detectRetina: true,
+    defaultLocation: [51.505, -0.09]
+  };
+}
+;
+
+/***/ }),
+
 /***/ "./src/forum/index.js":
 /*!****************************!*\
   !*** ./src/forum/index.js ***!
@@ -169,6 +260,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var flarum_common_components_TextEditorButton__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(flarum_common_components_TextEditorButton__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _components_File__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/File */ "./src/forum/components/File.js");
 /* harmony import */ var _components_OSMBBCode__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/OSMBBCode */ "./src/forum/components/OSMBBCode.js");
+/* harmony import */ var _components_mapConfigHelper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/mapConfigHelper */ "./src/forum/components/mapConfigHelper.js");
+
 
 
 
@@ -181,58 +274,24 @@ flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jerome
   (0,flarum_common_extend__WEBPACK_IMPORTED_MODULE_2__.extend)((flarum_common_components_TextEditor__WEBPACK_IMPORTED_MODULE_3___default().prototype), 'toolbarItems', function (items) {
     var _this = this;
 
-    if (
-    /*app.forum.attribute('zerosonesfun-bbcode-button.code') === ""*/
-    false) {} else {
-      items.add('bbcode', m((flarum_common_components_TextEditorButton__WEBPACK_IMPORTED_MODULE_4___default()), {
-        onclick: function onclick() {
-          return (0,_components_OSMBBCode__WEBPACK_IMPORTED_MODULE_6__["default"])(_this.tilesProvider);
-        },
-        icon: 'fas fa-map'
-      }, flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-osm.forum.text_editor.bbcode_tooltip')));
-    }
+    items.add('bbcode', m((flarum_common_components_TextEditorButton__WEBPACK_IMPORTED_MODULE_4___default()), {
+      onclick: function onclick() {
+        return (0,_components_OSMBBCode__WEBPACK_IMPORTED_MODULE_6__["default"])(_this.tilesProvider);
+      },
+      icon: 'fas fa-map'
+    }, flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-osm.forum.text_editor.bbcode_tooltip')));
   });
 });
 (0,flarum_common_extend__WEBPACK_IMPORTED_MODULE_2__.extend)((flarum_components_Post__WEBPACK_IMPORTED_MODULE_1___default().prototype), 'oncreate', function () {
-  var _app$forum$attribute,
-      _app$forum$attribute2,
-      _app$forum$attribute3,
-      _app$forum$attribute4,
-      _app$forum$attribute5,
-      _this2 = this;
+  this.postId = this.attrs.post.id(); //this.tilesProvider = app.forum.attribute("tilesProvider")??'osm';
+  //this.currentKey = '';
+  //this.currentStyle = '';
 
-  this.postId = this.attrs.post.id();
-  this.tilesProvider = (_app$forum$attribute = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute("tilesProvider")) != null ? _app$forum$attribute : 'osm';
-  this.currentKey = '';
-  this.currentStyle = '';
+  this.mapConf = (0,_components_mapConfigHelper__WEBPACK_IMPORTED_MODULE_7__["default"])(); // copy this for usage within .each()
 
-  switch (this.tilesProvider) {
-    case "mapbox":
-      this.currentKey = (_app$forum$attribute2 = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute("mapbox.key")) != null ? _app$forum$attribute2 : '';
-      this.currentStyle = (_app$forum$attribute3 = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute("mapbox.style")) != null ? _app$forum$attribute3 : 'mapbox/light-v9';
-      this.tileLayerURL = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}@2x?access_token={key}';
-      this.attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, ' + '© <a href="https://www.mapbox.com/">Mapbox</a>';
-      break;
+  var so = this; //for each gpx file in this post, loop and map
 
-    case "thunderforest":
-      this.currentKey = (_app$forum$attribute4 = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute("thunderforest.key")) != null ? _app$forum$attribute4 : '';
-      this.currentStyle = (_app$forum$attribute5 = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute("thunderforest.style")) != null ? _app$forum$attribute5 : 'atlas';
-      this.tileLayerURL = 'https://tile.thunderforest.com/{id}/{z}/{x}/{y}.png?apikey={key}';
-      this.attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, ' + '© <a href="https://www.thunderforest.com/">Thunderforest</a>';
-      break;
-
-    default:
-      this.tileLayerURL = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
-      this.attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>';
-  } // copy this for usage within .each()
-
-
-  var so = this;
   this.$('.mapFile-container').each(function (i) {
-    console.log('mapFileCont', _this2.$('.mapFile-container')[i]);
-  }); //for each gpx file in this post, loop and map
-
-  this.$('.osmFile').each(function (i) {
     // grab the uploaded gpx file's UUID and url
     var uuid = $(this).data('fofUploadDownloadUuid');
     var nid = 'map-' + so.postId + i + '-' + uuid;
@@ -246,19 +305,19 @@ flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jerome
       * more than one time
     */
 
-    $('.mapFile-container')[i].id = nid; // Get the map element
+    $(this).children('.mapFile-placeholder').first().prop('id', nid); // Get the map element
 
     var map = L.map(nid);
     map.addControl(new L.Control.Fullscreen()); // Set the tiles provider
 
-    new L.tileLayer(so.tileLayerURL, {
-      key: so.currentKey,
-      maxZoom: 18,
-      attribution: so.attribution,
-      id: so.currentStyle,
-      tileSize: 512,
-      zoomOffset: -1,
-      detectRetina: true
+    new L.tileLayer(so.mapConf.tileLayerURL, {
+      key: so.mapConf.currentKey,
+      maxZoom: so.mapConf.maxZoom,
+      attribution: so.mapConf.attribution,
+      id: so.mapConf.currentStyle,
+      tileSize: so.mapConf.tileSize,
+      zoomOffset: so.mapConf.zoomOffset,
+      detectRetina: so.mapConf.detectRetina
     }).addTo(map);
 
     if (fileExt == 'gpx') {
@@ -307,7 +366,35 @@ flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jerome
         map.fitBounds(geoJSONLayer.getBounds());
       });
     } else {
-      map.setView([51.505, -0.09], 13);
+      map.setView(so.mapConf.defaultLocation, so.mapConf.zoom);
+    }
+  }); // for each map location from BBCode, loop and map
+
+  this.$('.osm-location-map').each(function (i) {
+    var location = $(this).data('mapLocation');
+    var mapConf = (0,_components_mapConfigHelper__WEBPACK_IMPORTED_MODULE_7__["default"])($(this).data('mapProvider'), $(this).data('mapStyle'), $(this).data('mapZoom'));
+    var nid = 'map-' + Math.floor(Math.random() * 1000);
+    $(this).prop('id', nid);
+
+    if (location) {
+      fetch("https://nominatim.openstreetmap.org/search?q=" + location + "&format=json").then(function (response) {
+        return response.json();
+      }).then(function (json) {
+        // Get the map element
+        var map = L.map(nid);
+        map.addControl(new L.Control.Fullscreen()); // Set the tiles provider
+
+        new L.tileLayer(mapConf.tileLayerURL, {
+          key: mapConf.currentKey,
+          maxZoom: mapConf.maxZoom,
+          attribution: mapConf.attribution,
+          id: mapConf.currentStyle,
+          tileSize: mapConf.tileSize,
+          zoomOffset: mapConf.zoomOffset,
+          detectRetina: mapConf.detectRetina
+        }).addTo(map);
+        map.setView([json[0].lat, json[0].lon], mapConf.zoom);
+      });
     }
   });
 });

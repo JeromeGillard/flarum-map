@@ -5,58 +5,36 @@ import TextEditor from 'flarum/common/components/TextEditor';
 import TextEditorButton from 'flarum/common/components/TextEditorButton';
 import File from './components/File';
 import insertAtCursor from './components/OSMBBCode';
+import getMapConfig from './components/mapConfigHelper';
 
 app.initializers.add('jeromegillard/osm', () => {
   app.store.models.files = File;
 
   extend(TextEditor.prototype, 'toolbarItems', function (items) {
-    if (/*app.forum.attribute('zerosonesfun-bbcode-button.code') === ""*/false) {
-      return; } else {
-      items.add(
-        'bbcode',
-        <TextEditorButton onclick={() => insertAtCursor(this.tilesProvider)} icon={'fas fa-map'}>
-          {app.translator.trans('jeromegillard-osm.forum.text_editor.bbcode_tooltip')}
-        </TextEditorButton>
-      ); }
-    });
+    
+    items.add(
+      'bbcode',
+      <TextEditorButton onclick={() => insertAtCursor(this.tilesProvider)} icon={'fas fa-map'}>
+        {app.translator.trans('jeromegillard-osm.forum.text_editor.bbcode_tooltip')}
+      </TextEditorButton>
+    ); 
+  });
 
 });
 
 extend(Post.prototype, 'oncreate', function () {
   this.postId = this.attrs.post.id();
-  this.tilesProvider = app.forum.attribute("tilesProvider")??'osm';
-  this.currentKey = '';
-  this.currentStyle = '';
+  //this.tilesProvider = app.forum.attribute("tilesProvider")??'osm';
+  //this.currentKey = '';
+  //this.currentStyle = '';
 
-  switch(this.tilesProvider){
-    case "mapbox":
-      this.currentKey = app.forum.attribute("mapbox.key")??'';
-      this.currentStyle = app.forum.attribute("mapbox.style")??'mapbox/light-v9';
-      this.tileLayerURL = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}@2x?access_token={key}';
-      this.attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, ' +
-      '© <a href="https://www.mapbox.com/">Mapbox</a>';
-      break;
-    case "thunderforest":
-      this.currentKey = app.forum.attribute("thunderforest.key")??'';
-      this.currentStyle = app.forum.attribute("thunderforest.style")??'atlas';
-      this.tileLayerURL = 'https://tile.thunderforest.com/{id}/{z}/{x}/{y}.png?apikey={key}';
-      this.attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, ' +
-      '© <a href="https://www.thunderforest.com/">Thunderforest</a>';
-      break;
-    default:
-      this.tileLayerURL = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
-      this.attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>';
-  }
+  this.mapConf = getMapConfig();
 
   // copy this for usage within .each()
   let so = this;
 
-  this.$('.mapFile-container').each((i) => {
-    console.log('mapFileCont', this.$('.mapFile-container')[i]);
-  });
-
   //for each gpx file in this post, loop and map
-  this.$('.osmFile').each(function( i ) {
+  this.$('.mapFile-container').each(function( i ) {
 
     // grab the uploaded gpx file's UUID and url
     let uuid = $(this).data('fofUploadDownloadUuid');
@@ -72,7 +50,7 @@ extend(Post.prototype, 'oncreate', function () {
       * this allows us to have an unique div id even if a same file is displayed
       * more than one time
     */
-    $('.mapFile-container')[i].id = nid;
+    $(this).children('.mapFile-placeholder').first().prop('id', nid);
 
 
     // Get the map element
@@ -80,15 +58,15 @@ extend(Post.prototype, 'oncreate', function () {
     map.addControl(new L.Control.Fullscreen());
 
     // Set the tiles provider
-    new L.tileLayer(so.tileLayerURL,
+    new L.tileLayer(so.mapConf.tileLayerURL,
     {
-      key: so.currentKey,
-      maxZoom: 18,
-      attribution: so.attribution,
-      id: so.currentStyle,
-      tileSize: 512,
-      zoomOffset: -1,
-      detectRetina: true
+      key: so.mapConf.currentKey,
+      maxZoom: so.mapConf.maxZoom,
+      attribution: so.mapConf.attribution,
+      id: so.mapConf.currentStyle,
+      tileSize: so.mapConf.tileSize,
+      zoomOffset: so.mapConf.zoomOffset,
+      detectRetina: so.mapConf.detectRetina
     }).addTo(map);
 
     if(fileExt == 'gpx'){
@@ -144,9 +122,44 @@ extend(Post.prototype, 'oncreate', function () {
     }
 
     else {
-      map.setView([51.505, -0.09], 13);
+      map.setView(so.mapConf.defaultLocation, so.mapConf.zoom);
     }
 
+  });
+
+  // for each map location from BBCode, loop and map
+  this.$('.osm-location-map').each(function( i ) {
+    let location = $(this).data('mapLocation');
+    let mapConf = getMapConfig(
+      $(this).data('mapProvider'),
+      $(this).data('mapStyle'),
+      $(this).data('mapZoom')
+    )
+    const nid = 'map-'+Math.floor(Math.random() * 1000);
+    $(this).prop('id', nid);
+
+    if(location){
+      fetch(`https://nominatim.openstreetmap.org/search?q=${location}&format=json`)
+        .then(response => response.json())
+        .then(json => {
+
+          // Get the map element
+          let map = L.map(nid);
+          map.addControl(new L.Control.Fullscreen());
+          // Set the tiles provider
+          new L.tileLayer(mapConf.tileLayerURL,
+            {
+              key: mapConf.currentKey,
+              maxZoom: mapConf.maxZoom,
+              attribution: mapConf.attribution,
+              id: mapConf.currentStyle,
+              tileSize: mapConf.tileSize,
+              zoomOffset: mapConf.zoomOffset,
+              detectRetina: mapConf.detectRetina
+            }).addTo(map);
+          map.setView([json[0].lat, json[0].lon], mapConf.zoom);
+        });
+    }
   });
 
 });
