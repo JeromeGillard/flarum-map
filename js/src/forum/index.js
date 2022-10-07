@@ -52,6 +52,7 @@ extend(Post.prototype, 'oncreate', function () {
     */
     $(this).children('.mapFile-placeholder').first().prop('id', nid);
 
+console.log(nid, so.mapConf);
 
     // Get the map element
     let map = L.map(nid);

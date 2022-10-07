@@ -2,10 +2,11 @@ import app from 'flarum/admin/app';
 
 app.initializers.add('jeromegillard/osm', () => {
 
-  let currentTilesProvider = app.data.settings["jeromegillard-osm.tilesProvider"];
+  let currentTilesProvider = app.data.settings["jeromegillard-osm.tilesProvider"]??'osm';
 
   // As we don't know when the elements will be created, wait for them to display only the relevant ones.
   const observer = new MutationObserver(function() {
+    console.log($('.toggle-setting-block').length);
       if ($('.toggle-setting-block').length == 5) {
           toggleSettingBlocks();
           observer.disconnect();
@@ -39,6 +40,17 @@ app.initializers.add('jeromegillard/osm', () => {
       },
       30
     )
+    // Default zoom
+    .registerSetting(
+      {
+        setting: 'jeromegillard-osm.zoom',
+        label: app.translator.trans('jeromegillard-osm.admin.settings.zoom.label'),
+        help: app.translator.trans('jeromegillard-osm.admin.settings.zoom.help'),
+        type: 'text',
+        className: 'zoom-setting',
+        placeholder: 13
+      },
+      1)
 
     // OpenStreetMap
     .registerSetting( () => {

@@ -15,11 +15,29 @@ export default function getMapConfig(o_tilesProvider, o_style, o_zoom) {
             tilesProvider = o_tilesProvider;
     }
 
+    switch(tilesProvider){
+        case "mapbox":
+          currentKey = app.forum.attribute("mapbox.key")??'';
+          currentStyle = app.forum.attribute("mapbox.style")??'mapbox/light-v9'; 
+          tileLayerURL = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}@2x?access_token={key}';
+          attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, ' +
+          '© <a href="https://www.mapbox.com/">Mapbox</a>';
+          break;
+        case "thunderforest":
+          currentKey = app.forum.attribute("thunderforest.key")??'';
+          currentStyle = app.forum.attribute("thunderforest.style")??'atlas';
+          tileLayerURL = 'https://tile.thunderforest.com/{id}/{z}/{x}/{y}.png?apikey={key}';
+          attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, ' +
+          '© <a href="https://www.thunderforest.com/">Thunderforest</a>';
+          break;
+        default:
+          tileLayerURL = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
+          attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>';
+      }
+
     if(o_style){
         switch(tilesProvider){
-            case 'mapbox':
-                // default style if mapbox was selected
-                currentStyle = app.forum.attribute("mapbox.style")??'mapbox/light-v9'; 
+            case 'mapbox':                
                 if(o_style === 'mapbox/streets-v11' ||
                     o_style === 'mapbox/outdoors-v11' ||
                     o_style === 'mapbox/light-v10' ||
@@ -32,9 +50,7 @@ export default function getMapConfig(o_tilesProvider, o_style, o_zoom) {
                         currentStyle = o_style;
                     }
                 break;
-            case 'thunderforest':
-                // default style if thunderforest was selected
-                currentStyle = app.forum.attribute("thunderforest.style")??'atlas';
+            case 'thunderforest':                
                 if(o_style === 'cycle' ||
                     o_style === 'transport' ||
                     o_style === 'landscape' ||
@@ -51,23 +67,7 @@ export default function getMapConfig(o_tilesProvider, o_style, o_zoom) {
         }
     }
 
-    switch(tilesProvider){
-        case "mapbox":
-          currentKey = app.forum.attribute("mapbox.key")??'';
-          tileLayerURL = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}@2x?access_token={key}';
-          attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, ' +
-          '© <a href="https://www.mapbox.com/">Mapbox</a>';
-          break;
-        case "thunderforest":
-          currentKey = app.forum.attribute("thunderforest.key")??'';
-          tileLayerURL = 'https://tile.thunderforest.com/{id}/{z}/{x}/{y}.png?apikey={key}';
-          attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, ' +
-          '© <a href="https://www.thunderforest.com/">Thunderforest</a>';
-          break;
-        default:
-          tileLayerURL = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
-          attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>';
-      }
+    
 
     if(o_zoom >= 0 && o_zoom <= 18){
         zoom = o_zoom;

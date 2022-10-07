@@ -34,6 +34,7 @@ return [
 
     (new Extend\Settings())
         ->serializeToForum('tilesProvider', 'jeromegillard-osm.tilesProvider')
+        ->serializeToForum('zoom', 'jeromegillard-osm.zoom')
         ->serializeToForum('mapbox.key', 'jeromegillard-osm.mapbox.key')
         ->serializeToForum('mapbox.style', 'jeromegillard-osm.mapbox.style')
         ->serializeToForum('thunderforest.key', 'jeromegillard-osm.thunderforest.key')

@@ -177,39 +177,17 @@ function getMapConfig(o_tilesProvider, o_style, o_zoom) {
     tilesProvider = o_tilesProvider;
   }
 
-  if (o_style) {
-    switch (tilesProvider) {
-      case 'mapbox':
-        // default style if mapbox was selected
-        currentStyle = (_app$forum$attribute3 = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute("mapbox.style")) != null ? _app$forum$attribute3 : 'mapbox/light-v9';
-
-        if (o_style === 'mapbox/streets-v11' || o_style === 'mapbox/outdoors-v11' || o_style === 'mapbox/light-v10' || o_style === 'mapbox/dark-v10' || o_style === 'mapbox/satellite-v9' || o_style === 'mapbox/satellite-streets-v11' || o_style === 'mapbox/navigation-day-v1' || o_style === 'mapbox/streets-v11' || o_style === 'mapbox/navigation-night-v1') {
-          currentStyle = o_style;
-        }
-
-        break;
-
-      case 'thunderforest':
-        // default style if thunderforest was selected
-        currentStyle = (_app$forum$attribute4 = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute("thunderforest.style")) != null ? _app$forum$attribute4 : 'atlas';
-
-        if (o_style === 'cycle' || o_style === 'transport' || o_style === 'landscape' || o_style === 'outdoors' || o_style === 'transport-dark9' || o_style === 'spinal-map' || o_style === 'pioneer' || o_style === 'mobile-atlas' || o_style === 'neighbourhood' || o_style === 'atlas') {
-          currentStyle = o_style;
-        }
-
-        break;
-    }
-  }
-
   switch (tilesProvider) {
     case "mapbox":
-      currentKey = (_app$forum$attribute5 = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute("mapbox.key")) != null ? _app$forum$attribute5 : '';
+      currentKey = (_app$forum$attribute3 = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute("mapbox.key")) != null ? _app$forum$attribute3 : '';
+      currentStyle = (_app$forum$attribute4 = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute("mapbox.style")) != null ? _app$forum$attribute4 : 'mapbox/light-v9';
       tileLayerURL = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}@2x?access_token={key}';
       attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, ' + '© <a href="https://www.mapbox.com/">Mapbox</a>';
       break;
 
     case "thunderforest":
-      currentKey = (_app$forum$attribute6 = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute("thunderforest.key")) != null ? _app$forum$attribute6 : '';
+      currentKey = (_app$forum$attribute5 = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute("thunderforest.key")) != null ? _app$forum$attribute5 : '';
+      currentStyle = (_app$forum$attribute6 = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute("thunderforest.style")) != null ? _app$forum$attribute6 : 'atlas';
       tileLayerURL = 'https://tile.thunderforest.com/{id}/{z}/{x}/{y}.png?apikey={key}';
       attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, ' + '© <a href="https://www.thunderforest.com/">Thunderforest</a>';
       break;
@@ -217,6 +195,24 @@ function getMapConfig(o_tilesProvider, o_style, o_zoom) {
     default:
       tileLayerURL = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
       attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>';
+  }
+
+  if (o_style) {
+    switch (tilesProvider) {
+      case 'mapbox':
+        if (o_style === 'mapbox/streets-v11' || o_style === 'mapbox/outdoors-v11' || o_style === 'mapbox/light-v10' || o_style === 'mapbox/dark-v10' || o_style === 'mapbox/satellite-v9' || o_style === 'mapbox/satellite-streets-v11' || o_style === 'mapbox/navigation-day-v1' || o_style === 'mapbox/streets-v11' || o_style === 'mapbox/navigation-night-v1') {
+          currentStyle = o_style;
+        }
+
+        break;
+
+      case 'thunderforest':
+        if (o_style === 'cycle' || o_style === 'transport' || o_style === 'landscape' || o_style === 'outdoors' || o_style === 'transport-dark9' || o_style === 'spinal-map' || o_style === 'pioneer' || o_style === 'mobile-atlas' || o_style === 'neighbourhood' || o_style === 'atlas') {
+          currentStyle = o_style;
+        }
+
+        break;
+    }
   }
 
   if (o_zoom >= 0 && o_zoom <= 18) {
@@ -305,7 +301,8 @@ flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jerome
       * more than one time
     */
 
-    $(this).children('.mapFile-placeholder').first().prop('id', nid); // Get the map element
+    $(this).children('.mapFile-placeholder').first().prop('id', nid);
+    console.log(nid, so.mapConf); // Get the map element
 
     var map = L.map(nid);
     map.addControl(new L.Control.Fullscreen()); // Set the tiles provider

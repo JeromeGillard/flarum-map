@@ -14,9 +14,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(flarum_admin_app__WEBPACK_IMPORTED_MODULE_0__);
 
 flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jeromegillard/osm', function () {
-  var currentTilesProvider = (flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().data.settings["jeromegillard-osm.tilesProvider"]); // As we don't know when the elements will be created, wait for them to display only the relevant ones.
+  var _app$data$settings$je;
+
+  var currentTilesProvider = (_app$data$settings$je = (flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().data.settings["jeromegillard-osm.tilesProvider"])) != null ? _app$data$settings$je : 'osm'; // As we don't know when the elements will be created, wait for them to display only the relevant ones.
 
   var observer = new MutationObserver(function () {
+    console.log($('.toggle-setting-block').length);
+
     if ($('.toggle-setting-block').length == 5) {
       toggleSettingBlocks();
       observer.disconnect();
@@ -44,7 +48,15 @@ flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jerome
     },
     "default": 'osm',
     className: 'select-tilesProvider'
-  }, 30) // OpenStreetMap
+  }, 30) // Default zoom
+  .registerSetting({
+    setting: 'jeromegillard-osm.zoom',
+    label: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-osm.admin.settings.zoom.label'),
+    help: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-osm.admin.settings.zoom.help'),
+    type: 'text',
+    className: 'zoom-setting',
+    placeholder: 13
+  }, 1) // OpenStreetMap
   .registerSetting(function () {
     return m("div", {
       className: "Form-group"

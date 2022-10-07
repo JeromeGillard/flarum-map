@@ -12,6 +12,9 @@ jeromegillard-osm:
         help: Select the provider of the tiles layer that appears in the background
         tile_usage_policy: Tile Usage Policy
         link: See here
+      zoom:
+        label: Default zoom level
+        help: Any integer from 0 to 18.
       style:
           label: Style
           help: Pick a map style.
