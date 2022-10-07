@@ -110,7 +110,7 @@ extend(Post.prototype, 'oncreate', function () {
       }).addTo(map);
     }
 
-    else if(fileExt == 'geojson'){
+    else if(fileExt == 'json' || fileExt == 'geojson'){
       fetch(url)
         .then(response => response.json())
         .then(json => {

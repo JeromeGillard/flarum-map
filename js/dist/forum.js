@@ -273,7 +273,7 @@ flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jerome
       }).on('loaded', function (e) {
         map.fitBounds(e.target.getBounds());
       }).addTo(map);
-    } else if (fileExt == 'geojson') {
+    } else if (fileExt == 'json' || fileExt == 'geojson') {
       fetch(url).then(function (response) {
         return response.json();
       }).then(function (json) {
