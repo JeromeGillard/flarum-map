@@ -12,10 +12,10 @@ Install with composer:
 composer require jeromegillard/osm:"*"
 ```
 
-Configure FoF/Uploads to add the new GPX Template for `^application\/.*(gpx|json|xml)` files.
+Configure FoF/Uploads to add the new GPX Template for `^application\/.*(gpx|json|geojson|geo.json)` files.
 ![Setup FoF Upload MIME type](assets/readme-fof-upload-mime.png)
 
-Then add those extensions to this list:
+Then add `gpx,json,geojson` extensions to this list:
 ![Setup FoF Upload MIME type](assets/readme-fof-upload-extensions.png)
 
 :warning: Don't forget to save your changes!

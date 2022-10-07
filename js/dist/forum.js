@@ -233,6 +233,7 @@ flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jerome
     url += '/' + so.postId;
     url += '/' + (flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().session.csrfToken);
     var fileExt = $(this).data('mapUrl').split('.').pop().toLowerCase();
+    console.log("File ext", fileExt);
     /*  change the template rendering to insert a new id to the map element.
       * this allows us to have an unique div id even if a same file is displayed
       * more than one time
@@ -271,9 +272,13 @@ flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jerome
           }
         }
       }).on('loaded', function (e) {
-        map.fitBounds(e.target.getBounds());
+        try {
+          map.fitBounds(e.target.getBounds());
+        } catch (Exception) {
+          map.setView([51.505, -0.09], 13);
+        }
       }).addTo(map);
-    } else if (fileExt == 'geojson') {
+    } else if (fileExt == 'json' || fileExt == 'geojson') {
       fetch(url).then(function (response) {
         return response.json();
       }).then(function (json) {
@@ -282,16 +287,22 @@ flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jerome
 
           if (feature.properties && feature.properties.name) {
             popupContent += feature.properties.name;
+            console.log("Name", feature.properties.name);
+            layer.bindPopup(popupContent);
           }
-
-          layer.bindPopup(popupContent);
         }
 
         var geoJSONLayer = L.geoJSON([json], {
           style: function style(feature) {
             if (feature.properties && feature.properties.colour) {
+              console.log(fileExt, "Colour", feature.properties.colour);
               return {
                 color: feature.properties.colour,
+                weight: 3,
+                opacity: 1
+              };
+            } else {
+              return {
                 weight: 3,
                 opacity: 1
               };
@@ -299,7 +310,14 @@ flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jerome
           },
           onEachFeature: onEachFeature
         }).addTo(map);
-        map.fitBounds(geoJSONLayer.getBounds());
+
+        try {
+          console.log("Loaded geo json", url);
+          map.fitBounds(geoJSONLayer.getBounds());
+        } catch (Exception) {
+          console.log("Can't find center of geo json.");
+          map.setView([51.505, -0.09], 13);
+        }
       });
     } else {
       map.setView([51.505, -0.09], 13);

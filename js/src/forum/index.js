@@ -63,6 +63,7 @@ extend(Post.prototype, 'oncreate', function () {
             url += '/' + app.session.csrfToken;
 
     let fileExt = $(this).data('mapUrl').split('.').pop().toLowerCase();
+    console.log("File ext", fileExt);
 
     /*  change the template rendering to insert a new id to the map element.
       * this allows us to have an unique div id even if a same file is displayed
@@ -106,38 +107,57 @@ extend(Post.prototype, 'oncreate', function () {
           }
         }
       ).on('loaded', function(e) {
-      map.fitBounds(e.target.getBounds());
+      
+        try{
+          map.fitBounds(e.target.getBounds());
+        } catch(Exception){
+          map.setView([51.505, -0.09], 13);
+        }
+
       }).addTo(map);
     }
 
-    else if(fileExt == 'geojson'){
+    else if(fileExt == 'json' || fileExt == 'geojson'){
       fetch(url)
         .then(response => response.json())
         .then(json => {
 
           function onEachFeature(feature, layer) {
             var popupContent = '';
-
             if (feature.properties && feature.properties.name) {
-              popupContent += feature.properties.name;
+              popupContent += feature.properties.name;   
+              console.log("Name", feature.properties.name);           
+              layer.bindPopup(popupContent);
             }
 
-            layer.bindPopup(popupContent);
           }
 
           var geoJSONLayer = L.geoJSON([json], {
             style: function (feature) {
               if( feature.properties && feature.properties.colour){
+                console.log(fileExt, "Colour", feature.properties.colour);
                 return {
                   color: feature.properties.colour,
                   weight: 3,
                   opacity: 1
                   };
+              } else {
+                return {
+                  weight: 3,
+                  opacity: 1
+                }
               }
             },
             onEachFeature: onEachFeature,
-          }).addTo(map);
-          map.fitBounds(geoJSONLayer.getBounds());
+          }          
+          ).addTo(map);
+          try{
+            console.log("Loaded geo json", url);
+            map.fitBounds(geoJSONLayer.getBounds());
+          } catch(Exception){
+            console.log("Can't find center of geo json." );
+            map.setView([51.505, -0.09], 13);
+          }
           });
     }
 
