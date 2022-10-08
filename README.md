@@ -10,6 +10,8 @@ Display a map in flarum in those ways:
 
  ![Snaphost](assets/readme-snapshot.png)
 
+ ![Post icon](assets/readme-post-icon.png)
+
 ## Installation
 
 ### Composer
