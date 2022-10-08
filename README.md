@@ -1,6 +1,6 @@
 # Flarum Map extension
 
-![License](https://img.shields.io/badge/license-GPL-3.0-blue.svg) [![Latest Stable Version](https://img.shields.io/packagist/v/jeromegillard/flarum-map.svg)](https://packagist.org/packages/jeromegillard/flarum-map) [![Total Downloads](https://img.shields.io/packagist/dt/jeromegillard/flarum-map.svg)](https://packagist.org/packages/jeromegillard/flarum-map)
+![License](https://img.shields.io/badge/license-GPL-3.0-blue.svg) [![Latest Stable Version](https://img.shields.io/packagist/v/jeromegillard/map.svg)](https://packagist.org/packages/jeromegillard/map) [![Total Downloads](https://img.shields.io/packagist/dt/jeromegillard/map.svg)](https://packagist.org/packages/jeromegillard/map)
 
 A [Flarum](http://flarum.org) extension.  
 Display a map in flarum in those ways:
