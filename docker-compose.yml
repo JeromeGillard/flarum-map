@@ -15,7 +15,7 @@ services:
     depends_on:
       - flarum-dev-db
     volumes:
-      - .:/flarum/app/packages/flarum-osm
+      - .:/flarum/app/packages/flarum-map
     ports:
       - 80:8888
     networks:
@@ -27,7 +27,7 @@ services:
     env_file:
       - .env
       - flarum-dev.env.local
-    restart: unless-stopped  
+    restart: unless-stopped
     networks:
       - flarum-dev
 

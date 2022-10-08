@@ -6,7 +6,7 @@ use FoF\Upload\Templates\AbstractTextFormatterTemplate;
 
 /*
  * This class handles the fof-upload formatter
- */ 
+ */
 class MapTemplate extends AbstractTextFormatterTemplate
 {
     /**
@@ -29,7 +29,7 @@ class MapTemplate extends AbstractTextFormatterTemplate
      */
     public function description(): string
     {
-        return $this->trans('jeromegillard-map.admin.templates.map.file_description');
+        return $this->trans('jeromegillard-map.admin.templates.file_description');
     }
 
     /**

@@ -10,18 +10,23 @@ Display a map in flarum in those ways:
 
 ## Installation
 
+### Composer
 Install with composer:
 
 ```sh
 composer require jeromegillard/map:"*"
 ```
 
-Configure FoF/Uploads to add the new GPX Template for `^application\/.*(gpx|json|xml|geojson|geo.json)` files.
+### Configure extensions
+1. Enable the `FoF Uploads` extension.
+2. Enable the `Map` extension.
+3. Configure `FoF Uploads` to add the new GPX Template: 
+  - Add `^application\/.*(gpx|json|xml|geojson|geo.json)` mime type upload adapter mapping.
+  - Select `Map` as template.
 ![Setup FoF Upload MIME type](assets/readme-fof-upload-mime.png)
-
-Then add `gpx,json,geojson` extensions to this list:
+4. Then add `gpx,json,geojson` extensions to this list:
 ![Setup FoF Upload MIME type](assets/readme-fof-upload-extensions.png)
-
+5. Configure the `Map` extension (optional).
 :warning: Don't forget to save your changes!
 
 ## Updating

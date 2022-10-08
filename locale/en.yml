@@ -4,7 +4,7 @@ jeromegillard-map:
   admin:
     templates:
       map: Map
-      file_description: Display a map in flarum. The original file will be available to download. The tiles provider and style will be the one defined in the extension's settings. You must have flarum/markdown installed and enabled for this to work.
+      file_description: Display a map in flarum. The original file will be available to download. The tiles provider and style will be the one defined in the extension's settings. <b>You must have flarum/bbcode installed and enabled for this to work</b>.
       markdown-osm: Markdown map
       markdown-osm_description: Markdown map description
     settings:
