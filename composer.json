@@ -30,7 +30,10 @@
                 "backgroundColor": "#0C4767",
                 "color": "#FE9920"
               },
-            "category": ""
+            "category": "feature"
+        },
+        "flagrow": {
+            "discuss": "https://discuss.flarum.org/d/TODO"
         },
         "flarum-cli": {
             "modules": {
@@ -51,15 +54,18 @@
             }
         }
     },
-    "license": "GPL-3.0",
+    "license": "MIT",
     "authors": [
         {
             "name": "Jérôme Gillard",
             "role": "Developer"
         }
     ],
-    "minimum-stability": "dev",
-    "prefer-stable": true,
+    "support": {
+        "issues": "https://github.com/JeromeGillard/flarum-map/issues",
+        "source": "https://github.com/JeromeGillard/flarum-map",
+        "forum": "https://discuss.flarum.org/d/TODO"
+    },
     "autoload-dev": {
         "psr-4": {
             "JeromeGillard\\FlarumMap\\Tests\\": "tests/"
