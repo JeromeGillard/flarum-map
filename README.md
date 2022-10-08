@@ -1,12 +1,14 @@
 # Flarum Map extension
 
-![License](https://img.shields.io/badge/license-GPL-3.0-blue.svg) [![Latest Stable Version](https://img.shields.io/packagist/v/jeromegillard/osm.svg)](https://packagist.org/packages/jeromegillard/osm) [![Total Downloads](https://img.shields.io/packagist/dt/jeromegillard/osm.svg)](https://packagist.org/packages/jeromegillard/osm)
+![License](https://img.shields.io/badge/license-GPL-3.0-blue.svg) [![Latest Stable Version](https://img.shields.io/packagist/v/jeromegillard/flarum-map.svg)](https://packagist.org/packages/jeromegillard/flarum-map) [![Total Downloads](https://img.shields.io/packagist/dt/jeromegillard/flarum-map.svg)](https://packagist.org/packages/jeromegillard/flarum-map)
 
-A [Flarum](http://flarum.org) extension. 
+A [Flarum](http://flarum.org) extension.  
 Display a map in flarum in those ways:
  - insert a BBCode in a post
  - upload a `.gpx` file to display it on a map and a download link
  - upload a `GeoJSON` file (`.geojson` of `.json`) display it on a map and a download link
+
+ ![Snaphost](readme-snapshot.png)
 
 ## Installation
 
