@@ -1,6 +1,6 @@
 # Flarum Map extension
 
-![License](https://img.shields.io/badge/license-GPL-3.0-blue.svg) [![Latest Stable Version](https://img.shields.io/packagist/v/jeromegillard/map.svg)](https://packagist.org/packages/jeromegillard/map) [![Total Downloads](https://img.shields.io/packagist/dt/jeromegillard/map.svg)](https://packagist.org/packages/jeromegillard/map)
+[![MIT license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/FriendsOfFlarum/upload/blob/master/LICENSE.md) [![Latest Stable Version](https://img.shields.io/packagist/v/jeromegillard/map.svg)](https://packagist.org/packages/jeromegillard/map) [![Total Downloads](https://img.shields.io/packagist/dt/jeromegillard/map.svg)](https://packagist.org/packages/jeromegillard/map)
 
 A [Flarum](http://flarum.org) extension.  
 Display a map in flarum in those ways:
@@ -26,10 +26,10 @@ composer require jeromegillard/map:"*"
 2. Enable the `Map` extension.
 3. Configure `FoF Uploads` to add the new GPX Template: 
   - Add `^application\/.*(gpx|json|xml|geojson|geo.json)` mime type upload adapter mapping.
-  - Select `Map` as template.
-![Setup FoF Upload MIME type](assets/readme-fof-upload-mime.png)
-4. Then add `gpx,json,geojson` extensions to this list:
-![Setup FoF Upload MIME type](assets/readme-fof-upload-extensions.png)
+  - Select `Map` as template.  
+![Setup FoF Upload MIME type](assets/readme-fof-upload-mime.png)  
+4. Then add `gpx,json,geojson` extensions to this list:  
+![Setup FoF Upload MIME type](assets/readme-fof-upload-extensions.png)  
 5. Configure the `Map` extension (optional).
 
 
@@ -79,6 +79,6 @@ I've prepared a all-in-one `docker-compose` file to get up and running to develo
 
 ## Links
 
-- [Packagist](https://packagist.org/packages/jeromegillard/osm)
+- [Packagist](https://packagist.org/packages/jeromegillard/map)
 - [GitHub](https://github.com/JeromeGillard/flarum-map)
-- [Discuss](https://discuss.flarum.org/d/PUT_DISCUSS_SLUG_HERE)
+- [Discuss](https://discuss.flarum.org/d/31732-map-extension-display-a-map-a-gpx-or-a-geojson-file-in-a-post)

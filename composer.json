@@ -33,7 +33,7 @@
             "category": "feature"
         },
         "flagrow": {
-            "discuss": "https://discuss.flarum.org/d/TODO"
+            "discuss": "https://discuss.flarum.org/d/31732-map-extension-display-a-map-a-gpx-or-a-geojson-file-in-a-post"
         },
         "flarum-cli": {
             "modules": {
@@ -64,7 +64,7 @@
     "support": {
         "issues": "https://github.com/JeromeGillard/flarum-map/issues",
         "source": "https://github.com/JeromeGillard/flarum-map",
-        "forum": "https://discuss.flarum.org/d/TODO"
+        "forum": "https://discuss.flarum.org/d/31732-map-extension-display-a-map-a-gpx-or-a-geojson-file-in-a-post"
     },
     "autoload-dev": {
         "psr-4": {
