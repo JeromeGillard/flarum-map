@@ -221,6 +221,7 @@ function getMapConfig(o_tilesProvider, o_style, o_zoom) {
 
   return {
     "tilesProvider": tilesProvider,
+    "attribution": attribution,
     "currentStyle": currentStyle,
     "currentKey": currentKey,
     "tileLayerURL": tileLayerURL,
@@ -268,11 +269,10 @@ __webpack_require__.r(__webpack_exports__);
 flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jeromegillard/osm', function () {
   (flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().store.models.files) = _components_File__WEBPACK_IMPORTED_MODULE_5__["default"];
   (0,flarum_common_extend__WEBPACK_IMPORTED_MODULE_2__.extend)((flarum_common_components_TextEditor__WEBPACK_IMPORTED_MODULE_3___default().prototype), 'toolbarItems', function (items) {
-    var _this = this;
-
+    var mapConf = (0,_components_mapConfigHelper__WEBPACK_IMPORTED_MODULE_7__["default"])();
     items.add('bbcode', m((flarum_common_components_TextEditorButton__WEBPACK_IMPORTED_MODULE_4___default()), {
       onclick: function onclick() {
-        return (0,_components_OSMBBCode__WEBPACK_IMPORTED_MODULE_6__["default"])(_this.tilesProvider);
+        return (0,_components_OSMBBCode__WEBPACK_IMPORTED_MODULE_6__["default"])(mapConf.tilesProvider, mapConf.currentStyle, mapConf.zoom);
       },
       icon: 'fas fa-map'
     }, flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-osm.forum.text_editor.bbcode_tooltip')));

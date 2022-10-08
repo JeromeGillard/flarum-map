@@ -37,7 +37,7 @@ flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jerome
     help: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-osm.admin.settings.zoom.help'),
     type: 'text',
     className: 'zoom-setting',
-    placeholder: 13
+    "default": 13
   }, 90) // OpenStreetMap
   .registerSetting({
     label: 'OpenStreetMap',

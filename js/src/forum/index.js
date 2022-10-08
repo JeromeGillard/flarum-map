@@ -11,10 +11,10 @@ app.initializers.add('jeromegillard/osm', () => {
   app.store.models.files = File;
 
   extend(TextEditor.prototype, 'toolbarItems', function (items) {
-
+    let mapConf = getMapConfig();
     items.add(
       'bbcode',
-      <TextEditorButton onclick={() => insertAtCursor(this.tilesProvider)} icon={'fas fa-map'}>
+      <TextEditorButton onclick={() => insertAtCursor(mapConf.tilesProvider, mapConf.currentStyle, mapConf.zoom)} icon={'fas fa-map'}>
         {app.translator.trans('jeromegillard-osm.forum.text_editor.bbcode_tooltip')}
       </TextEditorButton>
     );

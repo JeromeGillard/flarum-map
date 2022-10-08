@@ -4,6 +4,9 @@ namespace JeromeGillard\FlarumOSM\Templates;
 
 use FoF\Upload\Templates\AbstractTextFormatterTemplate;
 
+/*
+ * This class handles the fof-upload formatter
+ */ 
 class OSMTemplate extends AbstractTextFormatterTemplate
 {
     /**
@@ -47,6 +50,5 @@ class OSMTemplate extends AbstractTextFormatterTemplate
     public function bbcode(): string
     {
         return '[upl-file uuid={IDENTIFIER} size={SIMPLETEXT2} url={URL}]{SIMPLETEXT1}[/upl-file]';
-        //return '[osm zoom={ZOOM}]{SIMPLETEXT1}[/osm]';
     }
 }

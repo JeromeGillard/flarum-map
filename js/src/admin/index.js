@@ -32,7 +32,7 @@ app.initializers.add('jeromegillard/osm', () => {
         help: app.translator.trans('jeromegillard-osm.admin.settings.zoom.help'),
         type: 'text',
         className: 'zoom-setting',
-        placeholder: 13
+        default: 13
       },
       90)
 

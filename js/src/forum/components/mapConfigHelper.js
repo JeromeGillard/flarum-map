@@ -72,7 +72,8 @@ export default function getMapConfig(o_tilesProvider, o_style, o_zoom) {
     if(o_zoom >= 0 && o_zoom <= 18){
         zoom = o_zoom;
     }
-    return {"tilesProvider": tilesProvider, "currentStyle": currentStyle, "currentKey": currentKey,
-                "tileLayerURL": tileLayerURL, "zoom": zoom, maxZoom: 18, tileSize: 512,
-                zoomOffset: -1, detectRetina: true, defaultLocation: [51.505, -0.09] };
+    return {"tilesProvider": tilesProvider, "attribution": attribution,"currentStyle": 
+                currentStyle, "currentKey": currentKey, "tileLayerURL": tileLayerURL, 
+                "zoom": zoom, maxZoom: 18, tileSize: 512, zoomOffset: -1, detectRetina: true, 
+                defaultLocation: [51.505, -0.09] };
   };

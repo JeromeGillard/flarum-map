@@ -9,16 +9,12 @@ use Flarum\Settings\SettingsRepositoryInterface;
 
 class OSMProvider extends AbstractServiceProvider
 {    
-	
-
     public function register()
     {
         /** @var Util $util */
         $util = $this->container->make(Util::class);
 
+        // register our fof-upload template
         $util->addRenderTemplate($this->container->make(OSMTemplate::class));
-
-        // display a map based on location query results
-        // https://nominatim.openstreetmap.org/search?q=nonceveux&format=json
     }
 }

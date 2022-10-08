@@ -4,8 +4,10 @@ namespace JeromeGillard\FlarumOSM\Providers;
 
 use s9e\TextFormatter\Configurator;
 
+// Register custom BBCode
 class BBCodesProvider
 {
+
 	public function __construct(Configurator $config)
     {
         $config->BBCodes->addCustom(
