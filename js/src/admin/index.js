@@ -2,17 +2,15 @@ import app from 'flarum/admin/app';
 
 app.initializers.add('jeromegillard/osm', () => {
 
-  let currentTilesProvider = app.data.settings["jeromegillard-osm.tilesProvider"]??'osm';
-
   app.extensionData
-    .for('jeromegillard-osm')
+    .for('jeromegillard-map')
 
     // Tile provider selection
     .registerSetting(
       {
-        setting: 'jeromegillard-osm.tilesProvider',
-        label: app.translator.trans('jeromegillard-osm.admin.settings.tiles_provider.label'),
-        help: app.translator.trans('jeromegillard-osm.admin.settings.tiles_provider.help'),
+        setting: 'jeromegillard-map.tilesProvider',
+        label: app.translator.trans('jeromegillard-map.admin.settings.tiles_provider.label'),
+        help: app.translator.trans('jeromegillard-map.admin.settings.tiles_provider.help'),
         type: 'select',
         options: {
           'osm': 'OpenStreetMap',
@@ -27,9 +25,9 @@ app.initializers.add('jeromegillard/osm', () => {
     // Default zoom
     .registerSetting(
       {
-        setting: 'jeromegillard-osm.zoom',
-        label: app.translator.trans('jeromegillard-osm.admin.settings.zoom.label'),
-        help: app.translator.trans('jeromegillard-osm.admin.settings.zoom.help'),
+        setting: 'jeromegillard-map.zoom',
+        label: app.translator.trans('jeromegillard-map.admin.settings.zoom.label'),
+        help: app.translator.trans('jeromegillard-map.admin.settings.zoom.help'),
         type: 'text',
         className: 'zoom-setting',
         default: 13
@@ -40,7 +38,7 @@ app.initializers.add('jeromegillard/osm', () => {
     .registerSetting(
       {
         label: 'OpenStreetMap',
-        help: app.translator.trans('jeromegillard-osm.admin.settings.osm.help',{
+        help: app.translator.trans('jeromegillard-map.admin.settings.osm.help',{
                 a: <a href="https://operations.osmfoundation.org/policies/tiles" target="_blank"/>
               }),
         type: 'hidden'
@@ -50,9 +48,9 @@ app.initializers.add('jeromegillard/osm', () => {
     // Mapbox key
     .registerSetting(
       {
-        setting: 'jeromegillard-osm.mapbox.key',
-        label: app.translator.trans('jeromegillard-osm.admin.settings.mapbox.label'),
-        help: app.translator.trans('jeromegillard-osm.admin.settings.mapbox.help', {
+        setting: 'jeromegillard-map.mapbox.key',
+        label: app.translator.trans('jeromegillard-map.admin.settings.mapbox.label'),
+        help: app.translator.trans('jeromegillard-map.admin.settings.mapbox.help', {
           a: <a href="https://www.mapbox.com" target="_blank"/>,
           b: <a href="https://docs.mapbox.com/help/how-mapbox-works/attribution/"/>
         }),
@@ -63,21 +61,21 @@ app.initializers.add('jeromegillard/osm', () => {
     // Mapbox styles (https://docs.mapbox.com/api/maps/styles/#mapbox-styles)
     .registerSetting(
       {
-        setting: 'jeromegillard-osm.mapbox.style',
-        label: app.translator.trans('jeromegillard-osm.admin.settings.style.label', {provider:'Mapbox'}),
-        help: app.translator.trans('jeromegillard-osm.admin.settings.style.help',{
+        setting: 'jeromegillard-map.mapbox.style',
+        label: app.translator.trans('jeromegillard-map.admin.settings.style.label', {provider:'Mapbox'}),
+        help: app.translator.trans('jeromegillard-map.admin.settings.style.help',{
           a: <a href="https://docs.mapbox.com/api/maps/styles/#mapbox-styles" target="_blank"/>
         }),
         type: 'select',
         options: {
-          'mapbox/streets-v11': 'Streets',
-          'mapbox/outdoors-v11': 'Outdoors',
-          'mapbox/light-v10': 'Light',
-          'mapbox/dark-v10': 'Dark',
-          'mapbox/satellite-v9': 'Satelite',
-          'mapbox/satellite-streets-v11': 'Satelite streets',
-          'mapbox/navigation-day-v1': 'Navigation day',
-          'mapbox/navigation-night-v1': 'Navigation night',
+          'mapbox/streets-v11': 'Streets (mapbox/streets-v11)',
+          'mapbox/outdoors-v11': 'Outdoors (mapbox/outdoors-v11)',
+          'mapbox/light-v10': 'Light (mapbox/light-v10)',
+          'mapbox/dark-v10': 'Dark (mapbox/dark-v10)',
+          'mapbox/satellite-v9': 'Satelite (mapbox/satellite-v9)',
+          'mapbox/satellite-streets-v11': 'Satelite streets (mapbox/satellite-streets-v11)',
+          'mapbox/navigation-day-v1': 'Navigation day (mapbox/navigation-day-v1)',
+          'mapbox/navigation-night-v1': 'Navigation night (mapbox/navigation-night-v1)',
         },
         default: 'mapbox/streets-v11',
         className: 'mapbox-setting mapbox-style toggle-setting-block'
@@ -87,9 +85,9 @@ app.initializers.add('jeromegillard/osm', () => {
     // Thunderforest key https://www.thunderforest.com/terms/
     .registerSetting(
       {
-        setting: 'jeromegillard-osm.thunderforest.key',
-        label: app.translator.trans('jeromegillard-osm.admin.settings.thunderforest.label'),
-        help: app.translator.trans('jeromegillard-osm.admin.settings.thunderforest.help',{
+        setting: 'jeromegillard-map.thunderforest.key',
+        label: app.translator.trans('jeromegillard-map.admin.settings.thunderforest.label'),
+        help: app.translator.trans('jeromegillard-map.admin.settings.thunderforest.help',{
           a: <a href="https://www.thunderforest.com" target="_blank"/>,
           b: <a href="https://www.thunderforest.com/terms/" target="_blank"/>
         }),
@@ -100,9 +98,9 @@ app.initializers.add('jeromegillard/osm', () => {
     // Thunderforest style
     .registerSetting(
       {
-        setting: 'jeromegillard-osm.thunderforest.style',
-        label: app.translator.trans('jeromegillard-osm.admin.settings.style.label', {provider:'Thunderforest'}),
-        help: app.translator.trans('jeromegillard-osm.admin.settings.style.help',{
+        setting: 'jeromegillard-map.thunderforest.style',
+        label: app.translator.trans('jeromegillard-map.admin.settings.style.label', {provider:'Thunderforest'}),
+        help: app.translator.trans('jeromegillard-map.admin.settings.style.help',{
           a: <a href="https://www.thunderforest.com/maps/" target="_blank"/>
         }),
         type: 'select',

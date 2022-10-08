@@ -1,8 +1,7 @@
-import app from 'flarum/app';
 import Model from 'flarum/common/Model';
 import mixin from 'flarum/common/utils/mixin';
 
-export default class File extends mixin(Model, {
+export default class mapFile extends mixin(Model, {
     baseName: Model.attribute('baseName'),
     path: Model.attribute('path'),
     url: Model.attribute('url'),
@@ -12,8 +11,7 @@ export default class File extends mixin(Model, {
     createdAt: Model.attribute('createdAt'),
     uuid: Model.attribute('uuid'),
     tag: Model.attribute('tag'),
-    hidden: Model.attribute('hidden'),
-    cuuid: Model.attribute('cuuid'),
+    hidden: Model.attribute('hidden')
 }){
 
 
@@ -30,7 +28,7 @@ export default class File extends mixin(Model, {
     bbcode() {
         //console.log('checking', this.tag())
         switch (this.tag()) {
-            case 'jeromegillard-osm':
+            case 'jeromegillard-map':
                 return `[upl-file uuid=${this.uuid()} size=${this.humanSize()} url=${this.url()}]${this.baseName()}[/upl-file]`;
             // File
             case 'file':

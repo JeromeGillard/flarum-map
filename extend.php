@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace JeromeGillard\FlarumOSM;
+namespace JeromeGillard\FlarumMap;
 
 use Flarum\Extend;
 use Flarum\Frontend\Document;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Flarum\Settings\SettingsRepositoryInterface;
-use JeromeGillard\FlarumOSM\Providers\BBCodesProvider;
+use JeromeGillard\FlarumMap\Providers\BBCodesProvider;
 use s9e\TextFormatter\Configurator;
 
 return [
@@ -30,15 +30,15 @@ return [
     new Extend\Locales(__DIR__.'/locale'),
 
     (new Extend\ServiceProvider())
-        ->register(Providers\OSMProvider::class),
+        ->register(Providers\MapProvider::class),
 
     (new Extend\Settings())
-        ->serializeToForum('tilesProvider', 'jeromegillard-osm.tilesProvider')
-        ->serializeToForum('zoom', 'jeromegillard-osm.zoom')
-        ->serializeToForum('mapbox.key', 'jeromegillard-osm.mapbox.key')
-        ->serializeToForum('mapbox.style', 'jeromegillard-osm.mapbox.style')
-        ->serializeToForum('thunderforest.key', 'jeromegillard-osm.thunderforest.key')
-        ->serializeToForum('thunderforest.style', 'jeromegillard-osm.thunderforest.style'),
+        ->serializeToForum('tilesProvider', 'jeromegillard-map.tilesProvider')
+        ->serializeToForum('zoom', 'jeromegillard-map.zoom')
+        ->serializeToForum('mapbox.key', 'jeromegillard-map.mapbox.key')
+        ->serializeToForum('mapbox.style', 'jeromegillard-map.mapbox.style')
+        ->serializeToForum('thunderforest.key', 'jeromegillard-map.thunderforest.key')
+        ->serializeToForum('thunderforest.style', 'jeromegillard-map.thunderforest.style'),
 
     (new Extend\View())
         ->namespace('fof-upload.templates', __DIR__.'/resources/templates'),

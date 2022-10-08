@@ -14,14 +14,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(flarum_admin_app__WEBPACK_IMPORTED_MODULE_0__);
 
 flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jeromegillard/osm', function () {
-  var _app$data$settings$je;
-
-  var currentTilesProvider = (_app$data$settings$je = (flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().data.settings["jeromegillard-osm.tilesProvider"])) != null ? _app$data$settings$je : 'osm';
-  flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().extensionData["for"]('jeromegillard-osm') // Tile provider selection
+  flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().extensionData["for"]('jeromegillard-map') // Tile provider selection
   .registerSetting({
-    setting: 'jeromegillard-osm.tilesProvider',
-    label: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-osm.admin.settings.tiles_provider.label'),
-    help: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-osm.admin.settings.tiles_provider.help'),
+    setting: 'jeromegillard-map.tilesProvider',
+    label: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-map.admin.settings.tiles_provider.label'),
+    help: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-map.admin.settings.tiles_provider.help'),
     type: 'select',
     options: {
       'osm': 'OpenStreetMap',
@@ -32,16 +29,16 @@ flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jerome
     className: 'select-tilesProvider'
   }, 100) // Default zoom
   .registerSetting({
-    setting: 'jeromegillard-osm.zoom',
-    label: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-osm.admin.settings.zoom.label'),
-    help: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-osm.admin.settings.zoom.help'),
+    setting: 'jeromegillard-map.zoom',
+    label: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-map.admin.settings.zoom.label'),
+    help: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-map.admin.settings.zoom.help'),
     type: 'text',
     className: 'zoom-setting',
     "default": 13
   }, 90) // OpenStreetMap
   .registerSetting({
     label: 'OpenStreetMap',
-    help: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-osm.admin.settings.osm.help', {
+    help: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-map.admin.settings.osm.help', {
       a: m("a", {
         href: "https://operations.osmfoundation.org/policies/tiles",
         target: "_blank"
@@ -50,9 +47,9 @@ flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jerome
     type: 'hidden'
   }, 80) // Mapbox key
   .registerSetting({
-    setting: 'jeromegillard-osm.mapbox.key',
-    label: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-osm.admin.settings.mapbox.label'),
-    help: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-osm.admin.settings.mapbox.help', {
+    setting: 'jeromegillard-map.mapbox.key',
+    label: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-map.admin.settings.mapbox.label'),
+    help: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-map.admin.settings.mapbox.help', {
       a: m("a", {
         href: "https://www.mapbox.com",
         target: "_blank"
@@ -65,11 +62,11 @@ flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jerome
     className: 'mapbox-setting toggle-setting-block'
   }, 71) // Mapbox styles (https://docs.mapbox.com/api/maps/styles/#mapbox-styles)
   .registerSetting({
-    setting: 'jeromegillard-osm.mapbox.style',
-    label: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-osm.admin.settings.style.label', {
+    setting: 'jeromegillard-map.mapbox.style',
+    label: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-map.admin.settings.style.label', {
       provider: 'Mapbox'
     }),
-    help: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-osm.admin.settings.style.help', {
+    help: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-map.admin.settings.style.help', {
       a: m("a", {
         href: "https://docs.mapbox.com/api/maps/styles/#mapbox-styles",
         target: "_blank"
@@ -77,22 +74,22 @@ flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jerome
     }),
     type: 'select',
     options: {
-      'mapbox/streets-v11': 'Streets',
-      'mapbox/outdoors-v11': 'Outdoors',
-      'mapbox/light-v10': 'Light',
-      'mapbox/dark-v10': 'Dark',
-      'mapbox/satellite-v9': 'Satelite',
-      'mapbox/satellite-streets-v11': 'Satelite streets',
-      'mapbox/navigation-day-v1': 'Navigation day',
-      'mapbox/navigation-night-v1': 'Navigation night'
+      'mapbox/streets-v11': 'Streets (mapbox/streets-v11)',
+      'mapbox/outdoors-v11': 'Outdoors (mapbox/outdoors-v11)',
+      'mapbox/light-v10': 'Light (mapbox/light-v10)',
+      'mapbox/dark-v10': 'Dark (mapbox/dark-v10)',
+      'mapbox/satellite-v9': 'Satelite (mapbox/satellite-v9)',
+      'mapbox/satellite-streets-v11': 'Satelite streets (mapbox/satellite-streets-v11)',
+      'mapbox/navigation-day-v1': 'Navigation day (mapbox/navigation-day-v1)',
+      'mapbox/navigation-night-v1': 'Navigation night (mapbox/navigation-night-v1)'
     },
     "default": 'mapbox/streets-v11',
     className: 'mapbox-setting mapbox-style toggle-setting-block'
   }, 70) // Thunderforest key https://www.thunderforest.com/terms/
   .registerSetting({
-    setting: 'jeromegillard-osm.thunderforest.key',
-    label: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-osm.admin.settings.thunderforest.label'),
-    help: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-osm.admin.settings.thunderforest.help', {
+    setting: 'jeromegillard-map.thunderforest.key',
+    label: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-map.admin.settings.thunderforest.label'),
+    help: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-map.admin.settings.thunderforest.help', {
       a: m("a", {
         href: "https://www.thunderforest.com",
         target: "_blank"
@@ -106,11 +103,11 @@ flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jerome
     className: 'thunderforest-setting toggle-setting-block'
   }, 61) // Thunderforest style
   .registerSetting({
-    setting: 'jeromegillard-osm.thunderforest.style',
-    label: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-osm.admin.settings.style.label', {
+    setting: 'jeromegillard-map.thunderforest.style',
+    label: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-map.admin.settings.style.label', {
       provider: 'Thunderforest'
     }),
-    help: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-osm.admin.settings.style.help', {
+    help: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-map.admin.settings.style.help', {
       a: m("a", {
         href: "https://www.thunderforest.com/maps/",
         target: "_blank"

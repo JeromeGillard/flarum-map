@@ -13,10 +13,10 @@ Display a map in flarum in those ways:
 Install with composer:
 
 ```sh
-composer require jeromegillard/osm:"*"
+composer require jeromegillard/map:"*"
 ```
 
-Configure FoF/Uploads to add the new GPX Template for `^application\/.*(gpx|json|geojson|geo.json)` files.
+Configure FoF/Uploads to add the new GPX Template for `^application\/.*(gpx|json|xml|geojson|geo.json)` files.
 ![Setup FoF Upload MIME type](assets/readme-fof-upload-mime.png)
 
 Then add `gpx,json,geojson` extensions to this list:
@@ -27,7 +27,7 @@ Then add `gpx,json,geojson` extensions to this list:
 ## Updating
 
 ```sh
-composer update jeromegillard/osm:"*"
+composer update jeromegillard/map:"*"
 php flarum migrate
 php flarum cache:clear
 ```
@@ -41,7 +41,7 @@ I've prepared a all-in-one `docker-compose` file to get up and running to develo
 1. Spin the containers: `docker-compose up -d`
 1. Enter the container: `docker exec -it -w /flarum/app flarum-dev /bin/sh`
 1. Allow local packages sources: `composer config repositories.0 path "packages/*"`
-1. Install the extension: `composer require jeromegillard/osm *@dev`
+1. Install the extension: `composer require jeromegillard/map *@dev`
 1. Wait for the container to start. It might be long stuck on last log "[INFO] Setting folder permissions", just wait.
 1. You can browse to `http://localhost` when logs shows "[INFO] End of startup script. Forum is starting."
 1. To rebuild the front-end, outside the container, go to the `js` folder and do `npm install` then `npm run dev` (you'll need npm installed on your computer). 

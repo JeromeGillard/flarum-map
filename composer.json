@@ -1,5 +1,5 @@
 {
-    "name": "jeromegillard/osm",
+    "name": "jeromegillard/map",
     "description": "OpenStreetMap in Flarum.",
     "keywords": [
         "flarum",
@@ -14,7 +14,7 @@
     },
     "autoload": {
         "psr-4": {
-            "JeromeGillard\\FlarumOSM\\": "src/"
+            "JeromeGillard\\FlarumMap\\": "src/"
         }
     },
     "extra": {
@@ -57,7 +57,7 @@
     "prefer-stable": true,
     "autoload-dev": {
         "psr-4": {
-            "JeromeGillard\\FlarumOSM\\Tests\\": "tests/"
+            "JeromeGillard\\FlarumMap\\Tests\\": "tests/"
         }
     },
     "scripts": {

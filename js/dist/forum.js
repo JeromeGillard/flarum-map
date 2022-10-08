@@ -18,95 +18,9 @@ flarum_common_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jerom
 
 /***/ }),
 
-/***/ "./src/forum/components/File.js":
-/*!**************************************!*\
-  !*** ./src/forum/components/File.js ***!
-  \**************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ File)
-/* harmony export */ });
-/* harmony import */ var _babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/inheritsLoose */ "./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js");
-/* harmony import */ var flarum_app__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flarum/app */ "flarum/app");
-/* harmony import */ var flarum_app__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(flarum_app__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var flarum_common_Model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! flarum/common/Model */ "flarum/common/Model");
-/* harmony import */ var flarum_common_Model__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(flarum_common_Model__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var flarum_common_utils_mixin__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! flarum/common/utils/mixin */ "flarum/common/utils/mixin");
-/* harmony import */ var flarum_common_utils_mixin__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(flarum_common_utils_mixin__WEBPACK_IMPORTED_MODULE_3__);
-
-
-
-
-
-var File = /*#__PURE__*/function (_mixin) {
-  (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__["default"])(File, _mixin);
-
-  function File() {
-    return _mixin.apply(this, arguments) || this;
-  }
-
-  var _proto = File.prototype;
-
-  /**
-   * Use FoF Uploads endpoint
-   */
-  _proto.apiEndpoint = function apiEndpoint() {
-    return '/fof/uploads' + (this.exists ? '/' + this.data.id : '');
-  }
-  /**
-   * Generate bbcode for this file
-   */
-  ;
-
-  _proto.bbcode = function bbcode() {
-    //console.log('checking', this.tag())
-    switch (this.tag()) {
-      case 'jeromegillard-osm':
-        return "[upl-file uuid=" + this.uuid() + " size=" + this.humanSize() + " url=" + this.url() + "]" + this.baseName() + "[/upl-file]";
-      // File
-
-      case 'file':
-        return "[upl-file uuid=" + this.uuid() + " size=" + this.humanSize() + "]" + this.baseName() + "[/upl-this]";
-      // Image template
-
-      case 'image':
-        return "[upl-image uuid=" + this.uuid() + " size=" + this.humanSize() + " url=" + this.url() + "]" + this.baseName() + "[/upl-image]";
-      // Image preview
-
-      case 'image-preview':
-        return "[upl-image-preview url=" + this.url() + "]";
-      // 'just-url' or unknown
-
-      default:
-        return this.url();
-    }
-  };
-
-  return File;
-}(flarum_common_utils_mixin__WEBPACK_IMPORTED_MODULE_3___default()((flarum_common_Model__WEBPACK_IMPORTED_MODULE_2___default()), {
-  baseName: flarum_common_Model__WEBPACK_IMPORTED_MODULE_2___default().attribute('baseName'),
-  path: flarum_common_Model__WEBPACK_IMPORTED_MODULE_2___default().attribute('path'),
-  url: flarum_common_Model__WEBPACK_IMPORTED_MODULE_2___default().attribute('url'),
-  type: flarum_common_Model__WEBPACK_IMPORTED_MODULE_2___default().attribute('type'),
-  size: flarum_common_Model__WEBPACK_IMPORTED_MODULE_2___default().attribute('size'),
-  humanSize: flarum_common_Model__WEBPACK_IMPORTED_MODULE_2___default().attribute('humanSize'),
-  createdAt: flarum_common_Model__WEBPACK_IMPORTED_MODULE_2___default().attribute('createdAt'),
-  uuid: flarum_common_Model__WEBPACK_IMPORTED_MODULE_2___default().attribute('uuid'),
-  tag: flarum_common_Model__WEBPACK_IMPORTED_MODULE_2___default().attribute('tag'),
-  hidden: flarum_common_Model__WEBPACK_IMPORTED_MODULE_2___default().attribute('hidden'),
-  cuuid: flarum_common_Model__WEBPACK_IMPORTED_MODULE_2___default().attribute('cuuid')
-}));
-
-
-
-/***/ }),
-
-/***/ "./src/forum/components/OSMBBCode.js":
+/***/ "./src/forum/components/mapBBCode.js":
 /*!*******************************************!*\
-  !*** ./src/forum/components/OSMBBCode.js ***!
+  !*** ./src/forum/components/mapBBCode.js ***!
   \*******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -131,7 +45,7 @@ function insertAtCursor(tilesProvider, style, zoom) {
             pos = input.selectionStart;
             front = input.value.substring(0, pos);
             back = input.value.substring(pos, input.value.length);
-            middle = "[osm provider=" + (tilesProvider != null ? tilesProvider : 'osm') + " style=" + (style != null ? style : 'street') + " zoom=" + (zoom != null ? zoom : 13) + "]" + app.translator.trans('jeromegillard-osm.forum.text_editor.location_placeholder') + "[/osm]";
+            middle = "[map provider=" + (tilesProvider != null ? tilesProvider : 'osm') + " style=" + (style != null ? style : 'street') + " zoom=" + (zoom != null ? zoom : 13) + "]" + app.translator.trans('jeromegillard-map.forum.text_editor.location_placeholder') + "[/map]";
             input.value = front + middle + back;
             pos = pos + 1;
             input.selectionStart = pos;
@@ -237,6 +151,88 @@ function getMapConfig(o_tilesProvider, o_style, o_zoom) {
 
 /***/ }),
 
+/***/ "./src/forum/components/mapFile.js":
+/*!*****************************************!*\
+  !*** ./src/forum/components/mapFile.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ mapFile)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/inheritsLoose */ "./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js");
+/* harmony import */ var flarum_common_Model__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flarum/common/Model */ "flarum/common/Model");
+/* harmony import */ var flarum_common_Model__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(flarum_common_Model__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var flarum_common_utils_mixin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! flarum/common/utils/mixin */ "flarum/common/utils/mixin");
+/* harmony import */ var flarum_common_utils_mixin__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(flarum_common_utils_mixin__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+
+var mapFile = /*#__PURE__*/function (_mixin) {
+  (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__["default"])(mapFile, _mixin);
+
+  function mapFile() {
+    return _mixin.apply(this, arguments) || this;
+  }
+
+  var _proto = mapFile.prototype;
+
+  /**
+   * Use FoF Uploads endpoint
+   */
+  _proto.apiEndpoint = function apiEndpoint() {
+    return '/fof/uploads' + (this.exists ? '/' + this.data.id : '');
+  }
+  /**
+   * Generate bbcode for this file
+   */
+  ;
+
+  _proto.bbcode = function bbcode() {
+    //console.log('checking', this.tag())
+    switch (this.tag()) {
+      case 'jeromegillard-map':
+        return "[upl-file uuid=" + this.uuid() + " size=" + this.humanSize() + " url=" + this.url() + "]" + this.baseName() + "[/upl-file]";
+      // File
+
+      case 'file':
+        return "[upl-file uuid=" + this.uuid() + " size=" + this.humanSize() + "]" + this.baseName() + "[/upl-this]";
+      // Image template
+
+      case 'image':
+        return "[upl-image uuid=" + this.uuid() + " size=" + this.humanSize() + " url=" + this.url() + "]" + this.baseName() + "[/upl-image]";
+      // Image preview
+
+      case 'image-preview':
+        return "[upl-image-preview url=" + this.url() + "]";
+      // 'just-url' or unknown
+
+      default:
+        return this.url();
+    }
+  };
+
+  return mapFile;
+}(flarum_common_utils_mixin__WEBPACK_IMPORTED_MODULE_2___default()((flarum_common_Model__WEBPACK_IMPORTED_MODULE_1___default()), {
+  baseName: flarum_common_Model__WEBPACK_IMPORTED_MODULE_1___default().attribute('baseName'),
+  path: flarum_common_Model__WEBPACK_IMPORTED_MODULE_1___default().attribute('path'),
+  url: flarum_common_Model__WEBPACK_IMPORTED_MODULE_1___default().attribute('url'),
+  type: flarum_common_Model__WEBPACK_IMPORTED_MODULE_1___default().attribute('type'),
+  size: flarum_common_Model__WEBPACK_IMPORTED_MODULE_1___default().attribute('size'),
+  humanSize: flarum_common_Model__WEBPACK_IMPORTED_MODULE_1___default().attribute('humanSize'),
+  createdAt: flarum_common_Model__WEBPACK_IMPORTED_MODULE_1___default().attribute('createdAt'),
+  uuid: flarum_common_Model__WEBPACK_IMPORTED_MODULE_1___default().attribute('uuid'),
+  tag: flarum_common_Model__WEBPACK_IMPORTED_MODULE_1___default().attribute('tag'),
+  hidden: flarum_common_Model__WEBPACK_IMPORTED_MODULE_1___default().attribute('hidden')
+}));
+
+
+
+/***/ }),
+
 /***/ "./src/forum/index.js":
 /*!****************************!*\
   !*** ./src/forum/index.js ***!
@@ -255,8 +251,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var flarum_common_components_TextEditor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(flarum_common_components_TextEditor__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var flarum_common_components_TextEditorButton__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! flarum/common/components/TextEditorButton */ "flarum/common/components/TextEditorButton");
 /* harmony import */ var flarum_common_components_TextEditorButton__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(flarum_common_components_TextEditorButton__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _components_File__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/File */ "./src/forum/components/File.js");
-/* harmony import */ var _components_OSMBBCode__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/OSMBBCode */ "./src/forum/components/OSMBBCode.js");
+/* harmony import */ var _components_mapFile__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/mapFile */ "./src/forum/components/mapFile.js");
+/* harmony import */ var _components_mapBBCode__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/mapBBCode */ "./src/forum/components/mapBBCode.js");
 /* harmony import */ var _components_mapConfigHelper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/mapConfigHelper */ "./src/forum/components/mapConfigHelper.js");
 
 
@@ -267,15 +263,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jeromegillard/osm', function () {
-  (flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().store.models.files) = _components_File__WEBPACK_IMPORTED_MODULE_5__["default"];
+  (flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().store.models.files) = _components_mapFile__WEBPACK_IMPORTED_MODULE_5__["default"];
   (0,flarum_common_extend__WEBPACK_IMPORTED_MODULE_2__.extend)((flarum_common_components_TextEditor__WEBPACK_IMPORTED_MODULE_3___default().prototype), 'toolbarItems', function (items) {
     var mapConf = (0,_components_mapConfigHelper__WEBPACK_IMPORTED_MODULE_7__["default"])();
     items.add('bbcode', m((flarum_common_components_TextEditorButton__WEBPACK_IMPORTED_MODULE_4___default()), {
       onclick: function onclick() {
-        return (0,_components_OSMBBCode__WEBPACK_IMPORTED_MODULE_6__["default"])(mapConf.tilesProvider, mapConf.currentStyle, mapConf.zoom);
+        return (0,_components_mapBBCode__WEBPACK_IMPORTED_MODULE_6__["default"])(mapConf.tilesProvider, mapConf.currentStyle, mapConf.zoom);
       },
       icon: 'fas fa-map'
-    }, flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-osm.forum.text_editor.bbcode_tooltip')));
+    }, flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-map.forum.text_editor.bbcode_tooltip')));
   });
 });
 (0,flarum_common_extend__WEBPACK_IMPORTED_MODULE_2__.extend)((flarum_components_Post__WEBPACK_IMPORTED_MODULE_1___default().prototype), 'oncreate', function () {
@@ -286,13 +282,13 @@ flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jerome
 
   this.$('.mapFile-container').each(function (i) {
     // grab the uploaded gpx file's UUID and url
-    var uuid = $(this).children('.osmFile').data('fofUploadDownloadUuid');
+    var uuid = $(this).children('.mapFile').data('fofUploadDownloadUuid');
     var nid = 'map-' + so.postId + i + '-' + uuid;
     var url = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute('apiUrl') + '/fof/download';
     url += '/' + uuid;
     url += '/' + so.postId;
     url += '/' + (flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().session.csrfToken);
-    var fileExt = $(this).children('.osmFile').data('mapUrl').split('.').pop().toLowerCase();
+    var fileExt = $(this).children('.mapFile').data('mapUrl').split('.').pop().toLowerCase();
     /*  change the template rendering to insert a new id to the map element.
       * this allows us to have an unique div id even if a same file is displayed
       * more than one time
@@ -318,13 +314,13 @@ flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jerome
       new L.GPX(url, {
         async: true,
         marker_options: {
-          startIconUrl: '/assets/extensions/jeromegillard-osm/pin-icon-start.png',
-          endIconUrl: '/assets/extensions/jeromegillard-osm/pin-icon-end.png',
-          shadowUrl: '/assets/extensions/jeromegillard-osm/pin-shadow.png',
+          startIconUrl: '/assets/extensions/jeromegillard-map/pin-icon-start.png',
+          endIconUrl: '/assets/extensions/jeromegillard-map/pin-icon-end.png',
+          shadowUrl: '/assets/extensions/jeromegillard-map/pin-shadow.png',
           wptIconUrls: {
-            '': '/assets/extensions/jeromegillard-osm/default-waypoint.png',
-            'Geocache Found': '/assets/extensions/jeromegillard-osm/geocache.png',
-            'Park': '/assets/extensions/jeromegillard-osm/tree.png'
+            '': '/assets/extensions/jeromegillard-map/default-waypoint.png',
+            'Geocache Found': '/assets/extensions/jeromegillard-map/geocache.png',
+            'Park': '/assets/extensions/jeromegillard-map/tree.png'
           }
         }
       }).on('loaded', function (e) {
@@ -363,13 +359,14 @@ flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jerome
     }
   }); // for each map location from BBCode, loop and map
 
-  this.$('.osm-location-map').each(function (i) {
+  this.$('.bbcode-map').each(function (i) {
     var location = $(this).data('mapLocation');
     var mapConf = (0,_components_mapConfigHelper__WEBPACK_IMPORTED_MODULE_7__["default"])($(this).data('mapProvider'), $(this).data('mapStyle'), $(this).data('mapZoom'));
     var nid = 'map-' + Math.floor(Math.random() * 1000);
     $(this).prop('id', nid);
 
     if (location) {
+      // resolve location as coordinates
       fetch("https://nominatim.openstreetmap.org/search?q=" + location + "&format=json").then(function (response) {
         return response.json();
       }).then(function (json) {
@@ -391,17 +388,6 @@ flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jerome
     }
   });
 });
-
-/***/ }),
-
-/***/ "flarum/app":
-/*!********************************************!*\
-  !*** external "flarum.core.compat['app']" ***!
-  \********************************************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = flarum.core.compat['app'];
 
 /***/ }),
 

@@ -3,19 +3,19 @@ import Post from 'flarum/components/Post';
 import { extend } from 'flarum/common/extend';
 import TextEditor from 'flarum/common/components/TextEditor';
 import TextEditorButton from 'flarum/common/components/TextEditorButton';
-import File from './components/File';
-import insertAtCursor from './components/OSMBBCode';
+import mapFile from './components/mapFile';
+import insertAtCursor from './components/mapBBCode';
 import getMapConfig from './components/mapConfigHelper';
 
 app.initializers.add('jeromegillard/osm', () => {
-  app.store.models.files = File;
+  app.store.models.files = mapFile;
 
   extend(TextEditor.prototype, 'toolbarItems', function (items) {
     let mapConf = getMapConfig();
     items.add(
       'bbcode',
       <TextEditorButton onclick={() => insertAtCursor(mapConf.tilesProvider, mapConf.currentStyle, mapConf.zoom)} icon={'fas fa-map'}>
-        {app.translator.trans('jeromegillard-osm.forum.text_editor.bbcode_tooltip')}
+        {app.translator.trans('jeromegillard-map.forum.text_editor.bbcode_tooltip')}
       </TextEditorButton>
     );
   });
@@ -33,14 +33,14 @@ extend(Post.prototype, 'oncreate', function () {
   this.$('.mapFile-container').each(function( i ) {
 
     // grab the uploaded gpx file's UUID and url
-    let uuid = $(this).children('.osmFile').data('fofUploadDownloadUuid');
+    let uuid = $(this).children('.mapFile').data('fofUploadDownloadUuid');
     let nid = 'map-'+so.postId+i+'-'+uuid;
     let url = app.forum.attribute('apiUrl') + '/fof/download';
             url += '/' + uuid;
             url += '/' + so.postId;
             url += '/' + app.session.csrfToken;
 
-    let fileExt = $(this).children('.osmFile').data('mapUrl').split('.').pop().toLowerCase();
+    let fileExt = $(this).children('.mapFile').data('mapUrl').split('.').pop().toLowerCase();
 
     /*  change the template rendering to insert a new id to the map element.
       * this allows us to have an unique div id even if a same file is displayed
@@ -70,13 +70,13 @@ extend(Post.prototype, 'oncreate', function () {
         {
           async: true,
           marker_options: {
-            startIconUrl: '/assets/extensions/jeromegillard-osm/pin-icon-start.png',
-            endIconUrl: '/assets/extensions/jeromegillard-osm/pin-icon-end.png',
-            shadowUrl: '/assets/extensions/jeromegillard-osm/pin-shadow.png',
+            startIconUrl: '/assets/extensions/jeromegillard-map/pin-icon-start.png',
+            endIconUrl: '/assets/extensions/jeromegillard-map/pin-icon-end.png',
+            shadowUrl: '/assets/extensions/jeromegillard-map/pin-shadow.png',
             wptIconUrls: {
-              '': '/assets/extensions/jeromegillard-osm/default-waypoint.png',
-              'Geocache Found': '/assets/extensions/jeromegillard-osm/geocache.png',
-              'Park': '/assets/extensions/jeromegillard-osm/tree.png'
+              '': '/assets/extensions/jeromegillard-map/default-waypoint.png',
+              'Geocache Found': '/assets/extensions/jeromegillard-map/geocache.png',
+              'Park': '/assets/extensions/jeromegillard-map/tree.png'
             },
           }
         }
@@ -123,7 +123,7 @@ extend(Post.prototype, 'oncreate', function () {
   });
 
   // for each map location from BBCode, loop and map
-  this.$('.osm-location-map').each(function( i ) {
+  this.$('.bbcode-map').each(function( i ) {
     let location = $(this).data('mapLocation');
     let mapConf = getMapConfig(
       $(this).data('mapProvider'),
@@ -134,6 +134,7 @@ extend(Post.prototype, 'oncreate', function () {
     $(this).prop('id', nid);
 
     if(location){
+      // resolve location as coordinates
       fetch(`https://nominatim.openstreetmap.org/search?q=${location}&format=json`)
         .then(response => response.json())
         .then(json => {

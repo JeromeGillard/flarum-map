@@ -1,18 +1,18 @@
 <?php
 
-namespace JeromeGillard\FlarumOSM\Templates;
+namespace JeromeGillard\FlarumMap\Templates;
 
 use FoF\Upload\Templates\AbstractTextFormatterTemplate;
 
 /*
  * This class handles the fof-upload formatter
  */ 
-class OSMTemplate extends AbstractTextFormatterTemplate
+class MapTemplate extends AbstractTextFormatterTemplate
 {
     /**
      * @var string
      */
-    protected $tag = 'jeromegillard-osm';
+    protected $tag = 'jeromegillard-map';
 
     /**
      * The human readable name of the template.
@@ -21,7 +21,7 @@ class OSMTemplate extends AbstractTextFormatterTemplate
      */
     public function name(): string
     {
-        return $this->trans('jeromegillard-osm.admin.templates.osm');
+        return $this->trans('jeromegillard-map.admin.templates.map');
     }
 
     /**
@@ -29,7 +29,7 @@ class OSMTemplate extends AbstractTextFormatterTemplate
      */
     public function description(): string
     {
-        return $this->trans('jeromegillard-osm.admin.templates.osm.file_description');
+        return $this->trans('jeromegillard-map.admin.templates.map.file_description');
     }
 
     /**
@@ -39,7 +39,7 @@ class OSMTemplate extends AbstractTextFormatterTemplate
      */
     public function template(): string
     {
-        return $this->getView('fof-upload.templates::jeromegillard-osm');
+        return $this->getView('fof-upload.templates::jeromegillard-map');
     }
 
     /**

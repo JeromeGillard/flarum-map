@@ -1,13 +1,13 @@
 <?php
 
-namespace JeromeGillard\FlarumOSM\Providers;
+namespace JeromeGillard\FlarumMap\Providers;
 
 use Flarum\Foundation\AbstractServiceProvider;
 use FoF\Upload\Helpers\Util;
-use JeromeGillard\FlarumOSM\Templates\OSMTemplate;
+use JeromeGillard\FlarumMap\Templates\MapTemplate;
 use Flarum\Settings\SettingsRepositoryInterface;
 
-class OSMProvider extends AbstractServiceProvider
+class MapProvider extends AbstractServiceProvider
 {    
     public function register()
     {
@@ -15,6 +15,6 @@ class OSMProvider extends AbstractServiceProvider
         $util = $this->container->make(Util::class);
 
         // register our fof-upload template
-        $util->addRenderTemplate($this->container->make(OSMTemplate::class));
+        $util->addRenderTemplate($this->container->make(MapTemplate::class));
     }
 }

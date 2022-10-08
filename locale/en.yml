@@ -1,9 +1,10 @@
-jeromegillard-osm:
+jeromegillard-map:
   # For more details on the format
   # Checkout https://docs.flarum.org/extend/i18n/#appendix-a-standard-key-format
   admin:
     templates:
-      osm: OpenStreetMap
+      map: Map
+      file_description: Display a map in flarum. The original file will be available to download. The tiles provider and style will be the one defined in the extension's settings. You must have flarum/markdown installed and enabled for this to work.
       markdown-osm: Markdown map
       markdown-osm_description: Markdown map description
     settings:
