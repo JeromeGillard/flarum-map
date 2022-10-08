@@ -27,6 +27,8 @@ composer require jeromegillard/map:"*"
 4. Then add `gpx,json,geojson` extensions to this list:
 ![Setup FoF Upload MIME type](assets/readme-fof-upload-extensions.png)
 5. Configure the `Map` extension (optional).
+
+
 :warning: Don't forget to save your changes!
 
 ## Updating
@@ -39,7 +41,7 @@ php flarum cache:clear
 
 ## GeoJSON
 
-Features can be displayed.
+FeatureCollection can be displayed.
 
 As an example, to generate the GeoJSON file `assets/GeoJSON.example.json` to get a view of all trails of the [Amblève Trail Center](https://endurovtt.be), follow those steps:
 ```
@@ -74,5 +76,5 @@ I've prepared a all-in-one `docker-compose` file to get up and running to develo
 ## Links
 
 - [Packagist](https://packagist.org/packages/jeromegillard/osm)
-- [GitHub](https://github.com/jeromegillard/osm)
+- [GitHub](https://github.com/JeromeGillard/flarum-map)
 - [Discuss](https://discuss.flarum.org/d/PUT_DISCUSS_SLUG_HERE)
