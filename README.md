@@ -32,6 +32,26 @@ php flarum migrate
 php flarum cache:clear
 ```
 
+## GeoJSON
+
+Features can be displayed.
+
+As an example, to generate the GeoJSON file `assets/GeoJSON.example.json` to get a view of all trails of the [Amblève Trail Center](https://endurovtt.be), follow those steps:
+```
+# Go to https://overpass-turbo.eu/
+# Input that query:
+[out:json][timeout:25];
+(
+  relation(13959062);>>;
+)->.a;
+rel.a;
+out body;
+>;
+out skel qt;
+
+# Click export, as GeoJSON
+```
+
 ## Development
 
 I've prepared a all-in-one `docker-compose` file to get up and running to develop this Flarum extension easily.
