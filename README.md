@@ -8,8 +8,8 @@ Display a map in flarum in those ways:
  - upload a `.gpx` file to display it on a map and a download link
  - upload a `GeoJSON` file (`.geojson` of `.json`) display it on a map and a download link
 
- ![Snaphost](assets/readme-snapshot.png)
-
+ ![Snaphost](assets/readme-snapshot.png)  
+The post above was written like this:  
  ![Post icon](assets/readme-post-icon.png)
 
 ## Installation
