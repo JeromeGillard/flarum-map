@@ -4,22 +4,6 @@ app.initializers.add('jeromegillard/osm', () => {
 
   let currentTilesProvider = app.data.settings["jeromegillard-osm.tilesProvider"]??'osm';
 
-  // As we don't know when the elements will be created, wait for them to display only the relevant ones.
-  const observer = new MutationObserver(function() {
-    console.log($('.toggle-setting-block').length);
-      if ($('.toggle-setting-block').length == 5) {
-          toggleSettingBlocks();
-          observer.disconnect();
-      }
-  });
-  observer.observe(document.querySelector('body'), { childList: true });
-
-  // Display only the relevant settings block
-  const toggleSettingBlocks= () => {
-    $('.toggle-setting-block').closest('.Form-group').hide();
-    $('.'+currentTilesProvider+'-setting').closest('.Form-group').show();
-  };
-  
   app.extensionData
     .for('jeromegillard-osm')
 
@@ -31,14 +15,14 @@ app.initializers.add('jeromegillard/osm', () => {
         help: app.translator.trans('jeromegillard-osm.admin.settings.tiles_provider.help'),
         type: 'select',
         options: {
-          'osm': 'OpenStreetMap', 
+          'osm': 'OpenStreetMap',
           'mapbox': 'Mapbox',
           'thunderforest': 'Thunderforest'
         },
         default: 'osm',
         className: 'select-tilesProvider'
       },
-      30
+      100
     )
     // Default zoom
     .registerSetting(
@@ -50,37 +34,43 @@ app.initializers.add('jeromegillard/osm', () => {
         className: 'zoom-setting',
         placeholder: 13
       },
-      1)
+      90)
 
     // OpenStreetMap
-    .registerSetting( () => {
-      return(
-        <div className="Form-group">
-            <div class="helpText osm-setting  toggle-setting-block">{app.translator.trans('jeromegillard-osm.admin.settings.osm.help')} | <a href="https://operations.osmfoundation.org/policies/tiles" target="_blank">{app.translator.trans('jeromegillard-osm.admin.settings.tiles_provider.tile_usage_policy')}.</a></div>
-          </div>
-        )
+    .registerSetting(
+      {
+        label: 'OpenStreetMap',
+        help: app.translator.trans('jeromegillard-osm.admin.settings.osm.help',{
+                a: <a href="https://operations.osmfoundation.org/policies/tiles" target="_blank"/>
+              }),
+        type: 'hidden'
       },
-      30)
+      80)
 
     // Mapbox key
     .registerSetting(
       {
         setting: 'jeromegillard-osm.mapbox.key',
         label: app.translator.trans('jeromegillard-osm.admin.settings.mapbox.label'),
-        help: app.translator.trans('jeromegillard-osm.admin.settings.mapbox.help'),
+        help: app.translator.trans('jeromegillard-osm.admin.settings.mapbox.help', {
+          a: <a href="https://www.mapbox.com" target="_blank"/>,
+          b: <a href="https://docs.mapbox.com/help/how-mapbox-works/attribution/"/>
+        }),
         type: 'text',
         className: 'mapbox-setting toggle-setting-block'
       },
-      21)
+      71)
     // Mapbox styles (https://docs.mapbox.com/api/maps/styles/#mapbox-styles)
     .registerSetting(
       {
         setting: 'jeromegillard-osm.mapbox.style',
-        label: app.translator.trans('jeromegillard-osm.admin.settings.style.label'),
-        help: app.translator.trans('jeromegillard-osm.admin.settings.style.help'),
+        label: app.translator.trans('jeromegillard-osm.admin.settings.style.label', {provider:'Mapbox'}),
+        help: app.translator.trans('jeromegillard-osm.admin.settings.style.help',{
+          a: <a href="https://docs.mapbox.com/api/maps/styles/#mapbox-styles" target="_blank"/>
+        }),
         type: 'select',
         options: {
-          'mapbox/streets-v11': 'Streets', 
+          'mapbox/streets-v11': 'Streets',
           'mapbox/outdoors-v11': 'Outdoors',
           'mapbox/light-v10': 'Light',
           'mapbox/dark-v10': 'Dark',
@@ -92,27 +82,32 @@ app.initializers.add('jeromegillard/osm', () => {
         default: 'mapbox/streets-v11',
         className: 'mapbox-setting mapbox-style toggle-setting-block'
       },
-      20)
+      70)
 
-    // Thunderforest key  
+    // Thunderforest key https://www.thunderforest.com/terms/
     .registerSetting(
       {
         setting: 'jeromegillard-osm.thunderforest.key',
         label: app.translator.trans('jeromegillard-osm.admin.settings.thunderforest.label'),
-        help: app.translator.trans('jeromegillard-osm.admin.settings.thunderforest.help'),
+        help: app.translator.trans('jeromegillard-osm.admin.settings.thunderforest.help',{
+          a: <a href="https://www.thunderforest.com" target="_blank"/>,
+          b: <a href="https://www.thunderforest.com/terms/" target="_blank"/>
+        }),
         type: 'text',
         className: 'thunderforest-setting toggle-setting-block'
       },
-      31)
+      61)
     // Thunderforest style
     .registerSetting(
       {
         setting: 'jeromegillard-osm.thunderforest.style',
-        label: app.translator.trans('jeromegillard-osm.admin.settings.style.label'),
-        help: app.translator.trans('jeromegillard-osm.admin.settings.style.help'),
+        label: app.translator.trans('jeromegillard-osm.admin.settings.style.label', {provider:'Thunderforest'}),
+        help: app.translator.trans('jeromegillard-osm.admin.settings.style.help',{
+          a: <a href="https://www.thunderforest.com/maps/" target="_blank"/>
+        }),
         type: 'select',
         options: {
-          'cycle': 'cycle', 
+          'cycle': 'cycle',
           'transport': 'transport',
           'landscape': 'landscape',
           'outdoors': 'outdoors',
@@ -126,16 +121,8 @@ app.initializers.add('jeromegillard/osm', () => {
         default: 'atlas',
         className: 'thunderforest-setting thunderforest-style toggle-setting-block'
       },
-      30)
+      60)
 
     // TODO: add openmaptiles https://openmaptiles.org/styles/
 
-    // Toogle settings blocks on provider change
-    .registerSetting( () => {      
-      if($('.select-tilesProvider')[0]){
-        currentTilesProvider = $('.select-tilesProvider')[0].value;
-      }
-      toggleSettingBlocks();
-    },
-    0)
 });
