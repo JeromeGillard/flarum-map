@@ -11,23 +11,19 @@ app.initializers.add('jeromegillard/osm', () => {
   app.store.models.files = File;
 
   extend(TextEditor.prototype, 'toolbarItems', function (items) {
-    
+
     items.add(
       'bbcode',
       <TextEditorButton onclick={() => insertAtCursor(this.tilesProvider)} icon={'fas fa-map'}>
         {app.translator.trans('jeromegillard-osm.forum.text_editor.bbcode_tooltip')}
       </TextEditorButton>
-    ); 
+    );
   });
 
 });
 
 extend(Post.prototype, 'oncreate', function () {
   this.postId = this.attrs.post.id();
-  //this.tilesProvider = app.forum.attribute("tilesProvider")??'osm';
-  //this.currentKey = '';
-  //this.currentStyle = '';
-
   this.mapConf = getMapConfig();
 
   // copy this for usage within .each()
@@ -37,22 +33,20 @@ extend(Post.prototype, 'oncreate', function () {
   this.$('.mapFile-container').each(function( i ) {
 
     // grab the uploaded gpx file's UUID and url
-    let uuid = $(this).data('fofUploadDownloadUuid');
+    let uuid = $(this).children('.osmFile').data('fofUploadDownloadUuid');
     let nid = 'map-'+so.postId+i+'-'+uuid;
     let url = app.forum.attribute('apiUrl') + '/fof/download';
             url += '/' + uuid;
             url += '/' + so.postId;
             url += '/' + app.session.csrfToken;
 
-    let fileExt = $(this).data('mapUrl').split('.').pop().toLowerCase();
+    let fileExt = $(this).children('.osmFile').data('mapUrl').split('.').pop().toLowerCase();
 
     /*  change the template rendering to insert a new id to the map element.
       * this allows us to have an unique div id even if a same file is displayed
       * more than one time
     */
-    $(this).children('.mapFile-placeholder').first().prop('id', nid);
-
-console.log(nid, so.mapConf);
+    $(this).children('.mapFile-placeholder').prop('id', nid);
 
     // Get the map element
     let map = L.map(nid);

@@ -279,30 +279,26 @@ flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jerome
   });
 });
 (0,flarum_common_extend__WEBPACK_IMPORTED_MODULE_2__.extend)((flarum_components_Post__WEBPACK_IMPORTED_MODULE_1___default().prototype), 'oncreate', function () {
-  this.postId = this.attrs.post.id(); //this.tilesProvider = app.forum.attribute("tilesProvider")??'osm';
-  //this.currentKey = '';
-  //this.currentStyle = '';
-
+  this.postId = this.attrs.post.id();
   this.mapConf = (0,_components_mapConfigHelper__WEBPACK_IMPORTED_MODULE_7__["default"])(); // copy this for usage within .each()
 
   var so = this; //for each gpx file in this post, loop and map
 
   this.$('.mapFile-container').each(function (i) {
     // grab the uploaded gpx file's UUID and url
-    var uuid = $(this).data('fofUploadDownloadUuid');
+    var uuid = $(this).children('.osmFile').data('fofUploadDownloadUuid');
     var nid = 'map-' + so.postId + i + '-' + uuid;
     var url = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute('apiUrl') + '/fof/download';
     url += '/' + uuid;
     url += '/' + so.postId;
     url += '/' + (flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().session.csrfToken);
-    var fileExt = $(this).data('mapUrl').split('.').pop().toLowerCase();
+    var fileExt = $(this).children('.osmFile').data('mapUrl').split('.').pop().toLowerCase();
     /*  change the template rendering to insert a new id to the map element.
       * this allows us to have an unique div id even if a same file is displayed
       * more than one time
     */
 
-    $(this).children('.mapFile-placeholder').first().prop('id', nid);
-    console.log(nid, so.mapConf); // Get the map element
+    $(this).children('.mapFile-placeholder').prop('id', nid); // Get the map element
 
     var map = L.map(nid);
     map.addControl(new L.Control.Fullscreen()); // Set the tiles provider
