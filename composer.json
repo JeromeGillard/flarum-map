@@ -32,9 +32,6 @@
               },
             "category": "feature"
         },
-        "flagrow": {
-            "discuss": "https://discuss.flarum.org/d/31732-map-extension-display-a-map-a-gpx-or-a-geojson-file-in-a-post"
-        },
         "flarum-cli": {
             "modules": {
                 "admin": true,
