@@ -5,7 +5,7 @@ import TextEditor from 'flarum/common/components/TextEditor';
 import TextEditorButton from 'flarum/common/components/TextEditorButton';
 import mapFile from './components/mapFile';
 import insertAtCursor from './components/mapBBCode';
-import getMapConfig from './components/mapConfigHelper';
+import { getMapConfig, getTileLayer } from './components/mapConfigHelper';
 
 app.initializers.add('jeromegillard/osm', () => {
   app.store.models.files = mapFile;
@@ -53,16 +53,7 @@ extend(Post.prototype, 'oncreate', function () {
     map.addControl(new L.Control.Fullscreen());
 
     // Set the tiles provider
-    new L.tileLayer(so.mapConf.tileLayerURL,
-    {
-      key: so.mapConf.currentKey,
-      maxZoom: so.mapConf.maxZoom,
-      attribution: so.mapConf.attribution,
-      id: so.mapConf.currentStyle,
-      tileSize: so.mapConf.tileSize,
-      zoomOffset: so.mapConf.zoomOffset,
-      detectRetina: so.mapConf.detectRetina
-    }).addTo(map);
+    getTileLayer(so.mapConf).addTo(map);
 
     if(fileExt == 'gpx'){
     // Display the GPX file in it thanks to https://github.com/mpetazzoni/leaflet-gpx
@@ -143,16 +134,7 @@ extend(Post.prototype, 'oncreate', function () {
           let map = L.map(nid);
           map.addControl(new L.Control.Fullscreen());
           // Set the tiles provider
-          new L.tileLayer(mapConf.tileLayerURL,
-            {
-              key: mapConf.currentKey,
-              maxZoom: mapConf.maxZoom,
-              attribution: mapConf.attribution,
-              id: mapConf.currentStyle,
-              tileSize: mapConf.tileSize,
-              zoomOffset: mapConf.zoomOffset,
-              detectRetina: mapConf.detectRetina
-            }).addTo(map);
+          getTileLayer(mapConf).addTo(map);
           map.setView([json[0].lat, json[0].lon], mapConf.zoom);
         });
     }

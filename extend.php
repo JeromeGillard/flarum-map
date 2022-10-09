@@ -35,6 +35,8 @@ return [
     (new Extend\Settings())
         ->serializeToForum('tilesProvider', 'jeromegillard-map.tilesProvider')
         ->serializeToForum('zoom', 'jeromegillard-map.zoom')
+        ->serializeToForum('maptiler.key', 'jeromegillard-map.maptiler.key')
+        ->serializeToForum('maptiler.style', 'jeromegillard-map.maptiler.style')
         ->serializeToForum('mapbox.key', 'jeromegillard-map.mapbox.key')
         ->serializeToForum('mapbox.style', 'jeromegillard-map.mapbox.style')
         ->serializeToForum('thunderforest.key', 'jeromegillard-map.thunderforest.key')
@@ -48,10 +50,13 @@ return [
                 $settings = resolve(SettingsRepositoryInterface::class);
                 $document->head[] =
                     '<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+                    <link rel="stylesheet" href="https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css" />
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/1.13.1/mapbox-gl.min.css" />
                     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/gpx.min.js"></script>
                     <script src="https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js"></script>
-                    <link href="https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css" rel="stylesheet" />';
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/1.13.1/mapbox-gl.min.js"></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl-leaflet/0.0.15/leaflet-mapbox-gl.min.js"></script>';
             }),
 
     (new Extend\Formatter)

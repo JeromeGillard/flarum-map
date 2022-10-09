@@ -13,6 +13,7 @@ app.initializers.add('jeromegillard/osm', () => {
         help: app.translator.trans('jeromegillard-map.admin.settings.tiles_provider.help'),
         type: 'select',
         options: {
+          'maptiler': 'MapTiler',
           'osm': 'OpenStreetMap',
           'mapbox': 'Mapbox',
           'thunderforest': 'Thunderforest'
@@ -44,6 +45,48 @@ app.initializers.add('jeromegillard/osm', () => {
         type: 'hidden'
       },
       80)
+
+    // MapTiler key
+    .registerSetting(
+      {
+        setting: 'jeromegillard-map.maptiler.key',
+        label: app.translator.trans('jeromegillard-map.admin.settings.maptiler.label'),
+        help: app.translator.trans('jeromegillard-map.admin.settings.maptiler.help', {
+          a: <a href="https://www.maptiler.com" target="_blank"/>,
+          b: <a href="https://www.maptiler.com/copyright/" target="_blank"/>
+        }),
+        type: 'text',
+        className: 'maptiler-setting toggle-setting-block'
+      },
+      76)
+    // MapTiler styles (https://cloud.maptiler.com/maps/)
+    .registerSetting(
+      {
+        setting: 'jeromegillard-map.maptiler.style',
+        label: app.translator.trans('jeromegillard-map.admin.settings.style.label', {provider:'MapTiler'}),
+        help: app.translator.trans('jeromegillard-map.admin.settings.style.help',{
+          a: <a href="https://cloud.maptiler.com/maps/" target="_blank"/>
+        }),
+        type: 'select',
+        options: {
+          'basic-v2': 'Basic (basic-v2)',
+          'basic-4326': 'Basic EPSG:4326 (basic-4326)',
+          'bright-v2': 'Bright (bright-v2)',
+          'openstreetmap': 'OpenStreetMap (openstreetmap)',
+          'outdoor': 'Outdoor (outdoor)',
+          'pastel': 'Pasterl (pastel)',
+          'hybrid': 'Satelite hybrid (hybrid)',
+          'streets-v2': 'Street (streets-v2)',
+          'toner': 'Toner (toner)',
+          'topo': 'Topo (topo)',
+          'topographique': 'Topographique (topographique)',
+          'voyager': 'Voyager (voyager)',
+          'winter': 'Winter (winter)'
+        },
+        default: 'basic-v2',
+        className: 'maptiler-setting maptiler-style toggle-setting-block'
+      },
+      75)
 
     // Mapbox key
     .registerSetting(
