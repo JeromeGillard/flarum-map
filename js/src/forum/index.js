@@ -23,16 +23,17 @@ app.initializers.add('jeromegillard/osm', () => {
 
 });
 
-extend(Page.prototype, 'oncreate', function(){
-  console.log("Post.onCreate");
-
-  if(this.attrs.routeName == 'page'){
-    console.log("Post.onCreate page", this.attrs.id);
-    createMap(this.attrs.id);
-  }
-});
+// Render maps in posts
 extend(Post.prototype, 'oncreate', function(){
-  console.log("Post.onCreate");
-  this.pid = this.attrs.post.id();
-  createMap(this.pid);
+  createMap(this.attrs.post.id());
+});
+
+// Render maps in pages (fof/pages)
+extend(Page.prototype, 'oncreate', function(){
+  const pid = this.attrs.id;
+  if(this.attrs.routeName == 'page'){
+    // Wait for the post to be rendered. Anyone has a better event?
+    // With fof/links, when a user browse from a post to the page, there's no event triggered
+    setTimeout(createMap, 500, pid);
+  } 
 });
