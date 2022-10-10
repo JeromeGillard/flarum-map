@@ -18,13 +18,15 @@ export function getMapConfig(o_tilesProvider, o_style, o_zoom) {
 
     switch(tilesProvider){
         case "mapbox":
+          type = 'gl';
           currentKey = app.forum.attribute("mapbox.key")||'';
           currentStyle = app.forum.attribute("mapbox.style")||'mapbox/light-v9';
-          tileLayerURL = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}@2x?access_token={key}';
+          tileLayerURL = 'mapbox://styles/'+currentStyle;
           attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, ' +
           '© <a href="https://www.mapbox.com/">Mapbox</a>';
           break;
         case "thunderforest":
+          type: 'gl';  
           currentKey = app.forum.attribute("thunderforest.key")||'';
           currentStyle = app.forum.attribute("thunderforest.style")||'atlas';
           tileLayerURL = 'https://tile.thunderforest.com/{id}/{z}/{x}/{y}.png?apikey={key}';
@@ -95,6 +97,7 @@ export function getTileLayer(mapConf){
     if(mapConf.type == 'gl'){
       return new L.mapboxGL({
         attribution: mapConf.attribution,
+        accessToken: mapConf.currentKey,
         style: mapConf.tileLayerURL
       });
     } else {
@@ -115,14 +118,9 @@ export function getTileLayer(mapConf){
 
 
 export function createMap(pid) {
-console.log("create map");
   let so = {};
-
-  so.postId = pid;//this.attrs.post.id();
+  so.postId = pid;
   so.mapConf = getMapConfig();
-
-  // copy this for usage within .each()
-  //let so = this;
 
   //for each gpx file in this post, loop and map
   $('.mapFile-container').each(function( i ) {

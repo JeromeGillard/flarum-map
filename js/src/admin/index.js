@@ -13,9 +13,9 @@ app.initializers.add('jeromegillard/osm', () => {
         help: app.translator.trans('jeromegillard-map.admin.settings.tiles_provider.help'),
         type: 'select',
         options: {
-          'maptiler': 'MapTiler',
+          'maptiler': 'MapTiler (vectors)',
           'osm': 'OpenStreetMap',
-          'mapbox': 'Mapbox',
+          'mapbox': 'Mapbox (vectors)',
           'thunderforest': 'Thunderforest'
         },
         default: 'osm',
