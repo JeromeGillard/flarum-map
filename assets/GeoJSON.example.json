@@ -2,7 +2,7 @@
     "type": "FeatureCollection",
     "generator": "overpass-ide",
     "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
-    "timestamp": "2022-10-07T17:39:49Z",
+    "timestamp": "2022-10-11T17:22:38Z",
     "features": [
       {
         "type": "Feature",
@@ -14,18 +14,7 @@
           "name": "La Démentielle",
           "route": "mtb",
           "trailblazed": "yes",
-          "type": "route",
-          "@relations": [
-            {
-              "role": "",
-              "rel": 13959062,
-              "reltags": {
-                "mtb:type": "enduro",
-                "name": "Trail center de l'Ambleve",
-                "type": "site"
-              }
-            }
-          ]
+          "type": "route"
         },
         "geometry": {
           "type": "LineString",
@@ -248,18 +237,7 @@
           "name": "Heid des Graviers",
           "route": "mtb",
           "trailblazed": "yes",
-          "type": "route",
-          "@relations": [
-            {
-              "role": "",
-              "rel": 13959062,
-              "reltags": {
-                "mtb:type": "enduro",
-                "name": "Trail center de l'Ambleve",
-                "type": "site"
-              }
-            }
-          ]
+          "type": "route"
         },
         "geometry": {
           "type": "LineString",
@@ -427,18 +405,7 @@
           "route": "mtb",
           "signed_direction": "yes",
           "trailblazed": "yes",
-          "type": "route",
-          "@relations": [
-            {
-              "role": "",
-              "rel": 13959062,
-              "reltags": {
-                "mtb:type": "enduro",
-                "name": "Trail center de l'Ambleve",
-                "type": "site"
-              }
-            }
-          ]
+          "type": "route"
         },
         "geometry": {
           "type": "LineString",
@@ -565,18 +532,7 @@
           "name": "La Wasflam",
           "route": "mtb",
           "trailblazed": "yes",
-          "type": "route",
-          "@relations": [
-            {
-              "role": "",
-              "rel": 13959062,
-              "reltags": {
-                "mtb:type": "enduro",
-                "name": "Trail center de l'Ambleve",
-                "type": "site"
-              }
-            }
-          ]
+          "type": "route"
         },
         "geometry": {
           "type": "LineString",
@@ -883,18 +839,7 @@
           "name": "La Wasse",
           "route": "mtb",
           "trailblazed": "yes",
-          "type": "route",
-          "@relations": [
-            {
-              "role": "",
-              "rel": 13959062,
-              "reltags": {
-                "mtb:type": "enduro",
-                "name": "Trail center de l'Ambleve",
-                "type": "site"
-              }
-            }
-          ]
+          "type": "route"
         },
         "geometry": {
           "type": "LineString",
@@ -1101,18 +1046,7 @@
           "name": "La Blaireau",
           "route": "mtb",
           "trailblazed": "yes",
-          "type": "route",
-          "@relations": [
-            {
-              "role": "",
-              "rel": 13959062,
-              "reltags": {
-                "mtb:type": "enduro",
-                "name": "Trail center de l'Ambleve",
-                "type": "site"
-              }
-            }
-          ]
+          "type": "route"
         },
         "geometry": {
           "type": "LineString",
@@ -1415,18 +1349,7 @@
           "name": "Lès Eyîs",
           "route": "mtb",
           "trailblazed": "yes",
-          "type": "route",
-          "@relations": [
-            {
-              "role": "",
-              "rel": 13959062,
-              "reltags": {
-                "mtb:type": "enduro",
-                "name": "Trail center de l'Ambleve",
-                "type": "site"
-              }
-            }
-          ]
+          "type": "route"
         },
         "geometry": {
           "type": "LineString",
@@ -1653,18 +1576,7 @@
           "name": "Lêd Riveû",
           "route": "mtb",
           "trailblazed": "yes",
-          "type": "route",
-          "@relations": [
-            {
-              "role": "",
-              "rel": 13959062,
-              "reltags": {
-                "mtb:type": "enduro",
-                "name": "Trail center de l'Ambleve",
-                "type": "site"
-              }
-            }
-          ]
+          "type": "route"
         },
         "geometry": {
           "type": "LineString",
@@ -1995,18 +1907,7 @@
           "name": "La Bobaf",
           "route": "mtb",
           "trailblazed": "yes",
-          "type": "route",
-          "@relations": [
-            {
-              "role": "",
-              "rel": 13959062,
-              "reltags": {
-                "mtb:type": "enduro",
-                "name": "Trail center de l'Ambleve",
-                "type": "site"
-              }
-            }
-          ]
+          "type": "route"
         },
         "geometry": {
           "type": "LineString",
@@ -2222,18 +2123,7 @@
           "route": "mtb",
           "signed_direction": "yes",
           "trailblazed": "yes",
-          "type": "route",
-          "@relations": [
-            {
-              "role": "",
-              "rel": 13959062,
-              "reltags": {
-                "mtb:type": "enduro",
-                "name": "Trail center de l'Ambleve",
-                "type": "site"
-              }
-            }
-          ]
+          "type": "route"
         },
         "geometry": {
           "type": "LineString",
@@ -2528,18 +2418,7 @@
           "name": "Le Viaduc",
           "route": "mtb",
           "trailblazed": "yes",
-          "type": "route",
-          "@relations": [
-            {
-              "role": "",
-              "rel": 13959062,
-              "reltags": {
-                "mtb:type": "enduro",
-                "name": "Trail center de l'Ambleve",
-                "type": "site"
-              }
-            }
-          ]
+          "type": "route"
         },
         "geometry": {
           "type": "MultiLineString",
@@ -2803,22 +2682,53 @@
           "colour": "yellow",
           "name": "Liaison vers descentes enduro VTT",
           "route": "mtb",
-          "type": "route",
-          "@relations": [
-            {
-              "role": "",
-              "rel": 13959062,
-              "reltags": {
-                "mtb:type": "enduro",
-                "name": "Trail center de l'Ambleve",
-                "type": "site"
-              }
-            }
-          ]
+          "type": "route"
         },
         "geometry": {
           "type": "MultiLineString",
           "coordinates": [
+            [
+              [
+                5.7154484,
+                50.4823479
+              ],
+              [
+                5.7154507,
+                50.4824916
+              ],
+              [
+                5.7159451,
+                50.4826938
+              ],
+              [
+                5.7162617,
+                50.4828349
+              ],
+              [
+                5.716558,
+                50.483036
+              ],
+              [
+                5.7167902,
+                50.4829129
+              ],
+              [
+                5.7165465,
+                50.4827393
+              ],
+              [
+                5.7160515,
+                50.4824736
+              ],
+              [
+                5.7158088,
+                50.4823915
+              ],
+              [
+                5.7154484,
+                50.4823479
+              ]
+            ],
             [
               [
                 5.7415697,
@@ -7144,6 +7054,74 @@
           ]
         },
         "id": "relation/14667012"
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "@id": "way/1029037897",
+          "amenity": "parking",
+          "parking": "street_side",
+          "@relations": [
+            {
+              "role": "",
+              "rel": 14667012,
+              "reltags": {
+                "colour": "yellow",
+                "name": "Liaison vers descentes enduro VTT",
+                "route": "mtb",
+                "type": "route"
+              }
+            }
+          ]
+        },
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                5.7154484,
+                50.4823479
+              ],
+              [
+                5.7158088,
+                50.4823915
+              ],
+              [
+                5.7160515,
+                50.4824736
+              ],
+              [
+                5.7165465,
+                50.4827393
+              ],
+              [
+                5.7167902,
+                50.4829129
+              ],
+              [
+                5.716558,
+                50.483036
+              ],
+              [
+                5.7162617,
+                50.4828349
+              ],
+              [
+                5.7159451,
+                50.4826938
+              ],
+              [
+                5.7154507,
+                50.4824916
+              ],
+              [
+                5.7154484,
+                50.4823479
+              ]
+            ]
+          ]
+        },
+        "id": "way/1029037897"
       }
     ]
   }

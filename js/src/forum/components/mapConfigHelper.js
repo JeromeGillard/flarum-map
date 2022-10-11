@@ -26,7 +26,7 @@ export function getMapConfig(o_tilesProvider, o_style, o_zoom) {
           '© <a href="https://www.mapbox.com/">Mapbox</a>';
           break;
         case "thunderforest":
-          type: 'gl';  
+          type: 'gl';
           currentKey = app.forum.attribute("thunderforest.key")||'';
           currentStyle = app.forum.attribute("thunderforest.style")||'atlas';
           tileLayerURL = 'https://tile.thunderforest.com/{id}/{z}/{x}/{y}.png?apikey={key}';
@@ -94,7 +94,7 @@ export function getTileLayer(mapConf){
   //console.log(mapConf);
   if(mapConf && mapConf.tilesProvider){
     // Allow SVG tiles from 'gl' providers (MapTiler for instance)
-    if(mapConf.type == 'gl'){
+    if(mapConf.type === 'gl'){
       return new L.mapboxGL({
         attribution: mapConf.attribution,
         accessToken: mapConf.currentKey,
@@ -169,19 +169,48 @@ export function createMap(pid) {
       }).addTo(map);
     }
 
-    else if(fileExt == 'json' || fileExt == 'geojson'){
+    else if(fileExt === 'json' || fileExt === 'geojson'){
       fetch(url)
         .then(response => response.json())
         .then(json => {
 
           function onEachFeature(feature, layer) {
-            var popupContent = '';
 
-            if (feature.properties && feature.properties.name) {
-              popupContent += feature.properties.name;
+            if(feature && feature.properties){
+              var popupContent = '';
+
+              if (feature.properties.name) {
+                popupContent += feature.properties.name;
+              }
+              if (feature.properties.description) {
+                popupContent += feature.properties.description;
+              }
+
+              if (feature.properties.amenity === 'parking') {
+                // Check if feature is a polygon
+                if (feature.geometry.type === 'Polygon') {
+                  // Prepare a parking icon
+                  var parkingIcon = L.icon({
+                    iconUrl: '/assets/extensions/jeromegillard-map/pin-icon-parking.png',
+                    iconSize: [20, 20],
+                    iconAnchor: [10, 20],
+                    popupAnchor: [0, -10]
+                  });
+                  // Get bounds of polygon
+                  var bounds = layer.getBounds();
+                  // Get center of bounds
+                  var center = bounds.getCenter();
+                  // Use center to put marker on map
+                  var marker = L.marker(center,
+                    {icon: parkingIcon}
+                    ).addTo(map);
+                  }
+              }
+
+              if(popupContent !== ''){
+                layer.bindPopup(popupContent);
+              }
             }
-
-            layer.bindPopup(popupContent);
           }
 
           var geoJSONLayer = L.geoJSON([json], {

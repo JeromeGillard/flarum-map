@@ -31,9 +31,9 @@ extend(Post.prototype, 'oncreate', function(){
 // Render maps in pages (fof/pages)
 extend(Page.prototype, 'oncreate', function(){
   const pid = this.attrs.id;
-  if(this.attrs.routeName == 'page'){
+  if(this.attrs.routeName === 'page'){
     // Wait for the post to be rendered. Anyone has a better event?
     // With fof/links, when a user browse from a post to the page, there's no event triggered
     setTimeout(createMap, 500, pid);
-  } 
+  }
 });
