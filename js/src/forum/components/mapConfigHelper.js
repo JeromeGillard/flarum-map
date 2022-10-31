@@ -16,11 +16,47 @@ export function getMapConfig(o_tilesProvider, o_style, o_zoom) {
             tilesProvider = o_tilesProvider;
     }
 
+    if(o_style){
+      console.log("Custom style", o_style, tilesProvider);
+      switch(tilesProvider){
+          case 'mapbox':
+              if(o_style === 'mapbox/streets-v11' ||
+                  o_style === 'mapbox/outdoors-v11' ||
+                  o_style === 'mapbox/light-v10' ||
+                  o_style === 'mapbox/dark-v10' ||
+                  o_style === 'mapbox/satellite-v9' ||
+                  o_style === 'mapbox/satellite-streets-v11' ||
+                  o_style === 'mapbox/navigation-day-v1' ||
+                  o_style === 'mapbox/streets-v11' ||
+                  o_style === 'mapbox/navigation-night-v1') {
+                      currentStyle = o_style;
+                  }
+                  else {
+                    console.log("Unknown style", o_style);
+                  }
+              break;
+          case 'thunderforest':
+              if(o_style === 'cycle' ||
+                  o_style === 'transport' ||
+                  o_style === 'landscape' ||
+                  o_style === 'outdoors' ||
+                  o_style === 'transport-dark9' ||
+                  o_style === 'spinal-map' ||
+                  o_style === 'pioneer' ||
+                  o_style === 'mobile-atlas' ||
+                  o_style === 'neighbourhood' ||
+                  o_style === 'atlas') {
+                      currentStyle = o_style;
+                  }
+              break;
+      }
+  }
+
     switch(tilesProvider){
         case "mapbox":
           type = 'gl';
           currentKey = app.forum.attribute("mapbox.key")||'';
-          currentStyle = app.forum.attribute("mapbox.style")||'mapbox/light-v9';
+          currentStyle = currentStyle || app.forum.attribute("mapbox.style")||'mapbox/light-v9';
           tileLayerURL = 'mapbox://styles/'+currentStyle;
           attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, ' +
           '© <a href="https://www.mapbox.com/">Mapbox</a>';
@@ -28,7 +64,7 @@ export function getMapConfig(o_tilesProvider, o_style, o_zoom) {
         case "thunderforest":
           type: 'gl';
           currentKey = app.forum.attribute("thunderforest.key")||'';
-          currentStyle = app.forum.attribute("thunderforest.style")||'atlas';
+          currentStyle = currentStyle || app.forum.attribute("thunderforest.style")||'atlas';
           tileLayerURL = 'https://tile.thunderforest.com/{id}/{z}/{x}/{y}.png?apikey={key}';
           attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, ' +
           '© <a href="https://www.thunderforest.com/">Thunderforest</a>';
@@ -36,45 +72,13 @@ export function getMapConfig(o_tilesProvider, o_style, o_zoom) {
         case "maptiler":
           type = 'gl';
           currentKey = app.forum.attribute("maptiler.key")||'';
-          currentStyle = app.forum.attribute("maptiler.style")||'basic-v2';
+          currentStyle = currentStyle || app.forum.attribute("maptiler.style")||'basic-v2';
           tileLayerURL = 'https://api.maptiler.com/maps/'+currentStyle+'/style.json?key='+currentKey;
           attribution = "\u003ca href=\"https://www.maptiler.com/copyright/\" target=\"_blank\"\u003e\u0026copy; MapTiler\u003c/a\u003e \u003ca href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\"\u003e\u0026copy; OpenStreetMap contributors\u003c/a\u003e";
           break;
         default:
           tileLayerURL = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
           attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>';
-      }
-
-    if(o_style){
-        switch(tilesProvider){
-            case 'mapbox':
-                if(o_style === 'mapbox/streets-v11' ||
-                    o_style === 'mapbox/outdoors-v11' ||
-                    o_style === 'mapbox/light-v10' ||
-                    o_style === 'mapbox/dark-v10' ||
-                    o_style === 'mapbox/satellite-v9' ||
-                    o_style === 'mapbox/satellite-streets-v11' ||
-                    o_style === 'mapbox/navigation-day-v1' ||
-                    o_style === 'mapbox/streets-v11' ||
-                    o_style === 'mapbox/navigation-night-v1') {
-                        currentStyle = o_style;
-                    }
-                break;
-            case 'thunderforest':
-                if(o_style === 'cycle' ||
-                    o_style === 'transport' ||
-                    o_style === 'landscape' ||
-                    o_style === 'outdoors' ||
-                    o_style === 'transport-dark9' ||
-                    o_style === 'spinal-map' ||
-                    o_style === 'pioneer' ||
-                    o_style === 'mobile-atlas' ||
-                    o_style === 'neighbourhood' ||
-                    o_style === 'atlas') {
-                        currentStyle = o_style;
-                    }
-                break;
-        }
     }
 
 
@@ -243,6 +247,7 @@ export function createMap(pid) {
       $(this).data('mapStyle'),
       $(this).data('mapZoom')
     )
+    console.log(mapConf, $(this).data('mapStyle'));
     const nid = 'map-'+Math.floor(Math.random() * 1000);
     $(this).prop('id', nid);
 
