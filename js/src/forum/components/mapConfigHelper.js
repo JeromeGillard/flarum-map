@@ -17,38 +17,59 @@ export function getMapConfig(o_tilesProvider, o_style, o_zoom) {
     }
 
     if(o_style){
-      console.log("Custom style", o_style, tilesProvider);
       switch(tilesProvider){
-          case 'mapbox':
-              if(o_style === 'mapbox/streets-v11' ||
-                  o_style === 'mapbox/outdoors-v11' ||
-                  o_style === 'mapbox/light-v10' ||
-                  o_style === 'mapbox/dark-v10' ||
-                  o_style === 'mapbox/satellite-v9' ||
-                  o_style === 'mapbox/satellite-streets-v11' ||
-                  o_style === 'mapbox/navigation-day-v1' ||
-                  o_style === 'mapbox/streets-v11' ||
-                  o_style === 'mapbox/navigation-night-v1') {
-                      currentStyle = o_style;
-                  }
-                  else {
-                    console.log("Unknown style", o_style);
-                  }
-              break;
-          case 'thunderforest':
-              if(o_style === 'cycle' ||
-                  o_style === 'transport' ||
-                  o_style === 'landscape' ||
-                  o_style === 'outdoors' ||
-                  o_style === 'transport-dark9' ||
-                  o_style === 'spinal-map' ||
-                  o_style === 'pioneer' ||
-                  o_style === 'mobile-atlas' ||
-                  o_style === 'neighbourhood' ||
-                  o_style === 'atlas') {
-                      currentStyle = o_style;
-                  }
-              break;
+        case 'maptiler':
+          if(o_style == 'basic-v2' ||
+              o_style == 'basic-4326' ||
+              o_style == 'bright-v2' ||
+              o_style == 'openstreetmap' ||
+              o_style == 'outdoor' ||
+              o_style == 'pastel' ||
+              o_style == 'hybrid' ||
+              o_style == 'streets-v2' ||
+              o_style == 'toner' ||
+              o_style == 'topo' ||
+              o_style == 'topographique' ||
+              o_style == 'voyager' ||
+              o_style == 'winter' ) {
+              currentStyle = o_style;
+          } else {
+            console.log("Unknown style", o_style);
+          }
+          break;
+        case 'mapbox':
+            if(o_style === 'mapbox/streets-v11' ||
+                o_style === 'mapbox/outdoors-v11' ||
+                o_style === 'mapbox/light-v10' ||
+                o_style === 'mapbox/dark-v10' ||
+                o_style === 'mapbox/satellite-v9' ||
+                o_style === 'mapbox/satellite-streets-v11' ||
+                o_style === 'mapbox/navigation-day-v1' ||
+                o_style === 'mapbox/streets-v11' ||
+                o_style === 'mapbox/navigation-night-v1') {
+                currentStyle = o_style;
+            }
+            else {
+              console.log("Unknown style", o_style);
+            }
+            break;
+        case 'thunderforest':
+            if(o_style === 'cycle' ||
+                o_style === 'transport' ||
+                o_style === 'landscape' ||
+                o_style === 'outdoors' ||
+                o_style === 'transport-dark9' ||
+                o_style === 'spinal-map' ||
+                o_style === 'pioneer' ||
+                o_style === 'mobile-atlas' ||
+                o_style === 'neighbourhood' ||
+                o_style === 'atlas') {
+                currentStyle = o_style;
+            }
+            else {
+              console.log("Unknown style", o_style);
+            }
+            break;
       }
   }
 
