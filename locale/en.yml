@@ -34,4 +34,4 @@ jeromegillard-map:
   forum:
     text_editor:
       bbcode_tooltip: insert a map
-      location_placeholder: WHERE?
+      location_placeholder: WHERE

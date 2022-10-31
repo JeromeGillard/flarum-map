@@ -20,8 +20,8 @@ The post above was written like this:
 # GeoJSON example:
 [upl-file uuid=022d8589-8c9c-4e63-b0ad-1942b5a4b480 size=133kB url=http://localhost/assets/files/2022-10-11/1665509211-565647-trail-center-ambleve.geojson]trail-center-ambleve.geojson[/upl-file]
 ```
-There's an icon to help you insert a map in your post:
- ![Post icon](assets/readme-post-icon.png)
+There's an icon to help you insert a map in your post:  
+![Post icon](assets/readme-post-icon.png)
 
  ## Supported tile layers
  | Provider | Style | Tiles type | Description |
