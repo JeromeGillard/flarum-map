@@ -10,10 +10,10 @@ Display a map in flarum in those ways:
 
  ![Snaphost](https://raw.githubusercontent.com/JeromeGillard/flarum-map/main/assets/readme-snapshot.png)  
 
-To include a map in your post, tere's an icon in the bar when composing:  
+To include a map in your post, there's an icon in the bar when composing:  
 ![Post icon](https://raw.githubusercontent.com/JeromeGillard/flarum-map/main/assets/readme-post-icon.png)
 
-It will inster that BBCode:
+It will insert that BBCode:
 ```
 [map provider=osm style=street zoom=13]WHERE[/map]
 ```
@@ -27,7 +27,7 @@ You can also change the zoom level by changing the `zoom` attribute within the B
 [map provider=osm style=street zoom=13]Nonceveux[/map]
 
 # Zoom=8 can fit my country
-[map provider=osm style=street zoom=8]Belgique[/map]
+[map provider=osm style=street zoom=8]Belgium[/map]
 ```
 Valid values for `zoom` are between `0` (world) and `18` (house).
 
