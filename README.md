@@ -110,15 +110,14 @@ composer require jeromegillard/map:"*"
 1. Enable the `FoF Uploads` extension.
 2. Enable the `Map` extension.
 3. Configure `FoF Uploads` to add the new GPX Template: 
-  - Add `^application\/.*(gpx|json|xml|geojson|geo.json)` mime type upload adapter mapping.
-  - Select `Map` as template.  
+  - Write `^application\/.*(gpx|json|xml|geojson|geo.json)` mime type upload adapter mapping.
+  - Select `Map` as template. 
+  - Click the `|+|` button to add the mapping
 ![Setup FoF Upload MIME type](https://raw.githubusercontent.com/JeromeGillard/flarum-map/main/assets/readme-fof-upload-mime.png)  
 4. Then add `gpx,json,geojson` extensions to this list:  
 ![Setup FoF Upload MIME type](https://raw.githubusercontent.com/JeromeGillard/flarum-map/main/assets/readme-fof-upload-extensions.png)  
-5. Configure the `Map` extension (optional).
-
-
-:warning: Don't forget to save your changes!
+5. :warning: **Save changes** (bottom of the screen)
+6. Configure the `Map` extension (optional).
 
 # Updating
 
