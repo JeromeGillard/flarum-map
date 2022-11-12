@@ -1,0 +1,32 @@
+jeromegillard-map:
+  admin:
+    templates:
+      map: Plan
+      file_description: Affiche un plan dans Flarum. Le fichier original sera disponible au téléchargement. Le fournisseur et le style des tuiles seront ceux définis dans les paramètres de l'extension. <b>Vous devez avoir flarum/bbcode installé et activé pour que cela fonctionne</b>.
+    settings:
+      tiles_provider:
+        label: Fournisseur de couches de tuiles par défaut
+        help: Sélectionnez le fournisseur de la couche de tuiles qui apparaît en arrière-plan
+      zoom:
+        label: Niveau de zoom par défaut
+        help: Nombre compris entre 0 et 18.
+      style:
+          label: Style par défaut pour {provider}
+          help: Choisissez un style de carte. <a>Découvrez leurs styles</a>.
+      maptiler:
+        label: Jeton MapTiler
+        help: Inscrivez-vous gratuitement sur <a>maptiler.com</a> pour obtenir un jeton. Veuillez respecter leurs <b>droits d'auteur</b>.
+      osm:
+        help: Les tuiles OpenStreetMap conviennent à la programmation de votre carte, mais lisez la <a>Politique d'utilisation des tuiles</a> d'OpenStreetMap si vous prévoyez d'utiliser les tuiles en production.
+      mapbox:
+        label: Jeton Mapbox
+        help: Inscrivez-vous gratuitement sur <a>mapbox.com</a> pour obtenir un jeton. Veuillez respecter leurs <b>droits d'auteur</b>.
+      thunderforest:
+        label: Clé d'API Thunderforest
+        help: Inscrivez-vous gratuitement sur <a>thunderforest.com</a> pour obtenir une clé API. Veuillez respecter leurs <b>conditions d'utilisation</b>.
+
+
+  forum:
+    text_editor:
+      bbcode_tooltip: insérer une carte
+      location_placeholder: LIEU

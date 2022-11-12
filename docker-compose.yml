@@ -6,7 +6,7 @@ version: "3.7"
 
 services:
   flarum-dev:
-    image: mondedie/flarum:stable
+    image: jeromegillard/flarum
     container_name: flarum-dev
     env_file:
       - .env

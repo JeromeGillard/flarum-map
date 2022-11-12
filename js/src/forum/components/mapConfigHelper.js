@@ -268,7 +268,7 @@ export function createMap(pid) {
       $(this).data('mapStyle'),
       $(this).data('mapZoom')
     )
-    console.log(mapConf, $(this).data('mapStyle'));
+    //console.log(mapConf, $(this).data('mapStyle'));
     const nid = 'map-'+Math.floor(Math.random() * 1000);
     $(this).prop('id', nid);
 
