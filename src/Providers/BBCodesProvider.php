@@ -11,7 +11,7 @@ class BBCodesProvider
 	public function __construct(Configurator $config)
     {
         $config->BBCodes->addCustom(
-            '[map provider={TEXT2} style={TEXT3} zoom={TEXT4} title={TEXT5} desc=[TEXT6]]{TEXT1}[/map]',
+            '[map provider={TEXT2} style={TEXT3} zoom={TEXT4} title={TEXT5} desc={TEXT6}]{TEXT1}[/map]',
             '<div class="bbcode-map"
               data-map-location="{TEXT1}"
               data-map-provider="{TEXT2}"

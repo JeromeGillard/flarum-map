@@ -263,8 +263,8 @@ export function createMap(pid) {
   // for each map location from BBCode, loop and map
   $('.bbcode-map').each(function( i ) {
     let location = $(this).data('mapLocation');
-    var title = $(this).data('title');
-    var desc = $(this).data('desc');
+    var title = $(this).data('mapTitle');
+    var desc = $(this).data('mapDesc');
     let mapConf = getMapConfig(
       $(this).data('mapProvider'),
       $(this).data('mapStyle'),
@@ -290,26 +290,26 @@ export function createMap(pid) {
 
           let pIcon = L.icon({
             iconUrl: '/assets/extensions/jeromegillard-map/pin-icon-start.png',
-            iconSize: [20, 20],
-            iconAnchor: [10, 20],
-            popupAnchor: [0, -10]
+            iconSize: [33, 45],
+            iconAnchor: [16, 45],
+            popupAnchor: [0, -22]
           });
-          // put marker on map
-          let marker = L.marker([json[0].lat, json[0].lon],
-            { icon: pIcon }
-          ).addTo(map);
 
           let popupContent = '';
 
           if (title) {
-            popupContent += title;
+            popupContent += '<strong>'+title+'</strong>';
           }
           if (desc) {
-            popupContent += desc;
+            popupContent += '<br/>'+desc;
           }
-          if (popupContent !== '') {
-            marker.bindPopup(popupContent);
+
+          // put marker on map
+          let marker = L.marker([json[0].lat, json[0].lon], { icon: pIcon }).addTo(map).bindPopup(popupContent);
+          if(popupContent){
+            marker.openPopup();
           }
+
         });
     }
   });
