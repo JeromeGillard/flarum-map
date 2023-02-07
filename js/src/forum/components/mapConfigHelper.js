@@ -263,6 +263,8 @@ export function createMap(pid) {
   // for each map location from BBCode, loop and map
   $('.bbcode-map').each(function( i ) {
     let location = $(this).data('mapLocation');
+    var title = $(this).data('title');
+    var desc = $(this).data('desc');
     let mapConf = getMapConfig(
       $(this).data('mapProvider'),
       $(this).data('mapStyle'),
@@ -284,6 +286,30 @@ export function createMap(pid) {
           // Set the tiles provider
           getTileLayer(mapConf).addTo(map);
           map.setView([json[0].lat, json[0].lon], mapConf.zoom);
+          //create marker and assign to map.
+
+          let pIcon = L.icon({
+            iconUrl: '/assets/extensions/jeromegillard-map/pin-icon-start.png',
+            iconSize: [20, 20],
+            iconAnchor: [10, 20],
+            popupAnchor: [0, -10]
+          });
+          // put marker on map
+          let marker = L.marker([json[0].lat, json[0].lon],
+            { icon: pIcon }
+          ).addTo(map);
+
+          let popupContent = '';
+
+          if (title) {
+            popupContent += title;
+          }
+          if (desc) {
+            popupContent += desc;
+          }
+          if (popupContent !== '') {
+            marker.bindPopup(popupContent);
+          }
         });
     }
   });

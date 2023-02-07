@@ -2,20 +2,20 @@
 
 [![MIT license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/JeromeGillard/flarum-map/blob/main/LICENSE.md) [![Latest Stable Version](https://img.shields.io/packagist/v/jeromegillard/map.svg)](https://packagist.org/packages/jeromegillard/map) [![Total Downloads](https://img.shields.io/packagist/dt/jeromegillard/map.svg)](https://packagist.org/packages/jeromegillard/map) [![](https://img.shields.io/github/issues-raw/jeromegillard/flarum-map)](https://github.com/JeromeGillard/flarum-map/issues) [![](https://img.shields.io/github/issues-pr-raw/jeromegillard/flarum-map)](https://github.com/JeromeGillard/flarum-map/pulls)
 
-A [Flarum](http://flarum.org) extension.  
+A [Flarum](http://flarum.org) extension.
 Display a map in flarum in those ways:
  - insert a BBCode in a post
  - upload a `.gpx` file to display it on a map and a download link
  - upload a `GeoJSON` file (`.geojson` of `.json`) display it on a map and a download link
 
- ![Snaphost](https://raw.githubusercontent.com/JeromeGillard/flarum-map/main/assets/readme-snapshot.png)  
+ ![Snaphost](https://raw.githubusercontent.com/JeromeGillard/flarum-map/main/assets/readme-snapshot.png)
 
-To include a map in your post, there's an icon in the bar when composing:  
+To include a map in your post, there's an icon in the bar when composing:
 ![Post icon](https://raw.githubusercontent.com/JeromeGillard/flarum-map/main/assets/readme-post-icon.png)
 
 It will insert that BBCode:
 ```
-[map provider=osm style=street zoom=13]WHERE[/map]
+[map provider=osm style=street zoom=13 title='Place Name' desc='Description']WHERE[/map]
 ```
 The `WHERE` value can be any location:
  - `Nonceveux, Liège, Belgium` as a plain text place name.
@@ -32,7 +32,7 @@ You can also change the zoom level by changing the `zoom` attribute within the B
 Valid values for `zoom` are between `0` (world) and `18` (house).
 
 # How to customize the map
-The post above was written like this:  
+The post above was written like this:
 ```
 # Mapbox satelite streets (need to register at MapBox.com to get a free API key) :
 [map provider=mapbox style=mapbox/satellite-streets-v11 zoom=15]Nonceveux, Liège, Belgium[/map]
@@ -49,7 +49,7 @@ The post above was written like this:
  Free, no registration needed: OpenStreetMap.
  | Provider | Style | Tiles type | Description |
  | -------- | ----- | ---------- | ----------- |
- |  `osm` | `street` | Rasters | [OpenStreetMap](https://www.openstreetmap.org), default. | 
+ |  `osm` | `street` | Rasters | [OpenStreetMap](https://www.openstreetmap.org), default. |
 
 ### MapTiler
 Free, API key needed at https://www.maptiler.com/
@@ -68,7 +68,7 @@ Free, API key needed at https://www.maptiler.com/
  |  `maptiler` | `topographique` | Vectors | [Topographique (topographique)](https://cloud.maptiler.com/maps/topographique/) |
  |  `maptiler` | `voyager` | Vectors | [Voyager (voyager)](https://cloud.maptiler.com/maps/voyager/) |
  |  `maptiler` | `winter` | Vectors | [Winter (winter)](https://cloud.maptiler.com/maps/winter/) |
- 
+
 ### MapBox
 Free, API key needed at https://www.mapbox.com/
  | Provider | Style | Tiles type | Description |
@@ -81,7 +81,7 @@ Free, API key needed at https://www.mapbox.com/
  |  `mapbox` | `mapbox/satellite-streets-v11` | Vectors | [Satelite streets (mapbox/satellite-streets-v11)](https://docs.mapbox.com/help/getting-started/satellite-imagery/) |
  |  `mapbox` | `mapbox/navigation-day-v1` | Vectors | [Navigation day (mapbox/navigation-day-v1)](https://api.mapbox.com/styles/v1/mapbox/navigation-day-v1.html?access_token=pk.eyJ1IjoiZXhhbXBsZXMiLCJhIjoiY2p0MG01MXRqMW45cjQzb2R6b2ptc3J4MSJ9.zA2W0IkI0c6KaAhJfk9bWg#13/40.41695/-3.70192) |
  |  `mapbox` | `mapbox/navigation-night-v1` | Vectors | [Navigation night (mapbox/navigation-night-v1)](https://api.mapbox.com/styles/v1/mapbox/navigation-night-v1.html?access_token=pk.eyJ1IjoiZXhhbXBsZXMiLCJhIjoiY2p0MG01MXRqMW45cjQzb2R6b2ptc3J4MSJ9.zA2W0IkI0c6KaAhJfk9bWg#13/40.41695/-3.70192) |
- 
+
 ### ThunderForest
 Free, API key needed at https://www.thunderforest.com/
  | Provider | Style | Tiles type | Description |
@@ -109,13 +109,13 @@ composer require jeromegillard/map:"*"
 ## Configure extensions
 1. Enable the `FoF Uploads` extension.
 2. Enable the `Map` extension.
-3. Configure `FoF Uploads` to add the new GPX Template: 
+3. Configure `FoF Uploads` to add the new GPX Template:
   - Write `^application\/.*(gpx|json|xml|geojson|geo.json)` mime type upload adapter mapping.
-  - Select `Map` as template. 
+  - Select `Map` as template.
   - Click the `|+|` button to add the mapping
-![Setup FoF Upload MIME type](https://raw.githubusercontent.com/JeromeGillard/flarum-map/main/assets/readme-fof-upload-mime.png)  
-4. Then add `gpx,json,geojson` extensions to this list:  
-![Setup FoF Upload MIME type](https://raw.githubusercontent.com/JeromeGillard/flarum-map/main/assets/readme-fof-upload-extensions.png)  
+![Setup FoF Upload MIME type](https://raw.githubusercontent.com/JeromeGillard/flarum-map/main/assets/readme-fof-upload-mime.png)
+4. Then add `gpx,json,geojson` extensions to this list:
+![Setup FoF Upload MIME type](https://raw.githubusercontent.com/JeromeGillard/flarum-map/main/assets/readme-fof-upload-extensions.png)
 5. :warning: **Save changes** (bottom of the screen)
 6. Configure the `Map` extension (optional).
 
@@ -160,7 +160,7 @@ I've prepared a all-in-one `docker-compose` file to get up and running to develo
 1. Install the extension: `composer require jeromegillard/map *@dev`
 1. Wait for the container to start. It might be long stuck on last log "[INFO] Setting folder permissions", just wait.
 1. You can browse to `http://localhost` when logs shows "[INFO] End of startup script. Forum is starting."
-1. To rebuild the front-end, outside the container, go to the `js` folder and do `npm install` then `npm run dev` (you'll need npm installed on your computer). 
+1. To rebuild the front-end, outside the container, go to the `js` folder and do `npm install` then `npm run dev` (you'll need npm installed on your computer).
 
 # Links
 
