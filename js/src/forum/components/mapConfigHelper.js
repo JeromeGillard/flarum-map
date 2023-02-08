@@ -305,9 +305,9 @@ export function createMap(pid) {
           }
 
           // put marker on map
-          let marker = L.marker([json[0].lat, json[0].lon], { icon: pIcon }).addTo(map).bindPopup(popupContent);
+          let marker = L.marker([json[0].lat, json[0].lon], { icon: pIcon }).addTo(map);
           if(popupContent){
-            marker.openPopup();
+            marker.bindPopup(popupContent).openPopup();
           }
 
         });
