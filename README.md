@@ -8,6 +8,7 @@ Display a map in flarum in those ways:
  - upload a `.gpx` file to display it on a map and a download link
  - upload a `GeoJSON` file (`.geojson` of `.json`) display it on a map and a download link
 
+ ![Snaphost](https://raw.githubusercontent.com/JeromeGillard/flarum-map/main/assets/readme-marker-example.png)
  ![Snaphost](https://raw.githubusercontent.com/JeromeGillard/flarum-map/main/assets/readme-snapshot.png)
 
 To include a map in your post, there's an icon in the bar when composing:
@@ -15,7 +16,7 @@ To include a map in your post, there's an icon in the bar when composing:
 
 It will insert that BBCode:
 ```
-[map provider=osm style=street zoom=13 title='Place Name' desc='Description']WHERE[/map]
+[map provider=osm style=street zoom=13 title='Marker title' desc='Marker pop-up content. Leave title and desc both empty to hide the marker.']WHERE[/map]
 ```
 The `WHERE` value can be any location:
  - `Nonceveux, Liège, Belgium` as a plain text place name.
