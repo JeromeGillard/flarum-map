@@ -17,8 +17,8 @@ class BBCodesProvider
               data-map-provider="{TEXT2}"
               data-map-style="{TEXT3}"
               data-map-zoom="{TEXT4}"
-              data-map-title="{TEXT5?}"
-              data-map-desc="{TEXT6?}">
+              data-map-title="{TEXT5}"
+              data-map-desc="{TEXT6}">
                 {TEXT1}
               </div>'
         );

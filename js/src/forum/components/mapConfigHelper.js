@@ -263,8 +263,8 @@ export function createMap(pid) {
   // for each map location from BBCode, loop and map
   $('div.PostStream-item[data-id="'+pid+'"] .bbcode-map').each(function( i ) {
     let location = $(this).data('mapLocation');
-    var title = $(this).data('mapTitle');
-    var desc = $(this).data('mapDesc');
+    let title = $(this).data('mapTitle');
+    let desc = $(this).data('mapDesc');
     let mapConf = getMapConfig(
       $(this).data('mapProvider'),
       $(this).data('mapStyle'),
@@ -286,30 +286,32 @@ export function createMap(pid) {
           // Set the tiles provider
           getTileLayer(mapConf).addTo(map);
           map.setView([json[0].lat, json[0].lon], mapConf.zoom);
-          //create marker and assign to map.
 
-          let pIcon = L.icon({
-            iconUrl: '/assets/extensions/jeromegillard-map/pin-icon-start.png',
-            iconSize: [33, 45],
-            iconAnchor: [16, 45],
-            popupAnchor: [0, -22]
-          });
+          // If there's a title or a desc, create marker and assign to map.
+          if(title || desc){
 
-          let popupContent = '';
+            let pIcon = L.icon({
+              iconUrl: '/assets/extensions/jeromegillard-map/pin-icon-start.png',
+              iconSize: [33, 45],
+              iconAnchor: [16, 45],
+              popupAnchor: [0, -22]
+            });
 
-          if (title) {
-            popupContent += '<strong>'+title+'</strong>';
+            let popupContent = '';
+
+            if (title) {
+              popupContent += '<strong>'+title+'</strong>';
+            }
+            if (desc) {
+              popupContent += '<br/>'+desc;
+            }
+
+            // put marker on map
+            let marker = L.marker([json[0].lat, json[0].lon], { icon: pIcon }).addTo(map);
+            if(popupContent){
+              marker.bindPopup(popupContent).openPopup();
+            }
           }
-          if (desc) {
-            popupContent += '<br/>'+desc;
-          }
-
-          // put marker on map
-          let marker = L.marker([json[0].lat, json[0].lon], { icon: pIcon }).addTo(map);
-          if(popupContent){
-            marker.bindPopup(popupContent).openPopup();
-          }
-
         });
     }
   });
