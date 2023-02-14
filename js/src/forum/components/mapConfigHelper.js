@@ -148,7 +148,7 @@ export function createMap(pid) {
   so.mapConf = getMapConfig();
 
   //for each gpx file in this post, loop and map
-  $('div.PostStream-item[data-id="'+pid+'"] .mapFile-container').each(function( i ) {
+  $('div.PostStream-item[data-id="'+pid+'"] .mapFile-container, div.Pages-container .mapFile-container').each(function( i ) {
 
     // grab the uploaded gpx file's UUID and url
     let uuid = $(this).children('.mapFile').data('fofUploadDownloadUuid');
@@ -261,7 +261,7 @@ export function createMap(pid) {
   });
 
   // for each map location from BBCode, loop and map
-  $('div.PostStream-item[data-id="'+pid+'"] .bbcode-map').each(function( i ) {
+  $('div.PostStream-item[data-id="'+pid+'"] .bbcode-map, div.Pages-container .bbcode-map').each(function( i ) {
     let location = $(this).data('mapLocation');
     let title = $(this).data('mapTitle');
     let desc = $(this).data('mapDesc');
