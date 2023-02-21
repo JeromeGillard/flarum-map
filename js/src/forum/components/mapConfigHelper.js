@@ -1,4 +1,5 @@
 import app from 'flarum/forum/app';
+import { } from './leaflet.ChineseTmsProviders.js';
 
 export function getMapConfig(o_tilesProvider, o_style, o_zoom) {
     let tilesProvider = app.forum.attribute("tilesProvider")||'osm';
@@ -14,7 +15,8 @@ export function getMapConfig(o_tilesProvider, o_style, o_zoom) {
         o_tilesProvider === 'mapbox' ||
         o_tilesProvider === 'thunderforest' ||
         o_tilesProvider === 'osm' ||
-        o_tilesProvider === 'gaode') {
+        o_tilesProvider === 'gaode' ||
+        o_tilesProvider === 'tencent') {
             tilesProvider = o_tilesProvider;
     }
 
@@ -73,13 +75,22 @@ export function getMapConfig(o_tilesProvider, o_style, o_zoom) {
             }
             break;
         case 'gaode':
-          if(o_style === 8 ||
-              o_style == 6) {
+          if(o_style === 'Normal.Map' ||
+              o_style == 'Satellite.Map') {
               currentStyle = o_style;
-            }
-            else {
-              console.log("Unknown style", o_style);
-            }
+          }
+          else {
+            console.log("Unknown style", o_style);
+          }
+          break;
+        case 'tencent':
+          if((o_style === 'Normal.Map' ||
+              o_style === 'Satellite.Map' ||
+              o_style === 'Terrain.Map')) {
+            currentStyle = o_style;
+          } else {
+            console.log("Unknown style", o_style);
+          }
       }
   }
 
@@ -108,15 +119,20 @@ export function getMapConfig(o_tilesProvider, o_style, o_zoom) {
           attribution = "\u003ca href=\"https://www.maptiler.com/copyright/\" target=\"_blank\"\u003e\u0026copy; MapTiler\u003c/a\u003e \u003ca href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\"\u003e\u0026copy; OpenStreetMap contributors\u003c/a\u003e";
           break;
         case "gaode":
-          currentStyle = currentStyle || app.forum.attribute("gaode.style")||'8';
-          tileLayerURL = 'https://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style='+currentStyle+'&x={x}&y={y}&z={z}';
-          subdomains = ["1", "2", "3", "4"]
+          type = 'cn';
+          currentStyle = currentStyle || app.forum.attribute("tencent.style")||'Normal.Map';
+          tileLayerURL = "GaoDe." + currentStyle;
           attribution = '&copy; <a href="https://www.autonavi.com">autonavi</a>';
+          break;
+        case "tencent":
+          type = 'cn';
+          currentStyle = currentStyle || app.forum.attribute("tencent.style")||'Normal.Map';
+          tileLayerURL = "Tencent." + currentStyle;
+          attribution = '&copy; <a href="https://map.qq.com/">Tencent</a>';
           break;
         default:
           tileLayerURL = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
           attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>';
-
           // tileLayerURL = 'https://{s}.tile.osm.org/{z}/{x}/{y}.png",
           // subdomains = ['a', 'b', 'c']
     }
@@ -144,6 +160,11 @@ export function getTileLayer(mapConf){
         accessToken: mapConf.currentKey,
         style: mapConf.tileLayerURL
       });
+    } else if(mapConf.type === 'cn'){
+      mapConf.key = mapConf.currentKey;
+      return new L.tileLayer.chinaProvider(
+        mapConf.tileLayerURL, mapConf
+        );
     } else {
       // Raster tiles
       return new L.tileLayer(mapConf.tileLayerURL,

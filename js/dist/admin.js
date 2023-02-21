@@ -24,7 +24,9 @@ flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jerome
       'maptiler': 'MapTiler (vectors)',
       'osm': 'OpenStreetMap',
       'mapbox': 'Mapbox (vectors)',
-      'thunderforest': 'Thunderforest'
+      'thunderforest': 'Thunderforest',
+      'gaode': 'GaoDe maps 高德地图',
+      'tencent': 'Tencent 腾讯地图'
     },
     "default": 'osm',
     className: 'select-tilesProvider'
@@ -180,7 +182,7 @@ flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jerome
   .registerSetting({
     setting: 'jeromegillard-map.gaode.style',
     label: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-map.admin.settings.style.label', {
-      provider: 'GaoDe (Amap / Alibaba maps service)'
+      provider: 'GaoDe maps 高德地图'
     }),
     help: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-map.admin.settings.style.help', {
       a: m("a", {
@@ -190,11 +192,32 @@ flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jerome
     }),
     type: 'select',
     options: {
-      '8': 'Normal',
-      '6': 'Satellite'
+      'Normal.Map': 'Normal',
+      'Satellite.Map': 'Satellite'
     },
     "default": '8',
     className: 'gaode-setting gaode-style toggle-setting-block'
+  }, 50) // Tencent
+  // Tencent style
+  .registerSetting({
+    setting: 'jeromegillard-map.tencent.style',
+    label: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-map.admin.settings.style.label', {
+      provider: 'Tencent 腾讯地图'
+    }),
+    help: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-map.admin.settings.style.help', {
+      a: m("a", {
+        href: "https://map.qq.com/",
+        target: "_blank"
+      })
+    }),
+    type: 'select',
+    options: {
+      'Normal.Map': 'Normal',
+      'Satellite.Map': 'Satellite',
+      'Terrain.Map': 'Terrain'
+    },
+    "default": 'tile',
+    className: 'tencent-setting tencent-style toggle-setting-block'
   }, 50); // TODO: add openmaptiles https://openmaptiles.org/styles/
 });
 

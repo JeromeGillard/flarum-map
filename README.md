@@ -168,3 +168,8 @@ I've prepared a all-in-one `docker-compose` file to get up and running to develo
 - [Packagist](https://packagist.org/packages/jeromegillard/map)
 - [GitHub](https://github.com/JeromeGillard/flarum-map)
 - [Discuss](https://discuss.flarum.org/d/31732-map-extension-display-a-map-a-gpx-or-a-geojson-file-in-a-post)
+
+# License
+
+ Leaflet.ChineseTmsProviders from https://github.com/htoooth/Leaflet.ChineseTmsProviders under [MIT license](https://github.com/htoooth/Leaflet.ChineseTmsProviders/blob/master/LICENSE) and from https://github.com/muyao1987/leaflet-tileLayer-baidugaode under [Apache license](https://github.com/muyao1987/leaflet-tileLayer-baidugaode/blob/master/LICENSE)
+
