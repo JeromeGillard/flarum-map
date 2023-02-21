@@ -50,20 +50,20 @@ return [
                 $settings = resolve(SettingsRepositoryInterface::class);
                 $document->head[] ='
                     <!-- Leaflet -->
-                    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
-                    <script src="https://unpkg.com/leaflet/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+                    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet/dist/leaflet.min.css" crossorigin="" />
+                    <script src="https://cdn.jsdelivr.net/npm/leaflet/dist/leaflet.min.js" crossorigin=""></script>
 
                     <!-- Leaflet fullscreen -->
-                    <script src="https://unpkg.com/leaflet-fullscreen/dist/Leaflet.fullscreen.min.js"></script>
-                    <link rel="stylesheet" href="https://unpkg.com/leaflet-fullscreen/dist/leaflet.fullscreen.css" />
+                    <script src="https://cdn.jsdelivr.net/npm/leaflet-fullscreen/dist/Leaflet.fullscreen.min.js"></script>
+                    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-fullscreen/dist/leaflet.fullscreen.min.css" />
 
                     <!-- Leaflet GPX -->
-                    <script src="https://unpkg.com/leaflet-gpx/gpx.js"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/leaflet-gpx/gpx.min.js"></script>
 
                     <!-- Mapbox-gl -->
-                    <script src="https://unpkg.com/mapbox-gl/dist/mapbox-gl.js"></script>
-                    <link href="https://unpkg.com/mapbox-gl/dist/mapbox-gl.css" rel="stylesheet" />
-                    <script src="https://unpkg.com/mapbox-gl-leaflet/leaflet-mapbox-gl.js"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/mapbox-gl/dist/mapbox-gl.min.js"></script>
+                    <link href="https://cdn.jsdelivr.net/npm/mapbox-gl/dist/mapbox-gl.min.css" rel="stylesheet" />
+                    <script src="https://cdn.jsdelivr.net/npm/mapbox-gl-leaflet/leaflet-mapbox-gl.min.js"></script>
 
                     ';
 
