@@ -8,11 +8,13 @@ export function getMapConfig(o_tilesProvider, o_style, o_zoom) {
     let zoom = app.forum.attribute("zoom")||13;
     let attribution;
     let type = 'raster';
+    let subdomains = [];
 
     if(o_tilesProvider &&
         o_tilesProvider === 'mapbox' ||
         o_tilesProvider === 'thunderforest' ||
-        o_tilesProvider === 'osm') {
+        o_tilesProvider === 'osm' ||
+        o_tilesProvider === 'gaode') {
             tilesProvider = o_tilesProvider;
     }
 
@@ -70,6 +72,14 @@ export function getMapConfig(o_tilesProvider, o_style, o_zoom) {
               console.log("Unknown style", o_style);
             }
             break;
+        case 'gaode':
+          if(o_style === 8 ||
+              o_style == 6) {
+              currentStyle = o_style;
+            }
+            else {
+              console.log("Unknown style", o_style);
+            }
       }
   }
 
@@ -97,9 +107,18 @@ export function getMapConfig(o_tilesProvider, o_style, o_zoom) {
           tileLayerURL = 'https://api.maptiler.com/maps/'+currentStyle+'/style.json?key='+currentKey;
           attribution = "\u003ca href=\"https://www.maptiler.com/copyright/\" target=\"_blank\"\u003e\u0026copy; MapTiler\u003c/a\u003e \u003ca href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\"\u003e\u0026copy; OpenStreetMap contributors\u003c/a\u003e";
           break;
+        case "gaode":
+          currentStyle = currentStyle || app.forum.attribute("gaode.style")||'8';
+          tileLayerURL = 'https://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style='+currentStyle+'&x={x}&y={y}&z={z}';
+          subdomains = ["1", "2", "3", "4"]
+          attribution = '&copy; <a href="https://www.autonavi.com">autonavi</a>';
+          break;
         default:
           tileLayerURL = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
           attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>';
+
+          // tileLayerURL = 'https://{s}.tile.osm.org/{z}/{x}/{y}.png",
+          // subdomains = ['a', 'b', 'c']
     }
 
 
@@ -112,7 +131,7 @@ export function getMapConfig(o_tilesProvider, o_style, o_zoom) {
     return {"tilesProvider": tilesProvider, "attribution": attribution,"currentStyle":
                 currentStyle, "currentKey": currentKey, "tileLayerURL": tileLayerURL,
                 "zoom": zoom, maxZoom: 18, tileSize: 512, zoomOffset: -1, detectRetina: true,
-                defaultLocation: [51.505, -0.09], "type": type };
+                defaultLocation: [51.505, -0.09], "type": type, "subdomains": subdomains };
   };
 
 export function getTileLayer(mapConf){
@@ -135,7 +154,8 @@ export function getTileLayer(mapConf){
           id: mapConf.currentStyle,
           tileSize: mapConf.tileSize,
           zoomOffset: mapConf.zoomOffset,
-          detectRetina: mapConf.detectRetina
+          detectRetina: mapConf.detectRetina,
+          subdomains: mapConf.subdomains
         });
     }
   }

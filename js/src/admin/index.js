@@ -164,6 +164,24 @@ app.initializers.add('jeromegillard/osm', () => {
       },
       60)
 
+    // Gaode maps (Amap / Alibaba maps service) https://amap.com/
+    // Gaode style
+    .registerSetting(
+      {
+        setting: 'jeromegillard-map.gaode.style',
+        label: app.translator.trans('jeromegillard-map.admin.settings.style.label', {provider:'GaoDe (Amap / Alibaba maps service)'}),
+        help: app.translator.trans('jeromegillard-map.admin.settings.style.help',{
+          a: <a href="https://amap.com/" target="_blank"/>
+        }),
+        type: 'select',
+        options: {
+          '8': 'Normal',
+          '6': 'Satellite'
+        },
+        default: '8',
+        className: 'gaode-setting gaode-style toggle-setting-block'
+      },
+      50)
     // TODO: add openmaptiles https://openmaptiles.org/styles/
 
 });

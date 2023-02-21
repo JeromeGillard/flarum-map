@@ -1,3 +1,1210 @@
-/*! For license information please see forum.js.LICENSE.txt */
-(()=>{var t={648:(t,e,r)=>{var o=r(288).default;function n(){"use strict";t.exports=n=function(){return e},t.exports.__esModule=!0,t.exports.default=t.exports;var e={},r=Object.prototype,a=r.hasOwnProperty,i="function"==typeof Symbol?Symbol:{},s=i.iterator||"@@iterator",c=i.asyncIterator||"@@asyncIterator",u=i.toStringTag||"@@toStringTag";function p(t,e,r){return Object.defineProperty(t,e,{value:r,enumerable:!0,configurable:!0,writable:!0}),t[e]}try{p({},"")}catch(t){p=function(t,e,r){return t[e]=r}}function l(t,e,r,o){var n=e&&e.prototype instanceof f?e:f,a=Object.create(n.prototype),i=new k(o||[]);return a._invoke=function(t,e,r){var o="suspendedStart";return function(n,a){if("executing"===o)throw new Error("Generator is already running");if("completed"===o){if("throw"===n)throw a;return{value:void 0,done:!0}}for(r.method=n,r.arg=a;;){var i=r.delegate;if(i){var s=_(i,r);if(s){if(s===d)continue;return s}}if("next"===r.method)r.sent=r._sent=r.arg;else if("throw"===r.method){if("suspendedStart"===o)throw o="completed",r.arg;r.dispatchException(r.arg)}else"return"===r.method&&r.abrupt("return",r.arg);o="executing";var c=m(t,e,r);if("normal"===c.type){if(o=r.done?"completed":"suspendedYield",c.arg===d)continue;return{value:c.arg,done:r.done}}"throw"===c.type&&(o="completed",r.method="throw",r.arg=c.arg)}}}(t,r,i),a}function m(t,e,r){try{return{type:"normal",arg:t.call(e,r)}}catch(t){return{type:"throw",arg:t}}}e.wrap=l;var d={};function f(){}function h(){}function y(){}var v={};p(v,s,(function(){return this}));var g=Object.getPrototypeOf,b=g&&g(g(P([])));b&&b!==r&&a.call(b,s)&&(v=b);var x=y.prototype=f.prototype=Object.create(v);function w(t){["next","throw","return"].forEach((function(e){p(t,e,(function(t){return this._invoke(e,t)}))}))}function L(t,e){function r(n,i,s,c){var u=m(t[n],t,i);if("throw"!==u.type){var p=u.arg,l=p.value;return l&&"object"==o(l)&&a.call(l,"__await")?e.resolve(l.__await).then((function(t){r("next",t,s,c)}),(function(t){r("throw",t,s,c)})):e.resolve(l).then((function(t){p.value=t,s(p)}),(function(t){return r("throw",t,s,c)}))}c(u.arg)}var n;this._invoke=function(t,o){function a(){return new e((function(e,n){r(t,o,e,n)}))}return n=n?n.then(a,a):a()}}function _(t,e){var r=t.iterator[e.method];if(void 0===r){if(e.delegate=null,"throw"===e.method){if(t.iterator.return&&(e.method="return",e.arg=void 0,_(t,e),"throw"===e.method))return d;e.method="throw",e.arg=new TypeError("The iterator does not provide a 'throw' method")}return d}var o=m(r,t.iterator,e.arg);if("throw"===o.type)return e.method="throw",e.arg=o.arg,e.delegate=null,d;var n=o.arg;return n?n.done?(e[t.resultName]=n.value,e.next=t.nextLoc,"return"!==e.method&&(e.method="next",e.arg=void 0),e.delegate=null,d):n:(e.method="throw",e.arg=new TypeError("iterator result is not an object"),e.delegate=null,d)}function j(t){var e={tryLoc:t[0]};1 in t&&(e.catchLoc=t[1]),2 in t&&(e.finallyLoc=t[2],e.afterLoc=t[3]),this.tryEntries.push(e)}function S(t){var e=t.completion||{};e.type="normal",delete e.arg,t.completion=e}function k(t){this.tryEntries=[{tryLoc:"root"}],t.forEach(j,this),this.reset(!0)}function P(t){if(t){var e=t[s];if(e)return e.call(t);if("function"==typeof t.next)return t;if(!isNaN(t.length)){var r=-1,o=function e(){for(;++r<t.length;)if(a.call(t,r))return e.value=t[r],e.done=!1,e;return e.value=void 0,e.done=!0,e};return o.next=o}}return{next:O}}function O(){return{value:void 0,done:!0}}return h.prototype=y,p(x,"constructor",y),p(y,"constructor",h),h.displayName=p(y,u,"GeneratorFunction"),e.isGeneratorFunction=function(t){var e="function"==typeof t&&t.constructor;return!!e&&(e===h||"GeneratorFunction"===(e.displayName||e.name))},e.mark=function(t){return Object.setPrototypeOf?Object.setPrototypeOf(t,y):(t.__proto__=y,p(t,u,"GeneratorFunction")),t.prototype=Object.create(x),t},e.awrap=function(t){return{__await:t}},w(L.prototype),p(L.prototype,c,(function(){return this})),e.AsyncIterator=L,e.async=function(t,r,o,n,a){void 0===a&&(a=Promise);var i=new L(l(t,r,o,n),a);return e.isGeneratorFunction(r)?i:i.next().then((function(t){return t.done?t.value:i.next()}))},w(x),p(x,u,"Generator"),p(x,s,(function(){return this})),p(x,"toString",(function(){return"[object Generator]"})),e.keys=function(t){var e=[];for(var r in t)e.push(r);return e.reverse(),function r(){for(;e.length;){var o=e.pop();if(o in t)return r.value=o,r.done=!1,r}return r.done=!0,r}},e.values=P,k.prototype={constructor:k,reset:function(t){if(this.prev=0,this.next=0,this.sent=this._sent=void 0,this.done=!1,this.delegate=null,this.method="next",this.arg=void 0,this.tryEntries.forEach(S),!t)for(var e in this)"t"===e.charAt(0)&&a.call(this,e)&&!isNaN(+e.slice(1))&&(this[e]=void 0)},stop:function(){this.done=!0;var t=this.tryEntries[0].completion;if("throw"===t.type)throw t.arg;return this.rval},dispatchException:function(t){if(this.done)throw t;var e=this;function r(r,o){return i.type="throw",i.arg=t,e.next=r,o&&(e.method="next",e.arg=void 0),!!o}for(var o=this.tryEntries.length-1;o>=0;--o){var n=this.tryEntries[o],i=n.completion;if("root"===n.tryLoc)return r("end");if(n.tryLoc<=this.prev){var s=a.call(n,"catchLoc"),c=a.call(n,"finallyLoc");if(s&&c){if(this.prev<n.catchLoc)return r(n.catchLoc,!0);if(this.prev<n.finallyLoc)return r(n.finallyLoc)}else if(s){if(this.prev<n.catchLoc)return r(n.catchLoc,!0)}else{if(!c)throw new Error("try statement without catch or finally");if(this.prev<n.finallyLoc)return r(n.finallyLoc)}}}},abrupt:function(t,e){for(var r=this.tryEntries.length-1;r>=0;--r){var o=this.tryEntries[r];if(o.tryLoc<=this.prev&&a.call(o,"finallyLoc")&&this.prev<o.finallyLoc){var n=o;break}}n&&("break"===t||"continue"===t)&&n.tryLoc<=e&&e<=n.finallyLoc&&(n=null);var i=n?n.completion:{};return i.type=t,i.arg=e,n?(this.method="next",this.next=n.finallyLoc,d):this.complete(i)},complete:function(t,e){if("throw"===t.type)throw t.arg;return"break"===t.type||"continue"===t.type?this.next=t.arg:"return"===t.type?(this.rval=this.arg=t.arg,this.method="return",this.next="end"):"normal"===t.type&&e&&(this.next=e),d},finish:function(t){for(var e=this.tryEntries.length-1;e>=0;--e){var r=this.tryEntries[e];if(r.finallyLoc===t)return this.complete(r.completion,r.afterLoc),S(r),d}},catch:function(t){for(var e=this.tryEntries.length-1;e>=0;--e){var r=this.tryEntries[e];if(r.tryLoc===t){var o=r.completion;if("throw"===o.type){var n=o.arg;S(r)}return n}}throw new Error("illegal catch attempt")},delegateYield:function(t,e,r){return this.delegate={iterator:P(t),resultName:e,nextLoc:r},"next"===this.method&&(this.arg=void 0),d}},e}t.exports=n,t.exports.__esModule=!0,t.exports.default=t.exports},288:t=>{function e(r){return t.exports=e="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t},t.exports.__esModule=!0,t.exports.default=t.exports,e(r)}t.exports=e,t.exports.__esModule=!0,t.exports.default=t.exports},357:(t,e,r)=>{var o=r(648)();t.exports=o;try{regeneratorRuntime=o}catch(t){"object"==typeof globalThis?globalThis.regeneratorRuntime=o:Function("r","regeneratorRuntime = r")(o)}}},e={};function r(o){var n=e[o];if(void 0!==n)return n.exports;var a=e[o]={exports:{}};return t[o](a,a.exports,r),a.exports}r.n=t=>{var e=t&&t.__esModule?()=>t.default:()=>t;return r.d(e,{a:e}),e},r.d=(t,e)=>{for(var o in e)r.o(e,o)&&!r.o(t,o)&&Object.defineProperty(t,o,{enumerable:!0,get:e[o]})},r.o=(t,e)=>Object.prototype.hasOwnProperty.call(t,e),r.r=t=>{"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(t,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(t,"__esModule",{value:!0})};var o={};(()=>{"use strict";r.r(o);const t=flarum.core.compat["common/app"];r.n(t)().initializers.add("jeromegillard/osm",(function(){console.log("[jeromegillard/osm] Hello, forum and admin!")}));const e=flarum.core.compat["forum/app"];var n=r.n(e);const a=flarum.core.compat["components/Post"];var i=r.n(a);const s=flarum.core.compat["components/Page"];var c=r.n(s);const u=flarum.core.compat["common/extend"],p=flarum.core.compat["common/components/TextEditor"];var l=r.n(p);const d=flarum.core.compat["common/components/TextEditorButton"];var f=r.n(d);function h(t,e){return h=Object.setPrototypeOf?Object.setPrototypeOf.bind():function(t,e){return t.__proto__=e,t},h(t,e)}const y=flarum.core.compat["common/Model"];var v=r.n(y);const g=flarum.core.compat["common/utils/mixin"];var b=function(t){var e,r;function o(){return t.apply(this,arguments)||this}r=t,(e=o).prototype=Object.create(r.prototype),e.prototype.constructor=e,h(e,r);var n=o.prototype;return n.apiEndpoint=function(){return"/fof/uploads"+(this.exists?"/"+this.data.id:"")},n.bbcode=function(){switch(this.tag()){case"jeromegillard-map":return"[upl-file uuid="+this.uuid()+" size="+this.humanSize()+" url="+this.url()+"]"+this.baseName()+"[/upl-file]";case"file":return"[upl-file uuid="+this.uuid()+" size="+this.humanSize()+"]"+this.baseName()+"[/upl-this]";case"image":return"[upl-image uuid="+this.uuid()+" size="+this.humanSize()+" url="+this.url()+"]"+this.baseName()+"[/upl-image]";case"image-preview":return"[upl-image-preview url="+this.url()+"]";default:return this.url()}},o}(r.n(g)()(v(),{baseName:v().attribute("baseName"),path:v().attribute("path"),url:v().attribute("url"),type:v().attribute("type"),size:v().attribute("size"),humanSize:v().attribute("humanSize"),createdAt:v().attribute("createdAt"),uuid:v().attribute("uuid"),tag:v().attribute("tag"),hidden:v().attribute("hidden")}));function x(t,e,r,o,n,a,i){try{var s=t[a](i),c=s.value}catch(t){return void r(t)}s.done?e(c):Promise.resolve(c).then(o,n)}var w=r(357),_=r.n(w);function j(t,e,r){var o,a,i,s,c=n().forum.attribute("tilesProvider")||"osm",u=n().forum.attribute("zoom")||13,p="raster";if((t&&"mapbox"===t||"thunderforest"===t||"osm"===t)&&(c=t),e)switch(c){case"maptiler":"basic-v2"==e||"basic-4326"==e||"bright-v2"==e||"openstreetmap"==e||"outdoor"==e||"pastel"==e||"hybrid"==e||"streets-v2"==e||"toner"==e||"topo"==e||"topographique"==e||"voyager"==e||"winter"==e?o=e:console.log("Unknown style",e);break;case"mapbox":"mapbox/streets-v11"===e||"mapbox/outdoors-v11"===e||"mapbox/light-v10"===e||"mapbox/dark-v10"===e||"mapbox/satellite-v9"===e||"mapbox/satellite-streets-v11"===e||"mapbox/navigation-day-v1"===e||"mapbox/streets-v11"===e||"mapbox/navigation-night-v1"===e?o=e:console.log("Unknown style",e);break;case"thunderforest":"cycle"===e||"transport"===e||"landscape"===e||"outdoors"===e||"transport-dark9"===e||"spinal-map"===e||"pioneer"===e||"mobile-atlas"===e||"neighbourhood"===e||"atlas"===e?o=e:console.log("Unknown style",e)}switch(c){case"mapbox":p="gl",a=n().forum.attribute("mapbox.key")||"",i="mapbox://styles/"+(o=o||n().forum.attribute("mapbox.style")||"mapbox/light-v9"),s='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, © <a href="https://www.mapbox.com/">Mapbox</a>';break;case"thunderforest":a=n().forum.attribute("thunderforest.key")||"",o=o||n().forum.attribute("thunderforest.style")||"atlas",i="https://tile.thunderforest.com/{id}/{z}/{x}/{y}.png?apikey={key}",s='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, © <a href="https://www.thunderforest.com/">Thunderforest</a>';break;case"maptiler":p="gl",a=n().forum.attribute("maptiler.key")||"",i="https://api.maptiler.com/maps/"+(o=o||n().forum.attribute("maptiler.style")||"basic-v2")+"/style.json?key="+a,s='<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>';break;default:i="https://tile.openstreetmap.org/{z}/{x}/{y}.png",s='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}return r&&(u=r),(u<0||u>18)&&(u=13),{tilesProvider:c,attribution:s,currentStyle:o,currentKey:a,tileLayerURL:i,zoom:u,maxZoom:18,tileSize:512,zoomOffset:-1,detectRetina:!0,defaultLocation:[51.505,-.09],type:p}}function S(t){if(t&&t.tilesProvider)return"gl"===t.type?new L.mapboxGL({attribution:t.attribution,accessToken:t.currentKey,style:t.tileLayerURL}):new L.tileLayer(t.tileLayerURL,{key:t.currentKey,maxZoom:t.maxZoom,attribution:t.attribution,id:t.currentStyle,tileSize:t.tileSize,zoomOffset:t.zoomOffset,detectRetina:t.detectRetina})}function k(t){var e={};e.postId=t,e.mapConf=j(),$('div.PostStream-item[data-id="'+t+'"] .mapFile-container, div.Pages-container .mapFile-container').each((function(t){var r=$(this).children(".mapFile").data("fofUploadDownloadUuid"),o="map-"+e.postId+t+"-"+r,a=n().forum.attribute("apiUrl")+"/fof/download";a+="/"+r,a+="/"+e.postId,a+="/"+n().session.csrfToken;var i=$(this).children(".mapFile").data("mapUrl").split(".").pop().toLowerCase();$(this).children(".mapFile-placeholder").prop("id",o);var s=L.map(o);s.addControl(new L.Control.Fullscreen),S(e.mapConf).addTo(s),"gpx"==i?new L.GPX(a,{async:!0,marker_options:{startIconUrl:"/assets/extensions/jeromegillard-map/pin-icon-start.png",endIconUrl:"/assets/extensions/jeromegillard-map/pin-icon-end.png",shadowUrl:"/assets/extensions/jeromegillard-map/pin-shadow.png",wptIconUrls:{"":"/assets/extensions/jeromegillard-map/default-waypoint.png","Geocache Found":"/assets/extensions/jeromegillard-map/geocache.png",Park:"/assets/extensions/jeromegillard-map/tree.png"}}}).on("loaded",(function(t){s.fitBounds(t.target.getBounds())})).addTo(s):"json"===i||"geojson"===i?fetch(a).then((function(t){return t.json()})).then((function(t){var e=L.geoJSON([t],{style:function(t){if(t.properties&&t.properties.colour)return{color:t.properties.colour,weight:3,opacity:1}},onEachFeature:function(t,e){if(t&&t.properties){var r="";if(t.properties.name&&(r+=t.properties.name),t.properties.description&&(r+=t.properties.description),"parking"===t.properties.amenity&&"Polygon"===t.geometry.type){var o=L.icon({iconUrl:"/assets/extensions/jeromegillard-map/pin-icon-parking.png",iconSize:[20,20],iconAnchor:[10,20],popupAnchor:[0,-10]}),n=e.getBounds().getCenter();L.marker(n,{icon:o}).addTo(s)}""!==r&&e.bindPopup(r)}}}).addTo(s);s.fitBounds(e.getBounds())})):s.setView(e.mapConf.defaultLocation,e.mapConf.zoom)})),$('div.PostStream-item[data-id="'+t+'"] .bbcode-map, div.Pages-container .bbcode-map').each((function(t){var e=$(this).data("mapLocation"),r=$(this).data("mapTitle"),o=$(this).data("mapDesc"),n=j($(this).data("mapProvider"),$(this).data("mapStyle"),$(this).data("mapZoom")),a="map-"+Math.floor(1e3*Math.random());$(this).prop("id",a),e&&fetch("https://nominatim.openstreetmap.org/search?q="+e+"&format=json").then((function(t){return t.json()})).then((function(t){var e=L.map(a);if(e.addControl(new L.Control.Fullscreen),S(n).addTo(e),e.setView([t[0].lat,t[0].lon],n.zoom),r||o){var i=L.icon({iconUrl:"/assets/extensions/jeromegillard-map/pin-icon-start.png",iconSize:[33,45],iconAnchor:[16,45],popupAnchor:[0,-22]}),s="";r&&(s+="<strong>"+r+"</strong>"),o&&(s+="<br/>"+o);var c=L.marker([t[0].lat,t[0].lon],{icon:i}).addTo(e);s&&c.bindPopup(s).openPopup()}}))}))}n().initializers.add("jeromegillard/osm",(function(){n().store.models.files=b,(0,u.extend)(l().prototype,"toolbarItems",(function(t){var e=j();t.add("bbcode",m(f(),{onclick:function(){return t=e.tilesProvider,r=e.currentStyle,o=e.zoom,void(n=_().mark((function e(){var n,a,i,s,c;return _().wrap((function(e){for(;;)switch(e.prev=e.next){case 0:n=document.querySelector("textarea.FormControl"),a=n.selectionStart,i=n.value.substring(0,a),s=n.value.substring(a,n.value.length),c="[map provider="+(null!=t?t:"osm")+" style="+(null!=r?r:"street")+" zoom="+(null!=o?o:13)+" title='"+app.translator.trans("jeromegillard-map.forum.text_editor.marker_title_placeholder")+"' desc='"+app.translator.trans("jeromegillard-map.forum.text_editor.marker_description_placeholder")+"']"+app.translator.trans("jeromegillard-map.forum.text_editor.location_placeholder")+"[/map]",n.value=i+c+s,a+=1,n.selectionStart=a,n.selectionEnd=a,n.focus();case 10:case"end":return e.stop()}}),e)})),function(){var t=this,e=arguments;return new Promise((function(r,o){var a=n.apply(t,e);function i(t){x(a,r,o,i,s,"next",t)}function s(t){x(a,r,o,i,s,"throw",t)}i(void 0)}))})();var t,r,o,n},icon:"fas fa-map"},n().translator.trans("jeromegillard-map.forum.text_editor.bbcode_tooltip")))}))})),(0,u.extend)(i().prototype,"oncreate",(function(){k(this.attrs.post.id())})),(0,u.extend)(c().prototype,"oncreate",(function(){var t=this.attrs.id;"page"===this.attrs.routeName&&setTimeout(k,500,t)}))})(),module.exports=o})();
+/******/ (() => { // webpackBootstrap
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./src/common/index.ts":
+/*!*****************************!*\
+  !*** ./src/common/index.ts ***!
+  \*****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var flarum_common_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! flarum/common/app */ "flarum/common/app");
+/* harmony import */ var flarum_common_app__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(flarum_common_app__WEBPACK_IMPORTED_MODULE_0__);
+
+flarum_common_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jeromegillard/osm', function () {
+  console.log('[jeromegillard/osm] Hello, forum and admin!');
+});
+
+/***/ }),
+
+/***/ "./src/forum/components/mapBBCode.js":
+/*!*******************************************!*\
+  !*** ./src/forum/components/mapBBCode.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ insertAtCursor)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__);
+
+
+function insertAtCursor(tilesProvider, style, zoom) {
+  (0,_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee() {
+    var input, pos, front, back, middle;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            input = document.querySelector('textarea.FormControl');
+            pos = input.selectionStart;
+            front = input.value.substring(0, pos);
+            back = input.value.substring(pos, input.value.length);
+            middle = "[map provider=" + (tilesProvider != null ? tilesProvider : 'osm') + " style=" + (style != null ? style : 'street') + " zoom=" + (zoom != null ? zoom : 13) + " title='" + app.translator.trans('jeromegillard-map.forum.text_editor.marker_title_placeholder') + "' desc='" + app.translator.trans('jeromegillard-map.forum.text_editor.marker_description_placeholder') + "']" + app.translator.trans('jeromegillard-map.forum.text_editor.location_placeholder') + "[/map]";
+            input.value = front + middle + back;
+            pos = pos + 1;
+            input.selectionStart = pos;
+            input.selectionEnd = pos;
+            input.focus();
+
+          case 10:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }))();
+}
+
+/***/ }),
+
+/***/ "./src/forum/components/mapConfigHelper.js":
+/*!*************************************************!*\
+  !*** ./src/forum/components/mapConfigHelper.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createMap": () => (/* binding */ createMap),
+/* harmony export */   "getMapConfig": () => (/* binding */ getMapConfig),
+/* harmony export */   "getTileLayer": () => (/* binding */ getTileLayer)
+/* harmony export */ });
+/* harmony import */ var flarum_forum_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! flarum/forum/app */ "flarum/forum/app");
+/* harmony import */ var flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(flarum_forum_app__WEBPACK_IMPORTED_MODULE_0__);
+
+function getMapConfig(o_tilesProvider, o_style, o_zoom) {
+  var tilesProvider = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute("tilesProvider") || 'osm';
+  var currentStyle;
+  var currentKey;
+  var tileLayerURL;
+  var zoom = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute("zoom") || 13;
+  var attribution;
+  var type = 'raster';
+  var subdomains = [];
+
+  if (o_tilesProvider && o_tilesProvider === 'mapbox' || o_tilesProvider === 'thunderforest' || o_tilesProvider === 'osm' || o_tilesProvider === 'gaode') {
+    tilesProvider = o_tilesProvider;
+  }
+
+  if (o_style) {
+    switch (tilesProvider) {
+      case 'maptiler':
+        if (o_style == 'basic-v2' || o_style == 'basic-4326' || o_style == 'bright-v2' || o_style == 'openstreetmap' || o_style == 'outdoor' || o_style == 'pastel' || o_style == 'hybrid' || o_style == 'streets-v2' || o_style == 'toner' || o_style == 'topo' || o_style == 'topographique' || o_style == 'voyager' || o_style == 'winter') {
+          currentStyle = o_style;
+        } else {
+          console.log("Unknown style", o_style);
+        }
+
+        break;
+
+      case 'mapbox':
+        if (o_style === 'mapbox/streets-v11' || o_style === 'mapbox/outdoors-v11' || o_style === 'mapbox/light-v10' || o_style === 'mapbox/dark-v10' || o_style === 'mapbox/satellite-v9' || o_style === 'mapbox/satellite-streets-v11' || o_style === 'mapbox/navigation-day-v1' || o_style === 'mapbox/streets-v11' || o_style === 'mapbox/navigation-night-v1') {
+          currentStyle = o_style;
+        } else {
+          console.log("Unknown style", o_style);
+        }
+
+        break;
+
+      case 'thunderforest':
+        if (o_style === 'cycle' || o_style === 'transport' || o_style === 'landscape' || o_style === 'outdoors' || o_style === 'transport-dark9' || o_style === 'spinal-map' || o_style === 'pioneer' || o_style === 'mobile-atlas' || o_style === 'neighbourhood' || o_style === 'atlas') {
+          currentStyle = o_style;
+        } else {
+          console.log("Unknown style", o_style);
+        }
+
+        break;
+
+      case 'gaode':
+        if (o_style === 8 || o_style == 6) {
+          currentStyle = o_style;
+        } else {
+          console.log("Unknown style", o_style);
+        }
+
+    }
+  }
+
+  switch (tilesProvider) {
+    case "mapbox":
+      type = 'gl';
+      currentKey = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute("mapbox.key") || '';
+      currentStyle = currentStyle || flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute("mapbox.style") || 'mapbox/light-v9';
+      tileLayerURL = 'mapbox://styles/' + currentStyle;
+      attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, ' + '© <a href="https://www.mapbox.com/">Mapbox</a>';
+      break;
+
+    case "thunderforest":
+      type: 'gl';
+
+      currentKey = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute("thunderforest.key") || '';
+      currentStyle = currentStyle || flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute("thunderforest.style") || 'atlas';
+      tileLayerURL = 'https://tile.thunderforest.com/{id}/{z}/{x}/{y}.png?apikey={key}';
+      attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, ' + '© <a href="https://www.thunderforest.com/">Thunderforest</a>';
+      break;
+
+    case "maptiler":
+      type = 'gl';
+      currentKey = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute("maptiler.key") || '';
+      currentStyle = currentStyle || flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute("maptiler.style") || 'basic-v2';
+      tileLayerURL = 'https://api.maptiler.com/maps/' + currentStyle + '/style.json?key=' + currentKey;
+      attribution = "<a href=\"https://www.maptiler.com/copyright/\" target=\"_blank\">&copy; MapTiler</a> <a href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\">&copy; OpenStreetMap contributors</a>";
+      break;
+
+    case "gaode":
+      currentStyle = currentStyle || flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute("gaode.style") || '8';
+      tileLayerURL = 'https://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=' + currentStyle + '&x={x}&y={y}&z={z}';
+      subdomains = ["1", "2", "3", "4"];
+      attribution = '&copy; <a href="https://www.autonavi.com">autonavi</a>';
+      break;
+
+    default:
+      tileLayerURL = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
+      attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>';
+    // tileLayerURL = 'https://{s}.tile.osm.org/{z}/{x}/{y}.png",
+    // subdomains = ['a', 'b', 'c']
+  }
+
+  if (o_zoom) {
+    zoom = o_zoom;
+  }
+
+  if (zoom < 0 || zoom > 18) {
+    zoom = 13;
+  }
+
+  return {
+    "tilesProvider": tilesProvider,
+    "attribution": attribution,
+    "currentStyle": currentStyle,
+    "currentKey": currentKey,
+    "tileLayerURL": tileLayerURL,
+    "zoom": zoom,
+    maxZoom: 18,
+    tileSize: 512,
+    zoomOffset: -1,
+    detectRetina: true,
+    defaultLocation: [51.505, -0.09],
+    "type": type,
+    "subdomains": subdomains
+  };
+}
+;
+function getTileLayer(mapConf) {
+  //console.log(mapConf);
+  if (mapConf && mapConf.tilesProvider) {
+    // Allow SVG tiles from 'gl' providers (MapTiler for instance)
+    if (mapConf.type === 'gl') {
+      return new L.mapboxGL({
+        attribution: mapConf.attribution,
+        accessToken: mapConf.currentKey,
+        style: mapConf.tileLayerURL
+      });
+    } else {
+      // Raster tiles
+      return new L.tileLayer(mapConf.tileLayerURL, {
+        key: mapConf.currentKey,
+        maxZoom: mapConf.maxZoom,
+        attribution: mapConf.attribution,
+        id: mapConf.currentStyle,
+        tileSize: mapConf.tileSize,
+        zoomOffset: mapConf.zoomOffset,
+        detectRetina: mapConf.detectRetina,
+        subdomains: mapConf.subdomains
+      });
+    }
+  }
+}
+;
+function createMap(pid) {
+  var so = {};
+  so.postId = pid;
+  so.mapConf = getMapConfig(); //for each gpx file in this post, loop and map
+
+  $('div.PostStream-item[data-id="' + pid + '"] .mapFile-container, div.Pages-container .mapFile-container').each(function (i) {
+    // grab the uploaded gpx file's UUID and url
+    var uuid = $(this).children('.mapFile').data('fofUploadDownloadUuid');
+    var nid = 'map-' + so.postId + i + '-' + uuid;
+    var url = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().forum.attribute('apiUrl') + '/fof/download';
+    url += '/' + uuid;
+    url += '/' + so.postId;
+    url += '/' + (flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().session.csrfToken);
+    var fileExt = $(this).children('.mapFile').data('mapUrl').split('.').pop().toLowerCase();
+    /*  change the template rendering to insert a new id to the map element.
+      * this allows us to have an unique div id even if a same file is displayed
+      * more than one time
+    */
+
+    $(this).children('.mapFile-placeholder').prop('id', nid); // Get the map element
+
+    var map = L.map(nid);
+    map.addControl(new L.Control.Fullscreen()); // Set the tiles provider
+
+    getTileLayer(so.mapConf).addTo(map);
+
+    if (fileExt == 'gpx') {
+      // Display the GPX file in it thanks to https://github.com/mpetazzoni/leaflet-gpx
+      new L.GPX(url, {
+        async: true,
+        marker_options: {
+          startIconUrl: '/assets/extensions/jeromegillard-map/pin-icon-start.png',
+          endIconUrl: '/assets/extensions/jeromegillard-map/pin-icon-end.png',
+          shadowUrl: '/assets/extensions/jeromegillard-map/pin-shadow.png',
+          wptIconUrls: {
+            '': '/assets/extensions/jeromegillard-map/default-waypoint.png',
+            'Geocache Found': '/assets/extensions/jeromegillard-map/geocache.png',
+            'Park': '/assets/extensions/jeromegillard-map/tree.png'
+          }
+        }
+      }).on('loaded', function (e) {
+        map.fitBounds(e.target.getBounds());
+      }).addTo(map);
+    } else if (fileExt === 'json' || fileExt === 'geojson') {
+      fetch(url).then(function (response) {
+        return response.json();
+      }).then(function (json) {
+        function onEachFeature(feature, layer) {
+          if (feature && feature.properties) {
+            var popupContent = '';
+
+            if (feature.properties.name) {
+              popupContent += feature.properties.name;
+            }
+
+            if (feature.properties.description) {
+              popupContent += feature.properties.description;
+            }
+
+            if (feature.properties.amenity === 'parking') {
+              // Check if feature is a polygon
+              if (feature.geometry.type === 'Polygon') {
+                // Prepare a parking icon
+                var parkingIcon = L.icon({
+                  iconUrl: '/assets/extensions/jeromegillard-map/pin-icon-parking.png',
+                  iconSize: [20, 20],
+                  iconAnchor: [10, 20],
+                  popupAnchor: [0, -10]
+                }); // Get bounds of polygon
+
+                var bounds = layer.getBounds(); // Get center of bounds
+
+                var center = bounds.getCenter(); // Use center to put marker on map
+
+                var marker = L.marker(center, {
+                  icon: parkingIcon
+                }).addTo(map);
+              }
+            }
+
+            if (popupContent !== '') {
+              layer.bindPopup(popupContent);
+            }
+          }
+        }
+
+        var geoJSONLayer = L.geoJSON([json], {
+          style: function style(feature) {
+            if (feature.properties && feature.properties.colour) {
+              return {
+                color: feature.properties.colour,
+                weight: 3,
+                opacity: 1
+              };
+            }
+          },
+          onEachFeature: onEachFeature
+        }).addTo(map);
+        map.fitBounds(geoJSONLayer.getBounds());
+      });
+    } else {
+      map.setView(so.mapConf.defaultLocation, so.mapConf.zoom);
+    }
+  }); // for each map location from BBCode, loop and map
+
+  $('div.PostStream-item[data-id="' + pid + '"] .bbcode-map, div.Pages-container .bbcode-map').each(function (i) {
+    var location = $(this).data('mapLocation');
+    var title = $(this).data('mapTitle');
+    var desc = $(this).data('mapDesc');
+    var mapConf = getMapConfig($(this).data('mapProvider'), $(this).data('mapStyle'), $(this).data('mapZoom')); //console.log(mapConf, $(this).data('mapStyle'));
+
+    var nid = 'map-' + Math.floor(Math.random() * 1000);
+    $(this).prop('id', nid);
+
+    if (location) {
+      // resolve location as coordinates
+      fetch("https://nominatim.openstreetmap.org/search?q=" + location + "&format=json").then(function (response) {
+        return response.json();
+      }).then(function (json) {
+        // Get the map element
+        var map = L.map(nid);
+        map.addControl(new L.Control.Fullscreen()); // Set the tiles provider
+
+        getTileLayer(mapConf).addTo(map);
+        map.setView([json[0].lat, json[0].lon], mapConf.zoom); // If there's a title or a desc, create marker and assign to map.
+
+        if (title || desc) {
+          var pIcon = L.icon({
+            iconUrl: '/assets/extensions/jeromegillard-map/pin-icon-start.png',
+            iconSize: [33, 45],
+            iconAnchor: [16, 45],
+            popupAnchor: [0, -22]
+          });
+          var popupContent = '';
+
+          if (title) {
+            popupContent += '<strong>' + title + '</strong>';
+          }
+
+          if (desc) {
+            popupContent += '<br/>' + desc;
+          } // put marker on map
+
+
+          var marker = L.marker([json[0].lat, json[0].lon], {
+            icon: pIcon
+          }).addTo(map);
+
+          if (popupContent) {
+            marker.bindPopup(popupContent).openPopup();
+          }
+        }
+      });
+    }
+  });
+}
+;
+
+/***/ }),
+
+/***/ "./src/forum/components/mapFile.js":
+/*!*****************************************!*\
+  !*** ./src/forum/components/mapFile.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ mapFile)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/inheritsLoose */ "./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js");
+/* harmony import */ var flarum_common_Model__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flarum/common/Model */ "flarum/common/Model");
+/* harmony import */ var flarum_common_Model__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(flarum_common_Model__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var flarum_common_utils_mixin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! flarum/common/utils/mixin */ "flarum/common/utils/mixin");
+/* harmony import */ var flarum_common_utils_mixin__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(flarum_common_utils_mixin__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+
+var mapFile = /*#__PURE__*/function (_mixin) {
+  (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__["default"])(mapFile, _mixin);
+
+  function mapFile() {
+    return _mixin.apply(this, arguments) || this;
+  }
+
+  var _proto = mapFile.prototype;
+
+  /**
+   * Use FoF Uploads endpoint
+   */
+  _proto.apiEndpoint = function apiEndpoint() {
+    return '/fof/uploads' + (this.exists ? '/' + this.data.id : '');
+  }
+  /**
+   * Generate bbcode for this file
+   */
+  ;
+
+  _proto.bbcode = function bbcode() {
+    //console.log('checking', this.tag())
+    switch (this.tag()) {
+      case 'jeromegillard-map':
+        return "[upl-file uuid=" + this.uuid() + " size=" + this.humanSize() + " url=" + this.url() + "]" + this.baseName() + "[/upl-file]";
+      // File
+
+      case 'file':
+        return "[upl-file uuid=" + this.uuid() + " size=" + this.humanSize() + "]" + this.baseName() + "[/upl-this]";
+      // Image template
+
+      case 'image':
+        return "[upl-image uuid=" + this.uuid() + " size=" + this.humanSize() + " url=" + this.url() + "]" + this.baseName() + "[/upl-image]";
+      // Image preview
+
+      case 'image-preview':
+        return "[upl-image-preview url=" + this.url() + "]";
+      // 'just-url' or unknown
+
+      default:
+        return this.url();
+    }
+  };
+
+  return mapFile;
+}(flarum_common_utils_mixin__WEBPACK_IMPORTED_MODULE_2___default()((flarum_common_Model__WEBPACK_IMPORTED_MODULE_1___default()), {
+  baseName: flarum_common_Model__WEBPACK_IMPORTED_MODULE_1___default().attribute('baseName'),
+  path: flarum_common_Model__WEBPACK_IMPORTED_MODULE_1___default().attribute('path'),
+  url: flarum_common_Model__WEBPACK_IMPORTED_MODULE_1___default().attribute('url'),
+  type: flarum_common_Model__WEBPACK_IMPORTED_MODULE_1___default().attribute('type'),
+  size: flarum_common_Model__WEBPACK_IMPORTED_MODULE_1___default().attribute('size'),
+  humanSize: flarum_common_Model__WEBPACK_IMPORTED_MODULE_1___default().attribute('humanSize'),
+  createdAt: flarum_common_Model__WEBPACK_IMPORTED_MODULE_1___default().attribute('createdAt'),
+  uuid: flarum_common_Model__WEBPACK_IMPORTED_MODULE_1___default().attribute('uuid'),
+  tag: flarum_common_Model__WEBPACK_IMPORTED_MODULE_1___default().attribute('tag'),
+  hidden: flarum_common_Model__WEBPACK_IMPORTED_MODULE_1___default().attribute('hidden')
+}));
+
+
+
+/***/ }),
+
+/***/ "./src/forum/index.js":
+/*!****************************!*\
+  !*** ./src/forum/index.js ***!
+  \****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var flarum_forum_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! flarum/forum/app */ "flarum/forum/app");
+/* harmony import */ var flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(flarum_forum_app__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var flarum_components_Post__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flarum/components/Post */ "flarum/components/Post");
+/* harmony import */ var flarum_components_Post__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(flarum_components_Post__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var flarum_components_Page__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! flarum/components/Page */ "flarum/components/Page");
+/* harmony import */ var flarum_components_Page__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(flarum_components_Page__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var flarum_common_extend__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! flarum/common/extend */ "flarum/common/extend");
+/* harmony import */ var flarum_common_extend__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(flarum_common_extend__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var flarum_common_components_TextEditor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! flarum/common/components/TextEditor */ "flarum/common/components/TextEditor");
+/* harmony import */ var flarum_common_components_TextEditor__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(flarum_common_components_TextEditor__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var flarum_common_components_TextEditorButton__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! flarum/common/components/TextEditorButton */ "flarum/common/components/TextEditorButton");
+/* harmony import */ var flarum_common_components_TextEditorButton__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(flarum_common_components_TextEditorButton__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _components_mapFile__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/mapFile */ "./src/forum/components/mapFile.js");
+/* harmony import */ var _components_mapBBCode__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/mapBBCode */ "./src/forum/components/mapBBCode.js");
+/* harmony import */ var _components_mapConfigHelper__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/mapConfigHelper */ "./src/forum/components/mapConfigHelper.js");
+
+
+
+
+
+
+
+
+
+flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('jeromegillard/osm', function () {
+  (flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().store.models.files) = _components_mapFile__WEBPACK_IMPORTED_MODULE_6__["default"];
+  (0,flarum_common_extend__WEBPACK_IMPORTED_MODULE_3__.extend)((flarum_common_components_TextEditor__WEBPACK_IMPORTED_MODULE_4___default().prototype), 'toolbarItems', function (items) {
+    var mapConf = (0,_components_mapConfigHelper__WEBPACK_IMPORTED_MODULE_8__.getMapConfig)();
+    items.add('bbcode', m((flarum_common_components_TextEditorButton__WEBPACK_IMPORTED_MODULE_5___default()), {
+      onclick: function onclick() {
+        return (0,_components_mapBBCode__WEBPACK_IMPORTED_MODULE_7__["default"])(mapConf.tilesProvider, mapConf.currentStyle, mapConf.zoom);
+      },
+      icon: 'fas fa-map'
+    }, flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().translator.trans('jeromegillard-map.forum.text_editor.bbcode_tooltip')));
+  });
+}); // Render maps in posts
+
+(0,flarum_common_extend__WEBPACK_IMPORTED_MODULE_3__.extend)((flarum_components_Post__WEBPACK_IMPORTED_MODULE_1___default().prototype), 'oncreate', function () {
+  (0,_components_mapConfigHelper__WEBPACK_IMPORTED_MODULE_8__.createMap)(this.attrs.post.id());
+}); // Render maps in pages (fof/pages)
+
+(0,flarum_common_extend__WEBPACK_IMPORTED_MODULE_3__.extend)((flarum_components_Page__WEBPACK_IMPORTED_MODULE_2___default().prototype), 'oncreate', function () {
+  var pid = this.attrs.id;
+
+  if (this.attrs.routeName === 'page') {
+    // Wait for the post to be rendered. Anyone has a better event?
+    // With fof/links, when a user browse from a post to the page, there's no event triggered
+    setTimeout(_components_mapConfigHelper__WEBPACK_IMPORTED_MODULE_8__.createMap, 500, pid);
+  }
+});
+
+/***/ }),
+
+/***/ "flarum/common/Model":
+/*!*****************************************************!*\
+  !*** external "flarum.core.compat['common/Model']" ***!
+  \*****************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core.compat['common/Model'];
+
+/***/ }),
+
+/***/ "flarum/common/app":
+/*!***************************************************!*\
+  !*** external "flarum.core.compat['common/app']" ***!
+  \***************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core.compat['common/app'];
+
+/***/ }),
+
+/***/ "flarum/common/components/TextEditor":
+/*!*********************************************************************!*\
+  !*** external "flarum.core.compat['common/components/TextEditor']" ***!
+  \*********************************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core.compat['common/components/TextEditor'];
+
+/***/ }),
+
+/***/ "flarum/common/components/TextEditorButton":
+/*!***************************************************************************!*\
+  !*** external "flarum.core.compat['common/components/TextEditorButton']" ***!
+  \***************************************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core.compat['common/components/TextEditorButton'];
+
+/***/ }),
+
+/***/ "flarum/common/extend":
+/*!******************************************************!*\
+  !*** external "flarum.core.compat['common/extend']" ***!
+  \******************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core.compat['common/extend'];
+
+/***/ }),
+
+/***/ "flarum/common/utils/mixin":
+/*!***********************************************************!*\
+  !*** external "flarum.core.compat['common/utils/mixin']" ***!
+  \***********************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core.compat['common/utils/mixin'];
+
+/***/ }),
+
+/***/ "flarum/components/Page":
+/*!********************************************************!*\
+  !*** external "flarum.core.compat['components/Page']" ***!
+  \********************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core.compat['components/Page'];
+
+/***/ }),
+
+/***/ "flarum/components/Post":
+/*!********************************************************!*\
+  !*** external "flarum.core.compat['components/Post']" ***!
+  \********************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core.compat['components/Post'];
+
+/***/ }),
+
+/***/ "flarum/forum/app":
+/*!**************************************************!*\
+  !*** external "flarum.core.compat['forum/app']" ***!
+  \**************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core.compat['forum/app'];
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/regeneratorRuntime.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/regeneratorRuntime.js ***!
+  \*******************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var _typeof = (__webpack_require__(/*! ./typeof.js */ "./node_modules/@babel/runtime/helpers/typeof.js")["default"]);
+
+function _regeneratorRuntime() {
+  "use strict";
+  /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */
+
+  module.exports = _regeneratorRuntime = function _regeneratorRuntime() {
+    return exports;
+  }, module.exports.__esModule = true, module.exports["default"] = module.exports;
+  var exports = {},
+      Op = Object.prototype,
+      hasOwn = Op.hasOwnProperty,
+      $Symbol = "function" == typeof Symbol ? Symbol : {},
+      iteratorSymbol = $Symbol.iterator || "@@iterator",
+      asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator",
+      toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
+
+  function define(obj, key, value) {
+    return Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: !0,
+      configurable: !0,
+      writable: !0
+    }), obj[key];
+  }
+
+  try {
+    define({}, "");
+  } catch (err) {
+    define = function define(obj, key, value) {
+      return obj[key] = value;
+    };
+  }
+
+  function wrap(innerFn, outerFn, self, tryLocsList) {
+    var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator,
+        generator = Object.create(protoGenerator.prototype),
+        context = new Context(tryLocsList || []);
+    return generator._invoke = function (innerFn, self, context) {
+      var state = "suspendedStart";
+      return function (method, arg) {
+        if ("executing" === state) throw new Error("Generator is already running");
+
+        if ("completed" === state) {
+          if ("throw" === method) throw arg;
+          return doneResult();
+        }
+
+        for (context.method = method, context.arg = arg;;) {
+          var delegate = context.delegate;
+
+          if (delegate) {
+            var delegateResult = maybeInvokeDelegate(delegate, context);
+
+            if (delegateResult) {
+              if (delegateResult === ContinueSentinel) continue;
+              return delegateResult;
+            }
+          }
+
+          if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) {
+            if ("suspendedStart" === state) throw state = "completed", context.arg;
+            context.dispatchException(context.arg);
+          } else "return" === context.method && context.abrupt("return", context.arg);
+          state = "executing";
+          var record = tryCatch(innerFn, self, context);
+
+          if ("normal" === record.type) {
+            if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue;
+            return {
+              value: record.arg,
+              done: context.done
+            };
+          }
+
+          "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg);
+        }
+      };
+    }(innerFn, self, context), generator;
+  }
+
+  function tryCatch(fn, obj, arg) {
+    try {
+      return {
+        type: "normal",
+        arg: fn.call(obj, arg)
+      };
+    } catch (err) {
+      return {
+        type: "throw",
+        arg: err
+      };
+    }
+  }
+
+  exports.wrap = wrap;
+  var ContinueSentinel = {};
+
+  function Generator() {}
+
+  function GeneratorFunction() {}
+
+  function GeneratorFunctionPrototype() {}
+
+  var IteratorPrototype = {};
+  define(IteratorPrototype, iteratorSymbol, function () {
+    return this;
+  });
+  var getProto = Object.getPrototypeOf,
+      NativeIteratorPrototype = getProto && getProto(getProto(values([])));
+  NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype);
+  var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype);
+
+  function defineIteratorMethods(prototype) {
+    ["next", "throw", "return"].forEach(function (method) {
+      define(prototype, method, function (arg) {
+        return this._invoke(method, arg);
+      });
+    });
+  }
+
+  function AsyncIterator(generator, PromiseImpl) {
+    function invoke(method, arg, resolve, reject) {
+      var record = tryCatch(generator[method], generator, arg);
+
+      if ("throw" !== record.type) {
+        var result = record.arg,
+            value = result.value;
+        return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) {
+          invoke("next", value, resolve, reject);
+        }, function (err) {
+          invoke("throw", err, resolve, reject);
+        }) : PromiseImpl.resolve(value).then(function (unwrapped) {
+          result.value = unwrapped, resolve(result);
+        }, function (error) {
+          return invoke("throw", error, resolve, reject);
+        });
+      }
+
+      reject(record.arg);
+    }
+
+    var previousPromise;
+
+    this._invoke = function (method, arg) {
+      function callInvokeWithMethodAndArg() {
+        return new PromiseImpl(function (resolve, reject) {
+          invoke(method, arg, resolve, reject);
+        });
+      }
+
+      return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg();
+    };
+  }
+
+  function maybeInvokeDelegate(delegate, context) {
+    var method = delegate.iterator[context.method];
+
+    if (undefined === method) {
+      if (context.delegate = null, "throw" === context.method) {
+        if (delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method)) return ContinueSentinel;
+        context.method = "throw", context.arg = new TypeError("The iterator does not provide a 'throw' method");
+      }
+
+      return ContinueSentinel;
+    }
+
+    var record = tryCatch(method, delegate.iterator, context.arg);
+    if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel;
+    var info = record.arg;
+    return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel);
+  }
+
+  function pushTryEntry(locs) {
+    var entry = {
+      tryLoc: locs[0]
+    };
+    1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry);
+  }
+
+  function resetTryEntry(entry) {
+    var record = entry.completion || {};
+    record.type = "normal", delete record.arg, entry.completion = record;
+  }
+
+  function Context(tryLocsList) {
+    this.tryEntries = [{
+      tryLoc: "root"
+    }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0);
+  }
+
+  function values(iterable) {
+    if (iterable) {
+      var iteratorMethod = iterable[iteratorSymbol];
+      if (iteratorMethod) return iteratorMethod.call(iterable);
+      if ("function" == typeof iterable.next) return iterable;
+
+      if (!isNaN(iterable.length)) {
+        var i = -1,
+            next = function next() {
+          for (; ++i < iterable.length;) {
+            if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next;
+          }
+
+          return next.value = undefined, next.done = !0, next;
+        };
+
+        return next.next = next;
+      }
+    }
+
+    return {
+      next: doneResult
+    };
+  }
+
+  function doneResult() {
+    return {
+      value: undefined,
+      done: !0
+    };
+  }
+
+  return GeneratorFunction.prototype = GeneratorFunctionPrototype, define(Gp, "constructor", GeneratorFunctionPrototype), define(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) {
+    var ctor = "function" == typeof genFun && genFun.constructor;
+    return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name));
+  }, exports.mark = function (genFun) {
+    return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun;
+  }, exports.awrap = function (arg) {
+    return {
+      __await: arg
+    };
+  }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () {
+    return this;
+  }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) {
+    void 0 === PromiseImpl && (PromiseImpl = Promise);
+    var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl);
+    return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) {
+      return result.done ? result.value : iter.next();
+    });
+  }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () {
+    return this;
+  }), define(Gp, "toString", function () {
+    return "[object Generator]";
+  }), exports.keys = function (object) {
+    var keys = [];
+
+    for (var key in object) {
+      keys.push(key);
+    }
+
+    return keys.reverse(), function next() {
+      for (; keys.length;) {
+        var key = keys.pop();
+        if (key in object) return next.value = key, next.done = !1, next;
+      }
+
+      return next.done = !0, next;
+    };
+  }, exports.values = values, Context.prototype = {
+    constructor: Context,
+    reset: function reset(skipTempReset) {
+      if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) {
+        "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined);
+      }
+    },
+    stop: function stop() {
+      this.done = !0;
+      var rootRecord = this.tryEntries[0].completion;
+      if ("throw" === rootRecord.type) throw rootRecord.arg;
+      return this.rval;
+    },
+    dispatchException: function dispatchException(exception) {
+      if (this.done) throw exception;
+      var context = this;
+
+      function handle(loc, caught) {
+        return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught;
+      }
+
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i],
+            record = entry.completion;
+        if ("root" === entry.tryLoc) return handle("end");
+
+        if (entry.tryLoc <= this.prev) {
+          var hasCatch = hasOwn.call(entry, "catchLoc"),
+              hasFinally = hasOwn.call(entry, "finallyLoc");
+
+          if (hasCatch && hasFinally) {
+            if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0);
+            if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc);
+          } else if (hasCatch) {
+            if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0);
+          } else {
+            if (!hasFinally) throw new Error("try statement without catch or finally");
+            if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc);
+          }
+        }
+      }
+    },
+    abrupt: function abrupt(type, arg) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+
+        if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) {
+          var finallyEntry = entry;
+          break;
+        }
+      }
+
+      finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null);
+      var record = finallyEntry ? finallyEntry.completion : {};
+      return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record);
+    },
+    complete: function complete(record, afterLoc) {
+      if ("throw" === record.type) throw record.arg;
+      return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel;
+    },
+    finish: function finish(finallyLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel;
+      }
+    },
+    "catch": function _catch(tryLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+
+        if (entry.tryLoc === tryLoc) {
+          var record = entry.completion;
+
+          if ("throw" === record.type) {
+            var thrown = record.arg;
+            resetTryEntry(entry);
+          }
+
+          return thrown;
+        }
+      }
+
+      throw new Error("illegal catch attempt");
+    },
+    delegateYield: function delegateYield(iterable, resultName, nextLoc) {
+      return this.delegate = {
+        iterator: values(iterable),
+        resultName: resultName,
+        nextLoc: nextLoc
+      }, "next" === this.method && (this.arg = undefined), ContinueSentinel;
+    }
+  }, exports;
+}
+
+module.exports = _regeneratorRuntime, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/typeof.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/typeof.js ***!
+  \*******************************************************/
+/***/ ((module) => {
+
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  return (module.exports = _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
+    return typeof obj;
+  } : function (obj) {
+    return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+  }, module.exports.__esModule = true, module.exports["default"] = module.exports), _typeof(obj);
+}
+
+module.exports = _typeof, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/regenerator/index.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
+  \**********************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+// TODO(Babel 8): Remove this file.
+var runtime = __webpack_require__(/*! ../helpers/regeneratorRuntime */ "./node_modules/@babel/runtime/helpers/regeneratorRuntime.js")();
+
+module.exports = runtime; // Copied from https://github.com/facebook/regenerator/blob/main/packages/runtime/runtime.js#L736=
+
+try {
+  regeneratorRuntime = runtime;
+} catch (accidentalStrictMode) {
+  if (typeof globalThis === "object") {
+    globalThis.regeneratorRuntime = runtime;
+  } else {
+    Function("r", "regeneratorRuntime = r")(runtime);
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ _asyncToGenerator)
+/* harmony export */ });
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
+  }
+
+  if (info.done) {
+    resolve(value);
+  } else {
+    Promise.resolve(value).then(_next, _throw);
+  }
+}
+
+function _asyncToGenerator(fn) {
+  return function () {
+    var self = this,
+        args = arguments;
+    return new Promise(function (resolve, reject) {
+      var gen = fn.apply(self, args);
+
+      function _next(value) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
+      }
+
+      function _throw(err) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
+      }
+
+      _next(undefined);
+    });
+  };
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ _inheritsLoose)
+/* harmony export */ });
+/* harmony import */ var _setPrototypeOf_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./setPrototypeOf.js */ "./node_modules/@babel/runtime/helpers/esm/setPrototypeOf.js");
+
+function _inheritsLoose(subClass, superClass) {
+  subClass.prototype = Object.create(superClass.prototype);
+  subClass.prototype.constructor = subClass;
+  (0,_setPrototypeOf_js__WEBPACK_IMPORTED_MODULE_0__["default"])(subClass, superClass);
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/setPrototypeOf.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/setPrototypeOf.js ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ _setPrototypeOf)
+/* harmony export */ });
+function _setPrototypeOf(o, p) {
+  _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  };
+  return _setPrototypeOf(o, p);
+}
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be in strict mode.
+(() => {
+"use strict";
+/*!******************!*\
+  !*** ./forum.ts ***!
+  \******************/
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _src_common__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./src/common */ "./src/common/index.ts");
+/* harmony import */ var _src_forum__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./src/forum */ "./src/forum/index.js");
+
+
+})();
+
+module.exports = __webpack_exports__;
+/******/ })()
+;
 //# sourceMappingURL=forum.js.map
