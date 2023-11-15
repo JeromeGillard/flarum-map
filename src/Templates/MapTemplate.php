@@ -3,6 +3,7 @@
 namespace JeromeGillard\FlarumMap\Templates;
 
 use FoF\Upload\Templates\AbstractTextFormatterTemplate;
+use Illuminate\Contracts\View\View;
 
 /*
  * This class handles the fof-upload formatter
@@ -37,7 +38,7 @@ class MapTemplate extends AbstractTextFormatterTemplate
      *
      * @return string
      */
-    public function template(): string
+    public function template(): View
     {
         return $this->getView('fof-upload.templates::jeromegillard-map');
     }
