@@ -2,13 +2,15 @@
 
 namespace JeromeGillard\FlarumMap\Templates;
 
-use FoF\Upload\Templates\AbstractTextFormatterTemplate;
+//use FoF\Upload\Templates\AbstractTextFormatterTemplate;
+use FoF\Upload\Templates\AbstractTemplate;
 use Illuminate\Contracts\View\View;
+use FoF\Upload\File;
 
 /*
  * This class handles the fof-upload formatter
  */
-class MapTemplate extends AbstractTextFormatterTemplate
+class MapTemplate extends AbstractTemplate
 {
     /**
      * @var string
@@ -51,5 +53,12 @@ class MapTemplate extends AbstractTextFormatterTemplate
     public function bbcode(): string
     {
         return '[upl-file uuid={IDENTIFIER} size={SIMPLETEXT2} url={URL}]{SIMPLETEXT1}[/upl-file]';
+    }
+
+    public function preview(File $file): string
+    {
+        //return "[upl-file uuid={$file->uuid} preview_uri={$file->url} fullscreen_uri={URL}]";
+        return "[upl-file uuid={$file->uuid} name={$file->base_name} size={$file->humanSize}]";
+        //return $file->url;
     }
 }
