@@ -1,4 +1,5 @@
 import app from 'flarum/forum/app';
+import { } from './leaflet.ChineseTmsProviders.js';
 
 export function getMapConfig(o_tilesProvider, o_style, o_zoom) {
     let tilesProvider = app.forum.attribute("tilesProvider")||'osm';
@@ -8,11 +9,14 @@ export function getMapConfig(o_tilesProvider, o_style, o_zoom) {
     let zoom = app.forum.attribute("zoom")||13;
     let attribution;
     let type = 'raster';
+    let subdomains = [];
 
     if(o_tilesProvider &&
         o_tilesProvider === 'mapbox' ||
         o_tilesProvider === 'thunderforest' ||
-        o_tilesProvider === 'osm') {
+        o_tilesProvider === 'osm' ||
+        o_tilesProvider === 'gaode' ||
+        o_tilesProvider === 'tencent') {
             tilesProvider = o_tilesProvider;
     }
 
@@ -70,6 +74,23 @@ export function getMapConfig(o_tilesProvider, o_style, o_zoom) {
               console.log("Unknown style", o_style);
             }
             break;
+        case 'gaode':
+          if(o_style === 'Normal.Map' ||
+              o_style == 'Satellite.Map') {
+              currentStyle = o_style;
+          }
+          else {
+            console.log("Unknown style", o_style);
+          }
+          break;
+        case 'tencent':
+          if((o_style === 'Normal.Map' ||
+              o_style === 'Satellite.Map' ||
+              o_style === 'Terrain.Map')) {
+            currentStyle = o_style;
+          } else {
+            console.log("Unknown style", o_style);
+          }
       }
   }
 
@@ -97,9 +118,23 @@ export function getMapConfig(o_tilesProvider, o_style, o_zoom) {
           tileLayerURL = 'https://api.maptiler.com/maps/'+currentStyle+'/style.json?key='+currentKey;
           attribution = "\u003ca href=\"https://www.maptiler.com/copyright/\" target=\"_blank\"\u003e\u0026copy; MapTiler\u003c/a\u003e \u003ca href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\"\u003e\u0026copy; OpenStreetMap contributors\u003c/a\u003e";
           break;
+        case "gaode":
+          type = 'cn';
+          currentStyle = currentStyle || app.forum.attribute("tencent.style")||'Normal.Map';
+          tileLayerURL = "GaoDe." + currentStyle;
+          attribution = '&copy; <a href="https://www.autonavi.com">autonavi</a>';
+          break;
+        case "tencent":
+          type = 'cn';
+          currentStyle = currentStyle || app.forum.attribute("tencent.style")||'Normal.Map';
+          tileLayerURL = "Tencent." + currentStyle;
+          attribution = '&copy; <a href="https://map.qq.com/">Tencent</a>';
+          break;
         default:
           tileLayerURL = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
           attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>';
+          // tileLayerURL = 'https://{s}.tile.osm.org/{z}/{x}/{y}.png",
+          // subdomains = ['a', 'b', 'c']
     }
 
 
@@ -112,7 +147,7 @@ export function getMapConfig(o_tilesProvider, o_style, o_zoom) {
     return {"tilesProvider": tilesProvider, "attribution": attribution,"currentStyle":
                 currentStyle, "currentKey": currentKey, "tileLayerURL": tileLayerURL,
                 "zoom": zoom, maxZoom: 18, tileSize: 512, zoomOffset: -1, detectRetina: true,
-                defaultLocation: [51.505, -0.09], "type": type };
+                defaultLocation: [51.505, -0.09], "type": type, "subdomains": subdomains };
   };
 
 export function getTileLayer(mapConf){
@@ -125,6 +160,11 @@ export function getTileLayer(mapConf){
         accessToken: mapConf.currentKey,
         style: mapConf.tileLayerURL
       });
+    } else if(mapConf.type === 'cn'){
+      mapConf.key = mapConf.currentKey;
+      return new L.tileLayer.chinaProvider(
+        mapConf.tileLayerURL, mapConf
+        );
     } else {
       // Raster tiles
       return new L.tileLayer(mapConf.tileLayerURL,
@@ -135,7 +175,8 @@ export function getTileLayer(mapConf){
           id: mapConf.currentStyle,
           tileSize: mapConf.tileSize,
           zoomOffset: mapConf.zoomOffset,
-          detectRetina: mapConf.detectRetina
+          detectRetina: mapConf.detectRetina,
+          subdomains: mapConf.subdomains
         });
     }
   }

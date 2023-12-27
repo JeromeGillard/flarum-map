@@ -48,15 +48,25 @@ return [
     (new Extend\Frontend('forum'))
             ->content(function (Document $document, Request $request) {
                 $settings = resolve(SettingsRepositoryInterface::class);
-                $document->head[] =
-                    '<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css" integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin=""/>
-                    <link rel="stylesheet" href="https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css" />
-                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/1.13.1/mapbox-gl.min.css" />
-                    <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js" integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/gpx.min.js"></script>
-                    <script src="https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js"></script>
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/1.13.1/mapbox-gl.min.js"></script>
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl-leaflet/0.0.15/leaflet-mapbox-gl.min.js"></script>';
+                $document->head[] ='
+                    <!-- Leaflet -->
+                    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet/dist/leaflet.min.css" crossorigin="" />
+                    <script src="https://cdn.jsdelivr.net/npm/leaflet/dist/leaflet.min.js" crossorigin=""></script>
+
+                    <!-- Leaflet fullscreen -->
+                    <script src="https://cdn.jsdelivr.net/npm/leaflet-fullscreen/dist/Leaflet.fullscreen.min.js"></script>
+                    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-fullscreen/dist/leaflet.fullscreen.min.css" />
+
+                    <!-- Leaflet GPX -->
+                    <script src="https://cdn.jsdelivr.net/npm/leaflet-gpx/gpx.min.js"></script>
+
+                    <!-- Mapbox-gl -->
+                    <script src="https://cdn.jsdelivr.net/npm/mapbox-gl/dist/mapbox-gl.min.js"></script>
+                    <link href="https://cdn.jsdelivr.net/npm/mapbox-gl/dist/mapbox-gl.min.css" rel="stylesheet" />
+                    <script src="https://cdn.jsdelivr.net/npm/mapbox-gl-leaflet/leaflet-mapbox-gl.min.js"></script>
+
+                    ';
+
             }),
 
     (new Extend\Formatter)
